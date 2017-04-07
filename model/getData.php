@@ -158,6 +158,28 @@ function getCategory(){
     }
     return $resultArray;
 }
+function getMyProject($id){
+    global $conn;
+    $sql = "SELECT * FROM project INNER JOIN member_project ON project.id_project=member_project.id_project WHERE id_member = '$id'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "id_member_project"=>$obResult['id_member_project'],
+            "id_member"=>$obResult['id_member'],
+            "position"=>$obResult['position'],
+            "weight"=>$obResult['weight']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 
 
 ?>

@@ -148,10 +148,10 @@
                                                     <p class="text-left"><strong><?=$person?></strong></p>
                                                     <p class="text-left small"><?=$person->getEmail()?></p>
                                                     <div style="display: inline-block">
-                                                    <form action="../controller/profile.php?id=<?=$person->getId()?>" method="post" style="display: inline-block">
+                                                    <form action="../controller/profile.php?id=<?=$person->getId()?>" method="post" style="display: inline-block;float: left">
                                                         <input type="submit" name="profile" value="PROFILE">
                                                     </form>
-                                                    <form action="../controller/home.php" method="post" style="display: inline-block">
+                                                    <form action="../controller/home.php" method="post" style="display: inline-block;float: left">
                                                         <input type="submit" name="logout" value="LOGOUT">
                                                     </form>
                                                     </div>

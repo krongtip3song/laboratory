@@ -16,6 +16,8 @@
     $idpro = $_GET['id'];
     $data = getProject($idpro);
 
+
+
     include ("../view/one_project.php");
     exit();
 ?>

@@ -15,6 +15,43 @@ include ("header.php");
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
+        $('.delete_col').click(function () {
+            var id = $(this).data('id');
+            if( confirm("Do you want to delete ?") ){
+                window.location = "../model/manageCat.php?idcat="+id;
+            }
+        });
+        $('#add').click(function () {
+            var insert_cat = $('#cat').val();
+            if(insert_cat == ""){
+                $('#cat').css("border","1px solid red");
+                return false;
+            }
+        });
+        $('.edit_col').click(function () {
+            $('#add').val("แก้ไข");
+            $('#add').attr("name","edit");
+            $('#add').attr("id","edit");
+            $('#cancel').attr("type","submit");
+            var id = $(this).data('id');
+            $('#idcat').val(id);
+            var data = <?=json_encode($data);?>;
+            var cat_select;
+            for(var i=0;i<data.length;i++){
+                if(id == data[i]['id_category']){
+                    cat_select = data[i];
+                    break;
+                }
+            }
+            $('#cat').val(cat_select['name_category']);
+        });
+        $('#cancel').click(function () {
+            $('#cat').val("");
+            $('#add').val("เพิ่ม");
+            $('#add').attr("name","add");
+            $('#add').attr("id","add");
+            $('#cancel').attr("type","hidden");
+        });
     });
 </script>
 <style>
@@ -36,9 +73,12 @@ include ("header.php");
 <center>
     <div style="margin: 20px 20px 20px 20px;width: 80%;">
         <div>
-            <form action="../model/addCategory.php" method="post">
-                <input type="text">
-                <input type="submit" name="add" value="เพิ่ม">
+            <form action="../model/manageCat.php" method="post" >
+                <label>ชื่อหมวดหมู่</label>
+                <input type="text" name="cat" id="cat"/>
+                <input type="hidden" name="idcat" id="idcat"/>
+                <input type="submit" name="add" value="เพิ่ม" id="add"/>
+                <input type="hidden" name="cancel" value="ยกเลิก" id="cancel"/>
             </form>
 
         </div>

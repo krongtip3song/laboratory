@@ -31,6 +31,37 @@
                 }
             });
         });
+        $('#submit').click(function () {
+           if(!check_user){
+               alert("username ซ้ำ");
+               return false;
+           }
+           var user = $('#username').val();
+           var pass = $('#password').val();
+           var name = $('#name').val();
+           var surname = $('#surname').val();
+           var tel = $('#tel').val();
+           var email = $('#email').val();
+           if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == ""){
+               alert("กรอกข้อมูลให้ครบ");
+               return false;
+           }
+        });
+        $('#cancel').click(function () {
+            $("input[type='text']").val("");
+            return false;
+        });
+        $("#tel").keydown(function (e) {
+            var asc = e['key'].charCodeAt(0);
+            console.log(asc);
+            if(asc != 66){
+                if(asc < 48 || asc >57){
+                    alert("ใส่เฉพาะตัวเลข");
+                    return false;
+                }
+            }
+
+        });
     });
 </script>
 <style>
@@ -79,7 +110,7 @@
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทรศัพท์</label>
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="tel" id="tel"/>
+                    <input type="text" class="form-control" name="tel" id="tel" minlength="10" maxlength="10"/>
                 </div>
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">อีเมล</label>
                 <div class="col-md-4 col-sm-4 col-xs-12">

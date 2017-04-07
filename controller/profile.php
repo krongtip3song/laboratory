@@ -16,6 +16,7 @@ include("../model/getData.php");
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $data = getUser($id);
+    $myProject = getMyProject($id);
     session_start();
     include ("../view/view_profile.php");
     exit();

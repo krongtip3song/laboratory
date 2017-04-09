@@ -5,7 +5,7 @@
  * Date: 4/9/2017
  * Time: 3:29 PM
  */
-include ("/laboratory/laboratory/view/header.php");
+include ("header.php");
  $path = "/froala_editor_2.5.1";
 ?>
 <!DOCTYPE html>

@@ -22,7 +22,9 @@ include ("header.php");
 </div>
 <center>
     <div style="margin: 20px 20px 20px 20px;width: 80%;">
-
+        <?php
+        echo $data[0]["description"];
+        ?>
     </div>
 </center>
 <?php

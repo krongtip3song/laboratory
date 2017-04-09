@@ -87,10 +87,21 @@ include ("header.php");
         <br/>
         <div class="row">
             <div class="form-group">
+                <div class="control-label col-md-2 col-sm-2 col-xs-12">วันที่สร้าง</div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                    <input type="datetime-local" style="float: left" name="date" id="date"  />
+                </div>
+                <div class="col-md-4 col-sm-4 col-xs-12">
+                </div>
+            </div>
+        </div>
+        <br/>
+        <div class="row">
+            <div class="form-group">
                 <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="radio" style="float: left" name="type" value="STUDENT"/> <span class="ch"> PAPER</span><br>
-                    <input type="radio" style="float: left" name="type" value="ADMIN"/><span class="ch"> ADMIN</span>
+                    <input type="radio" style="float: left" name="category"  value="PAPER"/> <span class="ch"> PAPER</span><br>
+                    <input type="radio" style="float: left" name="category"   value="COM"/><span class="ch"> แข่งขัน</span>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                 </div>
@@ -115,7 +126,19 @@ include ("header.php");
     });
 
     $('#submit').click (function () {
-        console.log($('#myEditor').froalaEditor('html.get', true));
+        var title = $('#title').val();
+        var date_occ = $('#date').val();
+        var cat = $('input[name="category"]:checked').val();;
+        var html = $('#myEditor').froalaEditor('html.get', true );
+        var d = {html: html,
+                title : title,
+                category : cat,
+                date_occ : date_occ,
+        };
+
+        $.post("../model/addProject.php",d, function(data, status){
+            alert("Data: " + data + "\nStatus: " + status);
+        });
     })
 </script>
 

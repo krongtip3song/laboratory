@@ -11,13 +11,14 @@
 
 
 <?php
+
 include("../class/Authentication.class.php");
 include("../model/getData.php");
+session_start();
 if(isset($_GET['id'])){
     $id = $_GET['id'];
     $data = getUser($id);
     $myProject = getMyProject($id);
-    session_start();
     include ("../view/view_profile.php");
     exit();
 }

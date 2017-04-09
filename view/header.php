@@ -120,6 +120,9 @@
                                             </div>
                                         </div>
                                     </li>
+                                    <li class="menu-item">
+                                        <a class='menu_th' href="../controller/managehome.php">จัดการหน้าแรก</a>
+                                    </li>
                                     <?php
                                 }
                                 else{

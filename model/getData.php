@@ -180,6 +180,29 @@ function getMyProject($id){
     }
     return $resultArray;
 }
+function getWallProject(){
+    global $conn;
+    $sql = "SELECT * FROM project INNER JOIN wall_index ON project.id_project=wall_index.id_project";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "id_wall"=>$obResult['id_wall'],
+            "path_wall"=>$obResult['path_wall'],
+            "titleWall"=>$obResult['titleWall'],
+            "status"=>$obResult['status']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
+
 
 
 ?>

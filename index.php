@@ -51,6 +51,9 @@
         include ("config.inc.php");
         include ("class/Member.class.php");
         session_start();
+
+        //-----------------------------------------------------------------------------
+
         $counter_name = "counter.txt";
         // Check if a text file exists. If not create one and initialize it to zero.
         if (!file_exists($counter_name)) {
@@ -72,6 +75,33 @@
             fclose($f);
         }
         $conn->query("UPDATE visitor SET num='$counterVal'");
+
+        //-----------------------------------------------------------------------------
+
+        function getWallProject(){
+            global $conn;
+            $sql = "SELECT * FROM project INNER JOIN wall_index ON project.id_project=wall_index.id_project WHERE status=1";
+            $res = $conn->query($sql);
+            $resultArray = array();
+            while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+            {
+                $arrCol = array();
+                $arrCol = array("id_project"=>$obResult['id_project'],
+                    "title"=>$obResult['title'],
+                    "description"=>$obResult['description'],
+                    "date_Published"=>$obResult['date_Published'],
+                    "date_Occurred"=>$obResult['date_Occurred'],
+                    "id_category"=>$obResult['id_category'],
+                    "id_wall"=>$obResult['id_wall'],
+                    "path_wall"=>$obResult['path_wall'],
+                    "titleWall"=>$obResult['titleWall'],
+                    "status"=>$obResult['status']);
+                array_push($resultArray,$arrCol);
+            }
+            return $resultArray;
+        }
+
+        $wall = getWallProject();
 
         if(isset($_SESSION["user"])){
             $person = $_SESSION["user"];
@@ -98,12 +128,49 @@
                 <nav class="main-navigation">
                     <button class="menu-toggle"><i class="fa fa-bars"></i></button>
                     <ul class="menu">
-                        <li class="home menu-item current-menu-item"><a href="index.php"><img src="images/home-icon.png" alt="Home"></a></li>
-                        <li class="menu-item"><a href="about.html">About</a></li>
-                        <li class="menu-item"><a href="projects.html">Our projects</a></li>
-                        <li class="menu-item"><a href="contact.html">Contact</a></li>
                         <?php
                             if(isset($_SESSION["user"])) {
+                                if($type_user == "ADMIN"){
+                                    ?>
+                                    <li class="menu-item">
+                                        <a class="new-a" href="controller/home.php">หน้าหลัก</a>
+                                    </li>
+                                    <li class="dropdown menu-item">
+                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการผู้ใช้
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </a>
+                                        <div class="dropdown-menu" style="padding:17px;">
+                                            <div class="dropdown-content">
+
+                                                <a class="new-a" href="controller/datauser.php">แก้ไขข้อมูลผู้ใช้</a>
+                                                <a class="new-a" href="controller/adduser.php">เพิ่มผู้ใช้</a>
+                                                <a class="new-a" href="controller/submituser.php">ยืนยันผู้ใช้</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="dropdown menu-item">
+                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
+                                            <span class="glyphicon glyphicon-chevron-down"></span>
+                                        </a>
+                                        <div class="dropdown-menu" style="padding:17px;">
+                                            <div class="dropdown-content">
+                                                <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                                <a class="new-a" href="controller/allproject.php">เพิ่มโครงงาน</a>
+                                                <a class="new-a" href="controller/category.php">หมวดหมู่โครงงาน</a>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class='menu_th' href="controller/managehome.php">จัดการหน้าแรก</a>
+                                    </li>
+                                    <?php
+                                }
+                                else{
+                                    echo "<li class=\"home menu-item current-menu-item\"><a href=\"index.php\"><img src=\"images/home-icon.png\" alt=\"Home\"></a></li>
+                                <li class=\"menu-item\"><a href=\"about.html\">About</a></li>
+                                <li class=\"menu-item\"><a href=\"projects.html\">Our projects</a></li>
+                                <li class=\"menu-item\"><a href=\"contact.html\">Contact</a></li>";
+                                }
                         ?>
                                 <li class="dropdown menu-item" id="menuLogin">
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
@@ -140,6 +207,10 @@
                             else
                             {
                         ?>
+                                <li class="home menu-item current-menu-item"><a href="index.php"><img src="images/home-icon.png" alt="Home"></a></li>
+                                <li class="menu-item"><a href="about.html">About</a></li>
+                                <li class="menu-item"><a href="projects.html">Our projects</a></li>
+                                <li class="menu-item"><a href="contact.html">Contact</a></li>
                                 <li class="menu-item"><a data-target="#myModal" data-toggle="modal" style="cursor: pointer">Sign in</a></li>
                         <?php
                             }
@@ -155,33 +226,22 @@
 
     <div class="hero">
         <ul class="slides">
-            <li data-bg-image="images/slider-1.jpg">
-                <div class="container">
-                    <div class="slide-content">
-                        <h2 class="slide-title">LaboreLabore et dolore magna</h2>
-                        <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
-                        <a href="#" class="button">See details</a>
-                    </div>
-                </div>
-            </li>
-            <li data-bg-image="images/slider-2.jpg">
-                <div class="container">
-                    <div class="slide-content">
-                        <h2 class="slide-title">LaboreLabore et dolore magna</h2>
-                        <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
-                        <a href="#" class="button">See details</a>
-                    </div>
-                </div>
-            </li>
-            <li data-bg-image="images/slider-3.jpg">
-                <div class="container">
-                    <div class="slide-content">
-                        <h2 class="slide-title">LaboreLabore et dolore magna</h2>
-                        <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea commodo consequat duis aute irure dolor in reprehenderit.</p>
-                        <a href="#" class="button">See details</a>
-                    </div>
-                </div>
-            </li>
+            <?php
+                for($wall_c = 0;$wall_c<count($wall);$wall_c++) {
+                    ?>
+                    <li data-bg-image="<?=$wall[$wall_c]['path_wall']?>">
+                        <div class="container">
+                            <div class="slide-content">
+                                <h2 class="slide-title"><?=$wall[$wall_c]['titleWall']?></h2>
+                                <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea
+                                    commodo consequat duis aute irure dolor in reprehenderit.</p>
+                                <a href="#" class="button">See details</a>
+                            </div>
+                        </div>
+                    </li>
+                    <?php
+                }
+            ?>
         </ul>
     </div>
 

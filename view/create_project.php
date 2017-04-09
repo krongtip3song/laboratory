@@ -7,7 +7,6 @@
  */
 include ("header.php");
  $path = "/froala_editor_2.5.1";
- echo $path;
 ?>
 <!DOCTYPE html>
 <html>

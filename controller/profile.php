@@ -12,19 +12,26 @@
 
 <?php
 
-include("../class/Authentication.class.php");
-include("../model/getData.php");
-session_start();
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
-    $data = getUser($id);
-    $myProject = getMyProject($id);
-    include ("../view/view_profile.php");
-    exit();
-}
-else{
-    include ("../controller/home.php");
-    exit();
-}
+    include("../class/Authentication.class.php");
+    include("../model/getData.php");
+    session_start();
+    if(isset($_SESSION['user'])){
+        if(isset($_GET['id'])) {
+            $person = $_SESSION["user"];
+            $id = $_GET['id'];
+            $data = getUser($id);
+            $myProject = getMyProject($id);
+            include("../view/view_profile.php");
+            exit();
+        }
+        else{
+            header("Location:../index.php");
+            exit();
+        }
+    }
+    else{
+        header("Location:../index.php");
+        exit();
+    }
 
 ?>

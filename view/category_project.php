@@ -15,27 +15,44 @@ include ("header.php");
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
-        $('.delete_col').click(function () {
-            var id = $(this).data('id');
-            if( confirm("Do you want to delete ?") ){
-                window.location = "../model/manageCat.php?idcat="+id;
-            }
+        var check;
+        $('#cat').keyup(function () {
+            var cat = $('#cat').val();
+            $.ajax({
+                url: "../model/findCategory.php" ,
+                type: "POST",
+                data: {cat:cat}
+            })
+                .success(function(result) {
+                    if(result == "true"){
+                        $('#cat').css("border","1px solid green");
+                        check = true;
+                    }
+                    else{
+                        $('#cat').css("border","1px solid red");
+                        check = false;
+                    }
+                });
         });
         $('#add').click(function () {
             var insert_cat = $('#cat').val();
+            if(!check){
+                alert("ชื่อซ้ำ");
+                return false;
+            }
             if(insert_cat == ""){
                 $('#cat').css("border","1px solid red");
                 return false;
             }
         });
-        $('.edit_col').click(function () {
+        /*$('.edit_col').click(function () {
             $('#add').val("แก้ไข");
             $('#add').attr("name","edit");
             $('#add').attr("id","edit");
             $('#cancel').attr("type","submit");
             var id = $(this).data('id');
             $('#idcat').val(id);
-            var data = <?=json_encode($data);?>;
+            var data = //json_encode($data);?>;
             var cat_select;
             for(var i=0;i<data.length;i++){
                 if(id == data[i]['id_category']){
@@ -44,7 +61,7 @@ include ("header.php");
                 }
             }
             $('#cat').val(cat_select['name_category']);
-        });
+        });*/
         $('#cancel').click(function () {
             $('#cat').val("");
             $('#add').val("เพิ่ม");
@@ -53,6 +70,11 @@ include ("header.php");
             $('#cancel').attr("type","hidden");
         });
     });
+    function deleteCat(id) {
+        if( confirm("Do you want to delete ?") ){
+            window.location = "../model/manageCat.php?idcat="+id;
+        }
+    }
 </script>
 <style>
     .page-head{
@@ -71,7 +93,7 @@ include ("header.php");
     </div>
 </div>
 <center>
-    <div style="margin: 20px 20px 20px 20px;width: 80%;">
+    <div style="margin: 20px 20px 20px 20px;width: 50%;">
         <div>
             <form action="../model/manageCat.php" method="post" >
                 <label>ชื่อหมวดหมู่</label>
@@ -86,8 +108,8 @@ include ("header.php");
             <thead>
             <tr>
                 <th width="10%">ลำดับ</th>
-                <th width="20%">ชื่อหมวดหมู่</th>
-                <th width="20%">การกระทำ</th>
+                <th width="50%">ชื่อหมวดหมู่</th>
+                <th width="10%">การกระทำ</th>
             </tr>
             </thead>
             <tbody>
@@ -98,15 +120,8 @@ include ("header.php");
                     <td>".$list."</td>
                     <td>".$data[$i]['name_category']."</td>
                     <td>
-                    <div class='edit_col' data-id='".$data[$i]['id_category']."'>
-                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\">
-                                <span>แก้ไข</span>
-                            </i>
-                        </div>
                         <div class='delete_col' data-id='".$data[$i]['id_category']."'>
-                            <i class=\"fa fa-trash-o\" aria-hidden=\"true\">
-                                <span>ลบ</span>
-                            </i>
+                            <a onclick='deleteCat(".$data[$i]['id_category'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>
                         </div>
                     </td>
                 </tr>";

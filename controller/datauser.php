@@ -13,9 +13,24 @@
 <?php
     include("../class/Authentication.class.php");
     include("../model/getData.php");
-    $data = getAllUsers();
     session_start();
+    if(isset($_SESSION['user'])){
+        $person = $_SESSION["user"];
+        $type_user = $person->getType();
+        if($type_user == "ADMIN"){
+            $data = getAllUsers();
+            include ("../view/data_user.php");
+            exit();
+        }
+        else{
 
-    include ("../view/data_user.php");
-    exit();
+                header("Location:../index.php");
+                exit();
+
+        }
+    }
+    else{
+        header("Location:../index.php");
+        exit();
+    }
 ?>

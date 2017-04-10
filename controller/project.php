@@ -13,11 +13,22 @@
     include("../class/Authentication.class.php");
     include ("../model/getData.php");
     session_start();
-    $idpro = $_GET['id'];
-    $data = getProject($idpro);
-
-
-
-    include ("../view/one_project.php");
-    exit();
+    if(isset($_SESSION['user'])){
+        $person = $_SESSION["user"];
+        $type_user = $person->getType();
+        if($type_user == "ADMIN"){
+            $idpro = $_GET['id'];
+            $data = getProject($idpro);
+            include ("../view/one_project.php");
+            exit();
+        }
+        else{
+            header("Location:../index.php");
+            exit();
+        }
+    }
+    else{
+        header("Location:../index.php");
+        exit();
+    }
 ?>

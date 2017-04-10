@@ -26,11 +26,15 @@ if(isset($_POST['login'])){
     if (is_a($mem, "Member")) {
         if($mem->getType() == "ADMIN"){
             $_SESSION["user"] = $mem;
+            $person = $_SESSION["user"];
+            $type_user = $person->getType();
             include ("../view/admin_page.php");
             exit();
         }
         else{
             $_SESSION["user"] = $mem;
+            $person = $_SESSION["user"];
+            $type_user = $person->getType();
             echo "<script>alert('SUCCESS')</script>";
             header("Location:../index.php");
             exit();
@@ -53,10 +57,14 @@ if(isset($_POST["logout"])){
 }
 if(isset($_SESSION["user"])){
     if($_SESSION["user"]->getType() == "ADMIN"){
+        $person = $_SESSION["user"];
+        $type_user = $person->getType();
         include ("../view/admin_page.php");
         exit();
     }
     else{
+        $person = $_SESSION["user"];
+        $type_user = $person->getType();
         header("Location:../index.php");
         exit();
     }

@@ -16,44 +16,23 @@ include ("header.php");
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
-        $('.edit_col').click(function () {
-
-
-            var id = $(this).data('id');
-            $("#panel").slideDown("slow");
-            $('html,body').animate({
-                scrollTop: $('#panel').css('top')
-            }, 800, function() {});
-            var data = <?=json_encode($data);?>;
-            var user_select;
-            for(var i=0;i<data.length;i++){
-                if(id == data[i]['id_member']){
-                    user_select = data[i];
-                    break;
-                }
+        /*
+        $('#submit').click(function () {
+alert("sdasd");
+            if(user_select['username'] == $('#username').val() && user_select['password']==$('#pass').val() && user_select['name'] == $('#name').val() && user_select['surname'] == $('#surname').val() && user_select['tel'] == $('#tel').val() && user_select['email'] == $('#email').val() && $("input[name=radio]:checked").val() == user_select['type_user']){
+                alert("ไม่มีการเปลี่ยนแปลง");
+                return false;
             }
-            $('#idmem').val(user_select['id_member']);
-            $('#username').val(user_select['username']);
-            $('#pass').val(user_select['password']);
-            $('#name').val(user_select['name']);
-            $('#surname').val(user_select['surname']);
-            $('#tel').val(user_select['tel']);
-            $('#email').val(user_select['email']);
-            var typeU = user_select['type_user'];
-
-
-        });
-        $('.delete_col').click(function () {
-            var id = $(this).data('id');
-            if( confirm("Do you want to delete ?") ){
-                window.location = "../model/deleteUser.php?iduser="+id;
-            }
-        });
-        $('#cancel').click(function () {
-            $("#panel").slideUp("slow");
-            return false;
-        });
+        });*/
     } );
+    function deleteUser(id) {
+        if( confirm("Do you want to delete ?") ){
+            window.location = "../model/deleteUser.php?iduser="+id;
+        }
+    }
+    function editUser(id) {
+        window.location = "../controller/edituser.php?iduser="+id;
+    }
 </script>
 <style>
     .page-head{
@@ -84,76 +63,6 @@ include ("header.php");
     </div>
 </div>
 <center>
-<div id="panel">
-    <form action="../model/updateUser.php" method="post">
-        <input type="hidden" class="form-control" name="idmem" id="idmem"/>
-        <div class="row">
-            <div class="form-group">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อผู้ใช้</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="username" id="username"/>
-                </div>
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">รหัสผ่าน</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="pass" id="pass"/>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="form-group">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="name" id="name"/>
-                </div>
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">นามสกุล</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="surname" id="surname"/>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="form-group">
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">เบอร์โทรศัพท์</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="tel" id="tel"/>
-                </div>
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">อีเมล</label>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="text" class="form-control" name="email" id="email"/>
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">ชนิดผู้ใช้</div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="radio" style="float: left" name="type" class="typeUser"  value="STUDENT"/> <span class="ch"> STUDENT</span><br>
-                    <input type="radio" style="float: left" name="type" class="typeUser"  value="ADMIN" /><span class="ch"> ADMIN</span>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
-                </div>
-            </div>
-        </div>
-        <br/>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-3 col-sm-3 col-xs-12"></div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="submit" class="form-control" name="cancel" id="cancel" value="cancel"/>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="submit" class="form-control" name="submit" id="submit" value="submit"/>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12"></div>
-            </div>
-        </div>
-
-    </form>
-</div>
-
 <div style="margin: 20px 20px 20px 20px;width: 80%;">
     <table class="display" id="table_id">
         <thead>
@@ -180,14 +89,10 @@ include ("header.php");
                     <td>".$data[$i]['type_user']."</td>
                     <td>
                         <div class='edit_col' data-id='".$data[$i]['id_member']."'>
-                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\">
-                                <span>แก้ไข</span>
-                            </i>
+                            <a onclick='editUser(".$data[$i]['id_member'].")'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>  
                         </div>
-                        <div class='delete_col' data-id='".$data[$i]['id_member']."'>
-                            <i class=\"fa fa-trash-o\" aria-hidden=\"true\">
-                                <span>ลบ</span>
-                            </i>
+                        <div class='delete_col' data-id='".$data[$i]['id_member']."'>    
+                            <a onclick='deleteUser(".$data[$i]['id_member'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>           
                         </div>
                     </td>
                 </tr>";

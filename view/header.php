@@ -109,7 +109,7 @@
                                         <div class="dropdown-menu" style="padding:17px;">
                                             <div class="dropdown-content">
                                                 <a class="new-a" href="../controller/allproject.php">โครงงานทั้งหมด</a>
-                                                <a class="new-a" href="../controller/allproject.php">เพิ่มโครงงาน</a>
+                                                <a class="new-a" href="../controller/createproject.php">เพิ่มโครงงาน</a>
                                                 <a class="new-a" href="../controller/category.php">หมวดหมู่โครงงาน</a>
                                             </div>
                                         </div>

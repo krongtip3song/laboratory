@@ -7,7 +7,7 @@
  */
 include ("header.php");
 include("../model/getData.php");
- $path = "/froala_editor_2.5.1";
+ $path = "../lib/froala_editor_2.5.1";
  $path_selec = "../lib/selectize.js-master/examples";
 $user = getAllUsers();
 $i=0;
@@ -50,9 +50,12 @@ $i=0;
         }
 
         div#myEditor {
-            width: 81%;
+            width: 100%;
             margin: auto;
             text-align: left;
+        }
+        a{
+            cursor: pointer;
         }
     </style>
 </head>
@@ -97,8 +100,12 @@ $i=0;
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
-
-
+<div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')">
+    <div class="container">
+        <h4 class="page-title">เพิ่มโครงงาน</h4>
+    </div>
+</div>
+<center>
 <div style="margin: 30px 20px 20px 20px;width: 80%;">
     <form action="../model/uploadFile.php" method="post" enctype="multipart/form-data" id="form">
         <div class="row">
@@ -132,24 +139,27 @@ $i=0;
                 </div>
             </div>
         </div>
+        <br/>
+        <br/>
         <div id="myEditor"></div>
+        <br/>
         <br/>
         <div id="mem">
         <div class="row">
             <div class="form-group">
-                <label class="control-label col-md-1 col-sm-1 col-xs-12">ผู้มีส่วนเกี่ยวข้อง</label>
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">ผู้มีส่วนเกี่ยวข้อง</label>
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <script>
                         document.write("<input type='text' class='tags' id='"+i+"'>")
                     </script>
                 </div>
                 <label class="control-label col-md-1 col-sm-1 col-xs-12">ตำแหน่ง</label>
-                <div class="col-md-2 col-sm-2 col-xs-12">
+                <div class="col-md-3 col-sm-3 col-xs-12">
                     <script>
                         document.write("<input type='text' id='pos"+i+"'>")
                     </script>
                 </div>
-                <label class="control-label col-md-1 col-sm-1 col-xs-12">เปอร์เซ็นการมีส่วนร่วม</label>
+                <label class="control-label col-md-2 col-sm-2 col-xs-12">เปอร์เซ็นการมีส่วนร่วม</label>
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <script>
                         document.write("<input type='text' id='per"+i+"'>")
@@ -161,62 +171,68 @@ $i=0;
         </div>
         <a class="addMem">add more</a>
         <br/>
+        <br/>
         <div id="pic">
             <div class="row">
                 <div class="form-group">
-                    <div class="control-label col-md-2 col-sm-2 col-xs-12">รูปภาพ</div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">รูปภาพ</label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="file" name="picUpload[]" id="picUpload[]">
+                        <input type="file" name="picUpload[]" id="picUpload[]"/>
                     </div>
-                    <div class="control-label col-md-1 col-sm-1 ">ชื่อ</div>
-                    <div class="col-md-1 col-sm-1 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
                         <input type='text' name='textPic[]' id='textPic[]'/>
                     </div>
                 </div>
             </div>
         </div>
-
-
-<a class="addPic">add more</a>
-
+        <a class="addPic">add more</a>
+        <br/>
+        <br/>
         <div id="pap">
             <div class="row">
                 <div class="form-group">
-                    <div class="control-label col-md-2 col-sm-2 col-xs-12">เอกสาร</div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">เอกสาร</label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="file" name="papUpload[]" id="papUpload[]">
+                        <input type="file" name="papUpload[]" id="papUpload[]"/>
                     </div>
-                    <div class="control-label col-md-1 col-sm-1 ">ชื่อ</div>
-                    <div class="col-md-1 col-sm-1 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
                         <input type='text' name='textPap[]' id='textPap[]'/>
                     </div>
                 </div>
             </div>
         </div>
         <a class="addPap">add more</a>
+        <br/>
+        <br/>
         <div id="pro">
             <div class="row">
                 <div class="form-group">
-                    <div class="control-label col-md-2 col-sm-2 col-xs-12">โปรแกรม</div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">โปรแกรม</label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="file" name="proUpload[]" id="proUpload[]">
+                        <input type="file" name="proUpload[]" id="proUpload[]"/>
                     </div>
-                    <div class="control-label col-md-1 col-sm-1 ">ชื่อ</div>
-                    <div class="col-md-1 col-sm-1 col-xs-12">
+                    <div class="col-md-2 col-sm-2 col-xs-12"></div>
+                    <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
                         <input type='text' name='textPro[]' id='textPro[]'/>
                     </div>
                 </div>
             </div>
         </div>
-            <a class="addPro">add more</a>
-            <br/>
+        <a class="addPro">add more</a>
+        <br/>
+        <br/>
         <input type="submit"  name="submit" id="submit" value="submit"/>
 
 
 
     </form>
 </div>
-
+</center>
 
 <script>
     var percent = [];
@@ -254,16 +270,16 @@ $i=0;
          $(".addMem").click(function () {
              i++;
              /*var b =   for($i=0;$i<count($user);$i++) {echo "<option value=".$user[$i][id_member].'>'.$user[$i][name]."</option>";} ?>*/
-             var a = " <div class='row'> <div class='form-group'> <label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
+             var a = " <div class='row'> <div class='form-group'> <label class='control-label col-md-2 col-sm-2 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
 
              a = a +"<input class='tags' id='";
              a = a + i;
              a = a+"'>";
-             a = a+"</select> </div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
+             a = a+"</select> </div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-3 col-sm-3 col-xs-12'>";
              a = a+"<input id='pos";
              a = a + i;
              a = a + "'>";
-             a = a+"</div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
+             a = a+"</div><label class='control-label col-md-2 col-sm-2 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
              a = a+"<input id='per";
              a = a + i;
              a = a+"'>"
@@ -314,15 +330,15 @@ $i=0;
              } );
     });
         $(".addPic").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='control-label col-md-1 col-sm-1 '>ชื่อ</div> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> </div> </div>";
         $("#pic").append(a);
     });
         $(".addPap").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='control-label col-md-1 col-sm-1 '>ชื่อ</div> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
         $("#pap").append(a);
     });
         $(".addPro").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='control-label col-md-1 col-sm-1 '>ชื่อ</div> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
         $("#pro").append(a);
     });
 </script>

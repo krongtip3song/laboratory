@@ -202,7 +202,19 @@ function getWallProject(){
     }
     return $resultArray;
 }
-
+function getIDProject($title,$cat){
+    global $conn;
+    $sql = "SELECT id_project FROM project  WHERE title='$title' AND id_category = '$cat'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    if($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 
 
 ?>

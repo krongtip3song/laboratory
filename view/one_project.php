@@ -20,13 +20,13 @@ include ("header.php");
         <h4 class="page-title">โครงงาน</h4>
     </div>
 </div>
-<center>
-    <div style="margin: 20px 20px 20px 20px;width: 80%;">
+
+    <div style="margin: 20px 20px 20px 20px;width: 100%;">
         <?php
         echo $data[0]["description"];
         ?>
     </div>
-</center>
+
 <?php
 include ("footer.php");
 ?>

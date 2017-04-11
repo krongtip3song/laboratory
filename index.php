@@ -166,11 +166,36 @@
                                     <?php
                                 }
                                 else{
+                                    if($type_user == "TEACHER") {
+                                        ?>
+                                        <li class="menu-item">
+                                            <a class="new-a" href="index.php">หน้าหลัก</a>
+                                        </li>
+                                        <li class="dropdown menu-item">
+                                            <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
+                                                <span class="glyphicon glyphicon-chevron-down"></span>
+                                            </a>
+                                            <div class="dropdown-menu" style="padding:17px;">
+                                                <div class="dropdown-content">
+                                                    <a class="new-a"
+                                                       href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                                    <a class="new-a"
+                                                       href="../controller/adduser.php">โครงงานของตนเอง</a>
+                                                    <a class="new-a"
+                                                       href="../controller/submituser.php">สร้างโครงงาน</a>
+                                                </div>
+                                            </div>
+                                        </li>
+                                        <li class="menu-item">
+                                            <a class='menu_th' href="controller/submituser.php">ยืนยันผู้ใช้</a>
+                                        </li>
+                                        <?php
+                                    }else{
                                     echo "<li class=\"home menu-item current-menu-item\"><a href=\"index.php\"><img src=\"images/home-icon.png\" alt=\"Home\"></a></li>
                                 <li class=\"menu-item\"><a href=\"about.html\">About</a></li>
                                 <li class=\"menu-item\"><a href=\"projects.html\">Our projects</a></li>
                                 <li class=\"menu-item\"><a href=\"contact.html\">Contact</a></li>";
-                                }
+                                }}
                         ?>
                                 <li class="dropdown menu-item" id="menuLogin">
                                     <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">

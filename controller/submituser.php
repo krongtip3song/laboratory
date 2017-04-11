@@ -12,9 +12,24 @@
 <?php
     include("../class/Authentication.class.php");
     include("../model/getData.php");
-    $data = getUsersFail();
     session_start();
+    if(isset($_SESSION['user'])){
+        $person = $_SESSION["user"];
+        $type_user = $person->getType();
+        if($type_user == "ADMIN" || $type_user == "TEACHER"){
+            $data = getUsersFail();
+            include ("../view/submit_user.php");
+            exit();
+        }
+        else{
 
-    include ("../view/submit_user.php");
-    exit();
+                header("Location:../index.php");
+                exit();
+
+        }
+    }
+    else{
+        header("Location:../index.php");
+        exit();
+    }
 ?>

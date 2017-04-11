@@ -10,13 +10,13 @@ include ("../config.inc.php");
 
 
 if(isset($_GET['id'])){
-    $id = $_GET['idwall'];
+    $id = $_GET['id'];
     $sql = "DELETE FROM wall_index WHERE id_wall = '$id'";
     $res = $conn->exec($sql);
 }
 if(isset($_GET['idwall']) && isset($_GET['update'])){
     $id = $_GET['idwall'];
-    $status = !($_GET['update']);
+    $status = $_GET['update'];
     $sql = "UPDATE wall_index SET status = '$status' WHERE id_wall = '$id'";
     $res = $conn->exec($sql);
 }

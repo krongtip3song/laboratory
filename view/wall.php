@@ -10,31 +10,18 @@
 include ("header.php");
 ?>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
-        $('#submit').click(function () {
-            var val = [];
-            $(':checkbox:checked').each(function(i){
-                val[i] = $(this).val();
-            });
-            console.log(val);
-            if(val.length == 0){
-                alert("โปรดเลือกผู้ใช้");
-                return false;
+        function deleteWall(id) {
+            if( confirm("Do you want to delete ?") ){
+                window.location = "../model/manageWall.php?id="+id;
             }
-        });
-        $('.change_status').click(function () {
-            var id = $(this).data('id');
-            var status = $(this).data('status');
-            window.location = "../model/manageWall.php?idwall="+id+"&update="+status;
-        });
-        $('.delete_col').click(function () {
-            var id = $(this).data('id');
-            window.location = "../model/manageWall.php?id="+id;
-        });
-    } );
+        }
+    });
 </script>
 <style>
     .page-head{
@@ -62,7 +49,8 @@ include ("header.php");
             <th width="25%">คำบรรยาย</th>
             <th width="10%">รูปภาพ</th>
             <th width="5%">สถานะ</th>
-            <th width="25%">การกระทำ</th>
+            <th width="10%">การกระทำ</th>
+            <th width="15%">การกระทำ</th>
         </tr>
         </thead>
         <tbody>
@@ -77,25 +65,23 @@ include ("header.php");
                     <td>".$data[$i]['status']."</td>
                     <td>
                         <div class='change_status' data-id='".$data[$i]['id_wall']."' data-status='".$data[$i]['status']."'>
-                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\">
+                            
                                 ";
                                 if($data[$i]['status']){
-                                    echo "<span>เลิกใช้</span>";
+                                    echo "<a href='../model/manageWall.php?idwall=".$data[$i]['id_wall']."&update=0'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>เลิกใช้</a>";
                                 }
                                 else{
-                                    echo "<span>ใช้</span>";
+                                    echo "<a href='../model/manageWall.php?idwall=".$data[$i]['id_wall']."&update=1'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>ใช้</a>";
                                 }
-            echo "          </i>
+            echo "          
                         </div>
+                        </td>
+                        <td>
                         <div class='edit_col' data-id='".$data[$i]['id_wall']."'>
-                            <i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\">
-                                <span>แก้ไข</span>
-                            </i>
+                            <a onclick='deleteWall(".$data[$i]['id_wall'].")'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>           
                         </div>
                         <div class='delete_col' data-id='".$data[$i]['id_wall']."'>
-                            <i class=\"fa fa-trash-o\" aria-hidden=\"true\">
-                                <span>ลบ</span>
-                            </i>
+                            <a onclick='deleteWall(".$data[$i]['id_wall'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>
                         </div>
                     </td>
                 </tr>";

@@ -13,7 +13,7 @@
 <script>
     $(document).ready( function () {
         var check_user;
-        $('#username').keyup(function () {
+        $('#username').change(function () {
             var user = $('#username').val();
             $.ajax({
                 url: "../model/findUsername.php" ,
@@ -42,7 +42,8 @@
            var surname = $('#surname').val();
            var tel = $('#tel').val();
            var email = $('#email').val();
-           if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == ""){
+           var type = $("input[name=type]:checked").val();
+           if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == "" || type == undefined){
                alert("กรอกข้อมูลให้ครบ");
                return false;
            }
@@ -124,6 +125,7 @@
                 <div class="control-label col-md-2 col-sm-2 col-xs-12">ชนิดผู้ใช้</div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="radio" style="float: left" name="type" value="STUDENT"/> <span class="ch"> STUDENT</span><br>
+                    <input type="radio" style="float: left" name="type" value="TEACHER"/> <span class="ch"> TEACHER</span><br>
                     <input type="radio" style="float: left" name="type" value="ADMIN"/><span class="ch"> ADMIN</span>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">

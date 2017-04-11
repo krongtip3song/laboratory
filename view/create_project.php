@@ -6,7 +6,7 @@
  * Time: 3:29 PM
  */
 include ("header.php");
- $path = "../lib/froala_editor_2.5.1";
+ $path = "/froala_editor_2.5.1";
  echo $path;
 ?>
 <!DOCTYPE html>

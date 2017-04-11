@@ -13,6 +13,12 @@ include ("header.php");
 
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 
+
+<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
@@ -21,6 +27,25 @@ include ("header.php");
                 window.location = "../model/manageWall.php?id="+id;
             }
         }
+    });
+    $( function() {
+        var availableTags = [
+            <?php
+            for($i=0;$i<count($pro);$i++){
+                $title = $pro[$i]['title'];
+                $id = $pro[$i]['id_project'];
+                echo "{label :'".$title."',value:'".$id."'},";
+            }
+            ?>
+            ];
+        $( "#n_pro" ).autocomplete({
+            source: availableTags,
+            select: function( event, ui ) {
+                $( "#n_pro" ).val( ui.item.label );
+                $("#id_pro").val(ui.item.value);
+                return false;
+            }
+        });
     });
 </script>
 <style>
@@ -40,7 +65,22 @@ include ("header.php");
     </div>
 </div>
 <center>
+    <?php
+        if(isset($_POST['n_pro'])) echo $_POST['n_pro'];
+    ?>
 <div style="margin: 20px 20px 20px 20px;width: 80%;">
+    <form action="#" method="post" enctype="multipart/form-data" style="width: 100%">
+        <table>
+            <tr>
+                <td width="10%"><label>ชื่อโครงงาน</label></td>
+                <td width="20%"><input type="text" name="n_pro" id="n_pro"/><input type="hidden" name="id_pro" id="id_pro"/></td>
+                <td width="20%"><input type="text" name="des_pro" id="des_pro"/></td>
+                <td width="25%"><input type="file" name="img"/></td>
+                <td width="15%"><input type="submit" name="save" id="save"/></td>
+            </tr>
+        </table>
+
+    </form>
     <table class="display" id="table_id">
         <thead>
         <tr>
@@ -77,9 +117,6 @@ include ("header.php");
                         </div>
                         </td>
                         <td>
-                        <div class='edit_col' data-id='".$data[$i]['id_wall']."'>
-                            <a onclick='deleteWall(".$data[$i]['id_wall'].")'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>           
-                        </div>
                         <div class='delete_col' data-id='".$data[$i]['id_wall']."'>
                             <a onclick='deleteWall(".$data[$i]['id_wall'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>
                         </div>
@@ -91,6 +128,7 @@ include ("header.php");
     </table>
 </div>
 </center>
+
 <?php
 include ("footer.php");
 ?>

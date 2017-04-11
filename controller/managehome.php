@@ -19,6 +19,7 @@
         $type_user = $person->getType();
         if($type_user == "ADMIN"){
             $data = getWallProject();
+            $pro = getAllProjects();
             include ("../view/wall.php");
             exit();
         }

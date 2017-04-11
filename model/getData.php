@@ -215,6 +215,24 @@ function getIDProject($title,$cat){
     }
     return $resultArray;
 }
+function getFile($id){
+    global $conn;
+    $sql = "SELECT * FROM file  WHERE id_project = '$id'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_file"=>$obResult['id_file'],
+            "name"=>$obResult['name'],
+            "path"=>$obResult['path'],
+            "date_upload"=>$obResult['date_upload'],
+            "type"=>$obResult['type'],
+            "rank"=>$obResult['rank']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 
 
 ?>

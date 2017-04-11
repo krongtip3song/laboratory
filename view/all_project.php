@@ -48,7 +48,7 @@ include ("header.php");
                     <td>".$list."</td>
                     <td>".$data[$i]['title']."</td>
                     <td>".$data[$i]['name_category']."</td>
-                    <td>".$data[$i]['date_Published']."</td>
+                    <td>".date("d-m-Y",strtotime($data[$i]['date_Published']))."</td>
                     <td><a href='../controller/project.php?id=".$data[$i]['id_project']."'>more</a></td>
                 </tr>";
         }

@@ -20,6 +20,13 @@ if(isset($_GET['idwall']) && isset($_GET['update'])){
     $sql = "UPDATE wall_index SET status = '$status' WHERE id_wall = '$id'";
     $res = $conn->exec($sql);
 }
+if(isset($_POST['save'])){
+    $id = $_POST['id_pro'];
+    $des_pro = $_POST['des_pro'];
+
+    //$sql = "DELETE FROM wall_index WHERE id_wall = '$id'";
+    //$res = $conn->exec($sql);
+}
 
 
 if($res){

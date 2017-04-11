@@ -19,6 +19,7 @@
         if($type_user == "ADMIN"){
             $idpro = $_GET['id'];
             $data = getProject($idpro);
+            $file = getFile($idpro);
             include ("../view/one_project.php");
             exit();
         }

@@ -46,6 +46,49 @@
             padding-bottom: 0px;
         }
     </style>
+
+    <style>
+        .dropbtnWit {
+            background-color: white;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .dropdownWit {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-contentWit {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+        }
+
+        .dropdown-contentWit a {
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-contentWit a:hover {background-color: #f1f1f1}
+
+        .dropdownWit:hover .dropdown-contentWit {
+            display: block;
+        }
+        .dropdownWit:hover .dropbtnWit {
+            background-color: aliceblue;
+        }
+        li.menu-item.dropdownWit div.dropdown-contentWit a.new-a{
+            padding: 10px 10px;
+            text-decoration: none;
+            padding-left: 20px;
+        }
+    </style>
     <?php
 
         include ("config.inc.php");
@@ -135,29 +178,21 @@
                                     <li class="menu-item">
                                         <a class="new-a" href="controller/home.php">หน้าหลัก</a>
                                     </li>
-                                    <li class="dropdown menu-item">
-                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการผู้ใช้
-                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                        </a>
-                                        <div class="dropdown-menu" style="padding:17px;">
-                                            <div class="dropdown-content">
 
-                                                <a class="new-a" href="controller/datauser.php">แก้ไขข้อมูลผู้ใช้</a>
-                                                <a class="new-a" href="controller/adduser.php">เพิ่มผู้ใช้</a>
-                                                <a class="new-a" href="controller/submituser.php">ยืนยันผู้ใช้</a>
-                                            </div>
+                                    <li class="menu-item dropdownWit">
+                                        <a class="dropbtnWit">จัดการผู้ใช้ <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                        <div class="dropdown-contentWit">
+                                            <a class="new-a" href="controller/datauser.php">แก้ไขข้อมูลผู้ใช้</a>
+                                            <a class="new-a" href="controller/adduser.php">เพิ่มผู้ใช้</a>
+                                            <a class="new-a" href="controller/submituser.php">ยืนยันผู้ใช้</a>
                                         </div>
                                     </li>
-                                    <li class="dropdown menu-item">
-                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
-                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                        </a>
-                                        <div class="dropdown-menu" style="padding:17px;">
-                                            <div class="dropdown-content">
-                                                <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
-                                                <a class="new-a" href="controller/allproject.php">เพิ่มโครงงาน</a>
-                                                <a class="new-a" href="controller/category.php">หมวดหมู่โครงงาน</a>
-                                            </div>
+                                    <li class="menu-item dropdownWit">
+                                        <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                        <div class="dropdown-contentWit">
+                                            <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                            <a class="new-a" href="controller/createproject.php">เพิ่มโครงงาน</a>
+                                            <a class="new-a" href="controller/category.php">หมวดหมู่โครงงาน</a>
                                         </div>
                                     </li>
                                     <li class="menu-item">
@@ -171,19 +206,12 @@
                                         <li class="menu-item">
                                             <a class="new-a" href="index.php">หน้าหลัก</a>
                                         </li>
-                                        <li class="dropdown menu-item">
-                                            <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
-                                                <span class="glyphicon glyphicon-chevron-down"></span>
-                                            </a>
-                                            <div class="dropdown-menu" style="padding:17px;">
-                                                <div class="dropdown-content">
-                                                    <a class="new-a"
-                                                       href="controller/allproject.php">โครงงานทั้งหมด</a>
-                                                    <a class="new-a"
-                                                       href="../controller/adduser.php">โครงงานของตนเอง</a>
-                                                    <a class="new-a"
-                                                       href="../controller/submituser.php">สร้างโครงงาน</a>
-                                                </div>
+                                        <li class="menu-item dropdownWit">
+                                            <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                            <div class="dropdown-contentWit">
+                                                <a class="new-a" href="controller/datauser.php">โครงงานทั้งหมด</a>
+                                                <a class="new-a" href="controller/adduser.php">โครงงานของตนเอง</a>
+                                                <a class="new-a" href="controller/submituser.php">สร้างโครงงาน</a>
                                             </div>
                                         </li>
                                         <li class="menu-item">
@@ -271,44 +299,7 @@
     </div>
 
     <main class="main-content">
-        <!--  <div class="fullwidth-block">
-              <div class="container">
-                  <div class="row">
-                      <div class="col-md-3 col-sm-6">
-                          <div class="feature">
-                              <img src="images/icon-research-small.png" alt="" class="feature-image">
-                              <h2 class="feature-title">Research</h2>
-                              <p>Laborum et dolorum fuga harum quidem rerum facilis et expedita distinctio nam libero tempore.</p>
-                              <a href="" class="button">Learn more</a>
-                          </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                          <div class="feature">
-                              <img src="images/icon-medicine-small.png" alt="" class="feature-image">
-                              <h2 class="feature-title">Medicice</h2>
-                              <p>Laborum et dolorum fuga harum quidem rerum facilis et expedita distinctio nam libero tempore.</p>
-                              <a href="" class="button">Learn more</a>
-                          </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                          <div class="feature">
-                              <img src="images/icon-genetics-small.png" alt="" class="feature-image">
-                              <h2 class="feature-title">Genetics</h2>
-                              <p>Laborum et dolorum fuga harum quidem rerum facilis et expedita distinctio nam libero tempore.</p>
-                              <a href="" class="button">Learn more</a>
-                          </div>
-                      </div>
-                      <div class="col-md-3 col-sm-6">
-                          <div class="feature">
-                              <img src="images/icon-energy-small.png" alt="" class="feature-image">
-                              <h2 class="feature-title">Energy</h2>
-                              <p>Laborum et dolorum fuga harum quidem rerum facilis et expedita distinctio nam libero tempore.</p>
-                              <a href="" class="button">Learn more</a>
-                          </div>
-                      </div>
-                  </div> <!-- .row
-            </div> <!-- .container
-        </div> <!-- .fullwidth-block -->
+
 
         <div class="fullwidth-block" data-bg-color="#edf2f4">
             <div class="container">
@@ -342,48 +333,6 @@
             </div> <!-- .container -->
         </div> <!-- .fullwidth-block -->
 
-       <!-- <div class="fullwidth-block">
-            <div class="container">
-                <div class="row">
-                    <div class="col-md-8">
-                        <h2 class="section-title">Our mission and vision</h2>
-                        <p>Consequuntur minima, delectus quia labore sapiente maiores illo enim numquam sint? Molestias odio itaque, recusandae ut quae fuga ea tempore facere facilis. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi cupiditate repellat velit quo, fugiat dolores eum corrupti commodi? Deserunt, adipisci sunt voluptas aliquid aliquam eos. Perspiciatis, similique atque deserunt nam.</p>
-                        <p>Distinctio delectus consequuntur sed quod ipsum a, odio obcaecati neque, aliquam nostrum aliquid reprehenderit ad quae qui autem voluptate omnis quas Lorem ipsum dolor sit amet, consectetur adipisicing elit. Maxime magnam amet obcaecati dolore omnis consectetur dignissimos iste cupiditate excepturi quae porro fugiat, nemo iure, minima. Fuga hic voluptate ratione, at.ullam.</p>
-                    </div>
-                    <div class="col-md-4">
-                        <h2 class="section-title">Research summaries</h2>
-                        <ul class="arrow-list has-border">
-                            <li><a href="#">Praesentium voluptatum deleniti atque dolores</a></li>
-                            <li><a href="#">Corrupti quos et quas molestias excepturi sint</a></li>
-                            <li><a href="#">Occaecati cupiditate non provident similique sunt</a></li>
-                            <li><a href="#">Nam libero tempore, cum soluta nobis est eligendi</a></li>
-                        </ul>
-                        <a href="#" class="button">Show more</a>
-                    </div>
-                </div>
-            </div>
-        </div> -->
-
-       <!-- <div class="fullwidth-block cta" data-bg-image="images/cta-bg.jpg">
-            <div class="container">
-                <h2 class="cta-title">Neque porro quisquam</h2>
-                <p>Modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem enim ad minima veniam quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit qui in ea voluptate velit esse quam nihil moles</p>
-                <a href="#" class="button">See details</a>
-            </div>
-        </div>
-
-        <div class="fullwidth-block" data-bg-color="#edf2f4">
-            <div class="container">
-                <div class="subscribe-form">
-                    <h2>Join our newsletter</h2>
-                    <form action="#">
-                        <input type="text" placeholder="Enter your email">
-                        <input type="submit" value="Subscribe">
-                    </form>
-                </div>
-            </div>
-        </div> -->
-
     </main> <!-- .main-content -->
 
     <footer class="site-footer">
@@ -396,24 +345,7 @@
                         <address>ภาควิชาวิศวกรรมคอมพิวเตอร์ อาคาร 8 คณะวิศวกรรมศาสตร์ กำแพงแสน มหาวิทยาลัยเกษตรศาสตร์ วิทยาเขตกำแพงแสน อ.กำแพงแสน จ.นครปฐม 73140</address>
                     </div>
                 </div>
-                <!--<div class="col-md-3">
-                    <div class="widget">
-                        <h3 class="widget-title">Press room</h3>
-                        <ul class="arrow-list">
-                            <li><a href="#">Accusantium doloremque</a></li>
-                            <li><a href="#">Laudantium totam aperiam</a></li>
-                        </ul>
-                    </div>
-                </div>-->
-                <!-- <div class="col-md-3">
-                     <div class="widget">
-                         <h3 class="widget-title">Research summary</h3>
-                         <ul class="arrow-list">
-                             <li><a href="#">Accusantium doloremque</a></li>
-                             <li><a href="#">Laudantium totam aperiam</a></li>
-                         </ul>
-                     </div>
-                 </div>-->
+
                 <div class="col-md-6">
                     <div class="widget">
                         <h3 class="widget-title">Social media</h3>

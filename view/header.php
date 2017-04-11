@@ -62,6 +62,48 @@
         }
     </style>
 
+    <style>
+        .dropbtnWit {
+            background-color: aliceblue;
+            color: white;
+            padding: 16px;
+            font-size: 16px;
+            border: none;
+            cursor: pointer;
+        }
+        .dropdownWit {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-contentWit {
+            display: none;
+            position: absolute;
+            background-color: #f9f9f9;
+            min-width: 160px;
+            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+            z-index: 1;
+            right: 0;
+        }
+
+        .dropdown-contentWit a {
+            color: black;
+            text-decoration: none;
+            display: block;
+        }
+        .dropdown-contentWit a:hover {background-color: #f1f1f1}
+
+        .dropdownWit:hover .dropdown-contentWit {
+            display: block;
+        }
+        .dropdownWit:hover .dropbtnWit {
+            background-color: aliceblue;
+        }
+        li.menu-item.dropdownWit div.dropdown-contentWit a.new-a{
+            padding: 10px 10px;
+            text-decoration: none;
+            padding-left: 20px;
+        }
+    </style>
 </head>
 
 
@@ -89,29 +131,21 @@
                                     <li class="menu-item">
                                         <a class="new-a" href="../controller/home.php">หน้าหลัก</a>
                                     </li>
-                                    <li class="dropdown menu-item">
-                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการผู้ใช้
-                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                        </a>
-                                        <div class="dropdown-menu" style="padding:17px;">
-                                            <div class="dropdown-content">
 
-                                                <a class="new-a" href="../controller/datauser.php">แก้ไขข้อมูลผู้ใช้</a>
-                                                <a class="new-a" href="../controller/adduser.php">เพิ่มผู้ใช้</a>
-                                                <a class="new-a" href="../controller/submituser.php">ยืนยันผู้ใช้</a>
-                                            </div>
+                                    <li class="menu-item dropdownWit">
+                                        <a class="dropbtnWit">จัดการผู้ใช้ <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                        <div class="dropdown-contentWit">
+                                            <a class="new-a" href="../controller/datauser.php">แก้ไขข้อมูลผู้ใช้</a>
+                                            <a class="new-a" href="../controller/adduser.php">เพิ่มผู้ใช้</a>
+                                            <a class="new-a" href="../controller/submituser.php">ยืนยันผู้ใช้</a>
                                         </div>
                                     </li>
-                                    <li class="dropdown menu-item">
-                                        <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
-                                            <span class="glyphicon glyphicon-chevron-down"></span>
-                                        </a>
-                                        <div class="dropdown-menu" style="padding:17px;">
-                                            <div class="dropdown-content">
-                                                <a class="new-a" href="../controller/allproject.php">โครงงานทั้งหมด</a>
-                                                <a class="new-a" href="../controller/createproject.php">เพิ่มโครงงาน</a>
-                                                <a class="new-a" href="../controller/category.php">หมวดหมู่โครงงาน</a>
-                                            </div>
+                                    <li class="menu-item dropdownWit">
+                                        <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                        <div class="dropdown-contentWit">
+                                            <a class="new-a" href="../controller/allproject.php">โครงงานทั้งหมด</a>
+                                            <a class="new-a" href="../controller/createproject.php">เพิ่มโครงงาน</a>
+                                            <a class="new-a" href="../controller/category.php">หมวดหมู่โครงงาน</a>
                                         </div>
                                     </li>
                                     <li class="menu-item">
@@ -123,22 +157,19 @@
                                     if($type_user == "TEACHER"){
                                         ?>
                                         <li class="menu-item">
-                                            <a class="new-a" href="controller/home.php">หน้าหลัก</a>
+                                            <a class="new-a" href="../controller/home.php">หน้าหลัก</a>
                                         </li>
-                                        <li class="dropdown menu-item">
-                                            <a class='menu_th dropdown-toggle' href="#" data-toggle="dropdown">จัดการโครงงาน
-                                                <span class="glyphicon glyphicon-chevron-down"></span>
-                                            </a>
-                                            <div class="dropdown-menu" style="padding:17px;">
-                                                <div class="dropdown-content">
-                                                    <a class="new-a" href="../controller/datauser.php">โครงงานทั้งหมด</a>
-                                                    <a class="new-a" href="../controller/adduser.php">โครงงานของตนเอง</a>
-                                                    <a class="new-a" href="../controller/submituser.php">สร้างโครงงาน</a>
-                                                </div>
+
+                                        <li class="menu-item dropdownWit">
+                                            <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                            <div class="dropdown-contentWit">
+                                                <a class="new-a" href="../controller/datauser.php">โครงงานทั้งหมด</a>
+                                                <a class="new-a" href="../controller/adduser.php">โครงงานของตนเอง</a>
+                                                <a class="new-a" href="../controller/submituser.php">สร้างโครงงาน</a>
                                             </div>
                                         </li>
                                         <li class="menu-item">
-                                            <a class='menu_th' href="controller/submituser.php">ยืนยันผู้ใช้</a>
+                                            <a class='menu_th' href="../controller/submituser.php">ยืนยันผู้ใช้</a>
                                         </li>
                                         <?php
                                     }

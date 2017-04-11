@@ -132,7 +132,7 @@ for($i=0;$i<count($_FILES["$pro"]["name"]);$i++) {
     } else {
         if (move_uploaded_file($_FILES["$pro"]["tmp_name"][$i], $target_file)) {
            // echo "The file " . $namePro[$i] . " has been uploaded.";
-            uploadFile($conn,$namePro[$i],$target_file,"paper",$idPro,"1");
+            uploadFile($conn,$namePro[$i],$target_file,"program",$idPro,"1");
         } else {
             //echo "Sorry, there was an error uploading your file.";
         }

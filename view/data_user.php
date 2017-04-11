@@ -14,6 +14,7 @@ include ("header.php");
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
 
 <script>
+
     $(document).ready( function () {
         $('#table_id').dataTable();
         /*

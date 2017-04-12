@@ -72,6 +72,27 @@ include ("header.php");
                 ?>
             </table>
         </div>
+        <div>
+            <table>
+                <tr>
+                    <th>ลำดับ</th>
+                    <th>ชื่อ-สกุล</th>
+                    <th>ประเภท</th>
+                    <th>ตำแหน่ง</th>
+                </tr>
+                <?php
+                    for($mp=0;$mp<count($mem_project);$mp++){
+                        $c_mp = $mp+1;
+                        echo "<tr>
+                        <td>".$c_mp."</td>
+                        <td>".$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']."</td>
+                        <td>".$mem_project[$mp]['type_user']."</td>
+                        <td>".$mem_project[$mp]['position']."</td>
+                        </tr>";
+                    }
+                ?>
+            </table>
+        </div>
     </div>
 
 

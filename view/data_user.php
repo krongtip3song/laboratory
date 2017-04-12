@@ -9,9 +9,11 @@
 <?php
 include ("header.php");
 ?>
-
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
 <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+
 
 <script>
 
@@ -25,6 +27,36 @@ alert("sdasd");
                 return false;
             }
         });*/
+        $(document).on("click", ".edit_col", function () {
+            $("#modal_edit").modal('show');
+            var id = $(this).data('id');
+            var data = <?=json_encode($data);?>;
+            var user_select;
+            for(var i=0;i<data.length;i++){
+                if(id == data[i]['id_member']){
+                    user_select = data[i];
+                    break;
+                }
+            }
+            $('#idmem').val(user_select['id_member']);
+            $('#username').val(user_select['username']);
+            $('#pass').val(user_select['password']);
+            $('#name').val(user_select['name']);
+            $('#surname').val(user_select['surname']);
+            $('#tel').val(user_select['tel']);
+            $('#email').val(user_select['email']);
+            if(user_select['type_user'] == "STUDENT"){
+                $('#stu').prop('checked',true);
+            }
+            else{
+                if(user_select['type_user'] == "TEACHER"){
+                    $('#tea').prop('checked',true);
+                }
+                else{
+                    $('#ad').prop('checked',true);
+                }
+            }
+        });
     } );
     function deleteUser(id) {
         if( confirm("Do you want to delete ?") ){
@@ -90,7 +122,7 @@ alert("sdasd");
                     <td>".$data[$i]['type_user']."</td>
                     <td>
                         <div class='edit_col' data-id='".$data[$i]['id_member']."'>
-                            <a onclick='editUser(".$data[$i]['id_member'].")'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>  
+                            <a><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>  
                         </div>
                         <div class='delete_col' data-id='".$data[$i]['id_member']."'>    
                             <a onclick='deleteUser(".$data[$i]['id_member'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>           
@@ -103,6 +135,104 @@ alert("sdasd");
     </table>
 </div>
 </center>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_edit" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">แก้ไขข้อมูล</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <form action="../model/updateUser.php" method="post">
+                    <input type="hidden" name="idmem" id="idmem"/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">ชื่อผู้ใช้</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="username" id="username"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">รหัสผ่าน</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="pass" id="pass"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">ชื่อ</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="name" id="name"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">นามสกุล</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="surname" id="surname"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">เบอร์โทรศัพท์</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="tel" id="tel" minlength="10" maxlength="10"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">อีเมล</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" class="form-control" name="email" id="email"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">ชนิดผู้ใช้</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="radio" style="float: left" name="type" value="STUDENT" id="stu"/> <span class="ch"> STUDENT</span><br>
+                                <input type="radio" style="float: left" name="type" value="TEACHER" id="tea"/> <span class="ch"> TEACHER</span><br>
+                                <input type="radio" style="float: left" name="type" value="ADMIN" id="ad"/><span class="ch"> ADMIN</span>
+                            </div>
+                            <div class="col-md-3 col-sm-3 col-xs-12">
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+                            <div class="col-md-4 col-sm-4 col-xs-12">
+                                <input type="submit" class="btn btn-default" name="submit" id="submit" value="submit"/>
+                            </div>
+                            <div class="col-md-4 col-sm-3 col-xs-12"></div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 
 <?php
 include ("footer.php");

@@ -40,6 +40,7 @@ include ("header.php");
             ];
         $( "#n_pro" ).autocomplete({
             source: availableTags,
+            appendTo: "#modal_add",
             select: function( event, ui ) {
                 $( "#n_pro" ).val( ui.item.label );
                 $("#id_pro").val(ui.item.value);
@@ -47,6 +48,7 @@ include ("header.php");
             }
         });
     });
+
 </script>
 <style>
     .page-head{
@@ -69,18 +71,7 @@ include ("header.php");
         if(isset($_POST['n_pro'])) echo $_POST['n_pro'];
     ?>
 <div style="margin: 20px 20px 20px 20px;width: 80%;">
-    <form action="../model/manageWall.php" method="post" enctype="multipart/form-data" style="width: 100%">
-        <table>
-            <tr>
-                <td width="10%"><label>ชื่อโครงงาน</label></td>
-                <td width="20%"><input type="text" name="n_pro" id="n_pro"/><input type="hidden" name="id_pro" id="id_pro"/></td>
-                <td width="20%"><input type="text" name="des_pro" id="des_pro"/></td>
-                <td width="25%"><input type="file" name="img"/></td>
-                <td width="15%"><input type="submit" name="save" id="save"/></td>
-            </tr>
-        </table>
-
-    </form>
+    <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#modal_add">เพิ่ม</button>
     <table class="display" id="table_id">
         <thead>
         <tr>
@@ -128,6 +119,55 @@ include ("header.php");
     </table>
 </div>
 </center>
+
+
+<!-- Modal -->
+<div class="modal fade" id="modal_add" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">แก้ไขข้อมูล</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <form action="../model/manageWall.php" method="post" enctype="multipart/form-data" style="width: 100%" class="eventInsForm">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">ชื่อโครงงาน</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="n_pro" id="n_pro"/>
+                                <input type="hidden" name="id_pro" id="id_pro"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">คำบรรยาย</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="text" name="des_pro" id="des_pro"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="control-label col-md-3 col-sm-3 col-xs-12">รูปภาพ</label>
+                            <div class="col-md-6 col-sm-6 col-xs-12">
+                                <input type="file" name="img"/>
+                            </div>
+                        </div>
+                    </div>
+                    <br/>
+                    <input type="submit" name="save" id="save" value="บันทึก"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
 
 <?php
 include ("footer.php");

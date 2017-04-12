@@ -234,6 +234,26 @@ function getFile($id){
     }
     return $resultArray;
 }
-
+function getMemberProject($id){
+    global $conn;
+    $sql = "SELECT * FROM member_project INNER JOIN member ON member_project.id_member=member.id_member WHERE id_project = '$id' ORDER BY weight DESC";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_member"=>$obResult['id_member'],
+            "username"=>$obResult['username'],
+            "password"=>$obResult['password'],
+            "name"=>$obResult['name'],
+            "surname"=>$obResult['surname'],
+            "type_user"=>$obResult['type_user'],
+            "id_member_project"=>$obResult['id_member_project'],
+            "position"=>$obResult['position'],
+            "weight"=>$obResult['weight']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 
 ?>

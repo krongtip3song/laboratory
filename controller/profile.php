@@ -18,9 +18,11 @@
     if(isset($_SESSION['user'])){
         if(isset($_GET['id'])) {
             $person = $_SESSION["user"];
+            $type_user = $person->getType();
             $id = $_GET['id'];
             $data = getUser($id);
             $myProject = getMyProject($id);
+
             include("../view/view_profile.php");
             exit();
         }

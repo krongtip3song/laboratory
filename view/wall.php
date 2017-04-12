@@ -69,7 +69,7 @@ include ("header.php");
         if(isset($_POST['n_pro'])) echo $_POST['n_pro'];
     ?>
 <div style="margin: 20px 20px 20px 20px;width: 80%;">
-    <form action="#" method="post" enctype="multipart/form-data" style="width: 100%">
+    <form action="../model/manageWall.php" method="post" enctype="multipart/form-data" style="width: 100%">
         <table>
             <tr>
                 <td width="10%"><label>ชื่อโครงงาน</label></td>
@@ -101,7 +101,7 @@ include ("header.php");
                     <td>".$list."</td>
                     <td>".$data[$i]['title']."</td>
                     <td>".$data[$i]['titleWall']."</td>
-                    <td><img src='../".$data[$i]['path_wall']."' width='80px' height='40px'></td>
+                    <td><img src='../".$data[$i]['path_wall']."' width='80px' height='50px'></td>
                     <td>".$data[$i]['status']."</td>
                     <td>
                         <div class='change_status' data-id='".$data[$i]['id_wall']."' data-status='".$data[$i]['status']."'>

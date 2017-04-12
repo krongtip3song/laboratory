@@ -16,20 +16,10 @@
     if(isset($_SESSION['user'])){
         $person = $_SESSION["user"];
         $type_user = $person->getType();
-        if($type_user == "ADMIN"){
-            $idpro = $_GET['id'];
-            $data = getProject($idpro);
-            $file = getFile($idpro);
-            include ("../view/one_project.php");
-            exit();
-        }
-        else{
-            header("Location:../index.php");
-            exit();
-        }
     }
-    else{
-        header("Location:../index.php");
-        exit();
-    }
+    $idpro = $_GET['id'];
+    $data = getProject($idpro);
+    $file = getFile($idpro);
+    include ("../view/one_project.php");
+    exit();
 ?>

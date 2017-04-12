@@ -51,3 +51,30 @@
         <p class="colophon">copyright 2014 Company name. Designed by <a href="http://www.vandelaydesign.com/" title="Designed by VandelayDesign.com" target="_blank">VandelayDesign.com</a>. All rights reserved</p>
     </div> <!-- .container -->
 </footer>
+
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Sign In</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <form action="../controller/home.php" method="post">
+                    <input type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+                    <br/>
+                    <br/>
+                    <input type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                    <br/>
+                    <br/>
+                    <input type="submit" name="login" id="login" value="Login"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

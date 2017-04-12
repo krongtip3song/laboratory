@@ -16,7 +16,7 @@ include ("header.php");
     $(document).ready( function () {
         $('#table_id').dataTable();
         var check;
-        $('#cat').keyup(function () {
+        $('#cat').change(function () {
             var cat = $('#cat').val();
             $.ajax({
                 url: "../model/findCategory.php" ,

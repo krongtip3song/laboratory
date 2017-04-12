@@ -2,8 +2,8 @@
 /**
  * Created by PhpStorm.
  * User: WiiS
- * Date: 6/4/2560
- * Time: 2:55
+ * Date: 12/4/2560
+ * Time: 16:54
  */
 ?>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.0/jquery.min.js"></script>
@@ -14,15 +14,15 @@ include("../class/Authentication.class.php");
 include("../model/getData.php");
 session_start();
 if(isset($_SESSION['user'])){
-    $person = $_SESSION['user'];
+    $person = $_SESSION["user"];
     $type_user = $person->getType();
+    $id_user = $person->getId();
+    $data = getMyProject($id_user);
+    include ("../view/my_project.php");
+    exit();
 }
 else{
-    $person = null;
-    $type_user = null;
+    header("Location:../index.php");
+    exit();
 }
-$data = getAllProjects();
-include ("../view/all_project.php");
-exit();
-
 ?>

@@ -45,7 +45,7 @@ if(isset($_POST['login'])){
         echo "<script>window.location='../index.php'</script>";
     }
 }
-if(isset($_POST["logout"])){
+if(isset($_GET["logout"])){
     Authentication::logout($_SESSION["user"]);
     session_unset();
     session_destroy();

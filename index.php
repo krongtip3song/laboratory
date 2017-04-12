@@ -191,7 +191,7 @@
                                         <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
                                         <div class="dropdown-contentWit">
                                             <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
-                                            <a class="new-a" href="controller/createproject.php">เพิ่มโครงงาน</a>
+                                            <a class="new-a" href="controller/createproject.php">สร้างโครงงาน</a>
                                             <a class="new-a" href="controller/category.php">หมวดหมู่โครงงาน</a>
                                         </div>
                                     </li>
@@ -209,9 +209,9 @@
                                         <li class="menu-item dropdownWit">
                                             <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
                                             <div class="dropdown-contentWit">
-                                                <a class="new-a" href="controller/datauser.php">โครงงานทั้งหมด</a>
-                                                <a class="new-a" href="controller/adduser.php">โครงงานของตนเอง</a>
-                                                <a class="new-a" href="controller/submituser.php">สร้างโครงงาน</a>
+                                                <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                                <a class="new-a" href="controller/myproject.php">โครงงานของตนเอง</a>
+                                                <a class="new-a" href="controller/createproject.php">สร้างโครงงาน</a>
                                             </div>
                                         </li>
                                         <li class="menu-item">
@@ -219,40 +219,28 @@
                                         </li>
                                         <?php
                                     }else{
-                                    echo "<li class=\"home menu-item current-menu-item\"><a href=\"index.php\"><img src=\"images/home-icon.png\" alt=\"Home\"></a></li>
-                                <li class=\"menu-item\"><a href=\"about.html\">About</a></li>
-                                <li class=\"menu-item\"><a href=\"projects.html\">Our projects</a></li>
-                                <li class=\"menu-item\"><a href=\"contact.html\">Contact</a></li>";
+                                        if($type_user == "STUDENT"){
+                                            ?>
+                                            <li class="menu-item">
+                                                <a class="new-a" href="index.php">หน้าหลัก</a>
+                                            </li>
+                                            <li class="menu-item dropdownWit">
+                                                <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
+                                                <div class="dropdown-contentWit">
+                                                    <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                                    <a class="new-a" href="controller/myproject.php">โครงงานของตนเอง</a>
+                                                </div>
+                                            </li>
+                                            <?php
+                                        }
                                 }}
                         ?>
-                                <li class="dropdown menu-item" id="menuLogin">
-                                    <a class="dropdown-toggle" href="#" data-toggle="dropdown" id="navLogin">
-                                        <span class="glyphicon glyphicon-user"></span> 
-                                        <strong><?=$person?></strong>
-                                        <span class="glyphicon glyphicon-chevron-down"></span>
-                                    </a>
 
-                                    <div class="dropdown-menu" style="padding:17px;">
-                                        <div class="navbar-login">
-                                            <div class="row">
-                                                <div class="col-lg-4">
-                                                    <p class="text-center">
-                                                        <span class="glyphicon glyphicon-user" style="font-size: 87px;"></span>
-                                                    </p>
-                                                </div>
-                                                <div class="col-lg-8">
-                                                    <p class="text-left"><strong><?=$person?></strong></p>
-                                                    <p class="text-left small"><?=$person->getEmail()?></p>
-                                                    <form action="controller/profile.php?id=<?=$person->getId()?>" method="post" style="display: inline-block;float: left">
-                                                        <input type="submit" name="profile" value="PROFILE">
-                                                    </form>
-                                                    <form action="controller/home.php" method="post" style="display: inline-block;float: left">
-                                                        <input type="submit" name="logout" value="LOGOUT">
-                                                    </form>
-
-                                                </div>
-                                            </div>
-                                        </div>
+                                <li class="menu-item dropdownWit">
+                                    <a class="dropbtnWit"><strong><?=$person?></strong><span class="glyphicon glyphicon-chevron-down"></span></a>
+                                    <div class="dropdown-contentWit">
+                                        <a class="new-a" href="controller/profile.php?id=<?=$person->getId()?>">โปรไฟล์</a>
+                                        <a class="new-a" href="controller/home.php?logout=1">ออกจากระบบ</a>
                                     </div>
                                 </li>
                         <?php
@@ -261,10 +249,9 @@
                             {
                         ?>
                                 <li class="home menu-item current-menu-item"><a href="index.php"><img src="images/home-icon.png" alt="Home"></a></li>
-                                <li class="menu-item"><a href="about.html">About</a></li>
-                                <li class="menu-item"><a href="projects.html">Our projects</a></li>
-                                <li class="menu-item"><a href="contact.html">Contact</a></li>
-                                <li class="menu-item"><a data-target="#myModal" data-toggle="modal" style="cursor: pointer">Sign in</a></li>
+                                <li class="menu-item"><a href="controller/allproject.php">โครงงานทั้งหมด</a></li>
+                                <li class="menu-item"><a href="view/about.php">เกี่ยวกับ</a></li>
+                                <li class="menu-item"><a data-target="#myModal" data-toggle="modal" style="cursor: pointer">เข้าสู่ระบบ</a></li>
                         <?php
                             }
                         ?>
@@ -285,10 +272,9 @@
                     <li data-bg-image="<?=$wall[$wall_c]['path_wall']?>">
                         <div class="container">
                             <div class="slide-content">
-                                <h2 class="slide-title"><?=$wall[$wall_c]['titleWall']?></h2>
-                                <p>Enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi aliquip ex ea
-                                    commodo consequat duis aute irure dolor in reprehenderit.</p>
-                                <a href="#" class="button">See details</a>
+                                <h2 class="slide-title"><?=$wall[$wall_c]['title']?></h2>
+                                <p><?=$wall[$wall_c]['titleWall']?></p>
+                                <a href="controller/project.php?id=<?=$wall[$wall_c]['id_project']?>" class="button">See details</a>
                             </div>
                         </div>
                     </li>

@@ -160,7 +160,7 @@ function getCategory(){
 }
 function getMyProject($id){
     global $conn;
-    $sql = "SELECT * FROM project INNER JOIN member_project ON project.id_project=member_project.id_project WHERE id_member = '$id'";
+    $sql = "SELECT * FROM category INNER JOIN (project INNER JOIN member_project ON project.id_project=member_project.id_project) ON category.id_category=project.id_category WHERE id_member = '$id'";
     $res = $conn->query($sql);
     $resultArray = array();
     while($obResult = $res->fetch(PDO::FETCH_ASSOC))
@@ -172,6 +172,7 @@ function getMyProject($id){
             "date_Published"=>$obResult['date_Published'],
             "date_Occurred"=>$obResult['date_Occurred'],
             "id_category"=>$obResult['id_category'],
+            "name_category"=>$obResult['name_category'],
             "id_member_project"=>$obResult['id_member_project'],
             "id_member"=>$obResult['id_member'],
             "position"=>$obResult['position'],

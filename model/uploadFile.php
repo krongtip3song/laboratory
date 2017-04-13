@@ -10,6 +10,10 @@ include("../model/getData.php");
 
 $title = $_POST["title"];
 $cat = $_POST["category"];
+if(isset($_POST["main_pic"])){
+    $main_pic = $_POST["main_pic"];
+}
+
 if($cat =="PAPER"){$category = "1";}
 else{$category = "2";}
 $data = getIDProject($title,$category);
@@ -55,6 +59,16 @@ if (!is_dir("$target_dir")) {
             if (move_uploaded_file($_FILES["$pic"]["tmp_name"][$i], $target_file)) {
                // echo "The file " . $namePic[$i] . " has been uploaded.";
                 uploadFile($conn,$namePic[$i],$target_file,"pic",$idPro,"1");
+
+
+                if(isset($_POST["main_pic"])){
+                    if($i==$main_pic){
+                        $path_main_pic = substr($target_file,3);
+                        $sql_mp = "INSERT INTO wall_index (id_project,path_wall,status)VALUES('$idPro','$path_main_pic','0')";
+                        $conn->exec($sql_mp);
+                    }
+                }
+
             } else {
                // echo "Sorry, there was an error uploading your file.";
             }

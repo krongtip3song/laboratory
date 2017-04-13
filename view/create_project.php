@@ -20,6 +20,7 @@ $i=0;
 
 <script>
     var i = 0;
+    var i_main_pic = 0;
     var user;
     var member = [];
 </script>
@@ -184,6 +185,12 @@ $i=0;
                     <div class="col-md-2 col-sm-2 col-xs-12">
                         <input type='text' name='textPic[]' id='textPic[]'/>
                     </div>
+                    <div class="col-md-2 col-sm-2 col-xs-12">
+                        <script>
+                            document.write("<input type='radio' name='main_pic' class='main_pic' value='"+i_main_pic+"'/> รูปหลัก")
+                        </script>
+
+                    </div>
                 </div>
             </div>
         </div>
@@ -329,18 +336,24 @@ $i=0;
                  });
              } );
     });
-        $(".addPic").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> </div> </div>";
+        $(".addPic").click(function () { i_main_pic++;
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='radio' name='main_pic' class='main_pic' value='"+i_main_pic+"'/> รูปหลัก </div></div> </div>";
         $("#pic").append(a);
     });
         $(".addPap").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
         $("#pap").append(a);
     });
         $(".addPro").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-1 col-sm-1 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
         $("#pro").append(a);
     });
+        $(document).on("click", ".main_pic", function () {
+            var a = $(this).parent().parent().find("input[type=file]").val();
+           alert("asdsad");
+           console.log(a);
+           alert(a);
+        });
 </script>
 
 <script>

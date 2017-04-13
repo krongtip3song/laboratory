@@ -36,10 +36,9 @@ if(isset($_GET['idwall']) && isset($_GET['update'])){
 }
 if(isset($_POST['save'])){
     $id = $_POST['id_pro'];
-    $des_pro = $_POST['des_pro'];
     $target_dir = "images/wall_index/".$id."_".$_FILES["img"]["name"];
     if (move_uploaded_file($_FILES["img"]["tmp_name"], "../".$target_dir)) {
-        $sql = "INSERT INTO wall_index (id_project,path_wall,titleWall,status) VALUES('$id','$target_dir','$des_pro','0')";
+        $sql = "INSERT INTO wall_index (id_project,path_wall,status) VALUES('$id','$target_dir','0')";
         $res = $conn->exec($sql);
         if($res){
             echo "<script>alert('SUCCESS')</script>";

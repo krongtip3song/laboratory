@@ -77,7 +77,6 @@ include ("header.php");
         <tr>
             <th width="5%">ลำดับ</th>
             <th width="15%">ชื่อโครงงาน</th>
-            <th width="25%">คำบรรยาย</th>
             <th width="10%">รูปภาพ</th>
             <th width="5%">สถานะ</th>
             <th width="10%">การกระทำ</th>
@@ -91,7 +90,6 @@ include ("header.php");
             echo "<tr>
                     <td>".$list."</td>
                     <td>".$data[$i]['title']."</td>
-                    <td>".$data[$i]['titleWall']."</td>
                     <td><img src='../".$data[$i]['path_wall']."' width='80px' height='50px'></td>
                     <td>".$data[$i]['status']."</td>
                     <td>

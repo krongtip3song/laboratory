@@ -197,7 +197,6 @@ function getWallProject(){
             "id_category"=>$obResult['id_category'],
             "id_wall"=>$obResult['id_wall'],
             "path_wall"=>$obResult['path_wall'],
-            "titleWall"=>$obResult['titleWall'],
             "status"=>$obResult['status']);
         array_push($resultArray,$arrCol);
     }

@@ -88,6 +88,10 @@
             text-decoration: none;
             padding-left: 20px;
         }
+        .post .featured-image img {
+            width: 300px;
+            height: 250px;
+        }
     </style>
     <?php
 
@@ -137,14 +141,50 @@
                     "id_category"=>$obResult['id_category'],
                     "id_wall"=>$obResult['id_wall'],
                     "path_wall"=>$obResult['path_wall'],
-                    "titleWall"=>$obResult['titleWall'],
                     "status"=>$obResult['status']);
                 array_push($resultArray,$arrCol);
             }
             return $resultArray;
         }
+        function getLastProject(){
+            global $conn;
+            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Occurred DESC LIMIT 6";
+            $res = $conn->query($sql);
+            $resultArray = array();
+            while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+            {
+                $arrCol = array();
+                $arrCol = array("id_project"=>$obResult['id_project'],
+                    "title"=>$obResult['title'],
+                    "description"=>$obResult['description'],
+                    "date_Published"=>$obResult['date_Published'],
+                    "date_Occurred"=>$obResult['date_Occurred'],
+                    "id_category"=>$obResult['id_category'],
+                    "name_category"=>$obResult['name_category']);
+                array_push($resultArray,$arrCol);
+            }
+            return $resultArray;
+        }
+        function getMainPicProject($id){
+            global $conn;
+            $sql = "SELECT * FROM wall_index WHERE id_project='$id' ORDER BY id_wall DESC LIMIT 1";
+            $res = $conn->query($sql);
+            $resultArray = array();
+            if($obResult = $res->fetch(PDO::FETCH_ASSOC))
+            {
+                $arrCol = array();
+                $arrCol = array("id_wall"=>$obResult['id_wall'],
+                    "id_project"=>$obResult['id_project'],
+                    "path_wall"=>$obResult['path_wall'],
+                    "status"=>$obResult['status']);
+                array_push($resultArray,$arrCol);
+                return $resultArray[0]['path_wall'];
+            }
+            return null;
+        }
 
         $wall = getWallProject();
+        $last_pro = getLastProject();
 
         if(isset($_SESSION["user"])){
             $person = $_SESSION["user"];
@@ -273,7 +313,6 @@
                         <div class="container">
                             <div class="slide-content">
                                 <h2 class="slide-title"><?=$wall[$wall_c]['title']?></h2>
-                                <p><?=$wall[$wall_c]['titleWall']?></p>
                                 <a href="controller/project.php?id=<?=$wall[$wall_c]['id_project']?>" class="button">See details</a>
                             </div>
                         </div>
@@ -289,33 +328,34 @@
 
         <div class="fullwidth-block" data-bg-color="#edf2f4">
             <div class="container">
-                <h2 class="section-title">Latest News</h2>
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="post">
-                            <figure class="featured-image"><img src="images/news-1.jpg" alt=""></figure>
-                            <h2 class="entry-title"><a href="">Magni dolores rationale</a></h2>
-                            <small class="date">2 oct 2014</small>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
+                <h2 class="section-title">Latest Project</h2>
+                <?php
+                for($l_pro = 0;$l_pro<count($last_pro);$l_pro++) {
+                    if($l_pro%3==0){
+                        echo "<div class=\"row\">";
+                    }
+                    ?>
+                        <div class="col-md-4">
+                            <div class="post">
+                                <?php
+                                $img = getMainPicProject($last_pro[$l_pro]['id_project']);
+                                if($img == null){
+                                    $img = "images/mainpic.jpg";
+                                }
+                                ?>
+                                <figure class="featured-image"><img src="<?=$img?>" alt="" width="100px"></figure>
+                                <h2 class="entry-title"><a href="controller/project.php?id=<?=$last_pro[$l_pro]['id_project']?>"><?=$last_pro[$l_pro]['title']?></a></h2>
+                                <small class="date"><?=$last_pro[$l_pro]['date_Occurred']?></small>
+                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
+                                    laudantium...</p>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="post">
-                            <figure class="featured-image"><img src="images/news-2.jpg" alt=""></figure>
-                            <h2 class="entry-title"><a href="">Perspiciatis unde omnus</a></h2>
-                            <small class="date">2 oct 2014</small>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
-                        </div>
-                    </div>
-                    <div class="col-md-4">
-                        <div class="post">
-                            <figure class="featured-image"><img src="images/news-3.jpg" alt=""></figure>
-                            <h2 class="entry-title"><a href="">Voluptatem laundantium  totam</a></h2>
-                            <small class="date">2 oct 2014</small>
-                            <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium...</p>
-                        </div>
-                    </div>
-                </div> <!-- .row -->
+                    <?php
+                    if($l_pro%3==2){
+                        echo "</div>";
+                    }
+                }
+                ?>
             </div> <!-- .container -->
         </div> <!-- .fullwidth-block -->
 

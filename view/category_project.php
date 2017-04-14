@@ -45,14 +45,14 @@ include ("header.php");
                 return false;
             }
         });
-        /*$('.edit_col').click(function () {
+        $('.edit_col').click(function () {
             $('#add').val("แก้ไข");
             $('#add').attr("name","edit");
             $('#add').attr("id","edit");
             $('#cancel').attr("type","submit");
             var id = $(this).data('id');
             $('#idcat').val(id);
-            var data = //json_encode($data);?>;
+            var data = <?=json_encode($data);?>;
             var cat_select;
             for(var i=0;i<data.length;i++){
                 if(id == data[i]['id_category']){
@@ -61,7 +61,7 @@ include ("header.php");
                 }
             }
             $('#cat').val(cat_select['name_category']);
-        });*/
+        });
         $('#cancel').click(function () {
             $('#cat').val("");
             $('#add').val("เพิ่ม");
@@ -109,7 +109,7 @@ include ("header.php");
             <tr>
                 <th width="10%">ลำดับ</th>
                 <th width="50%">ชื่อหมวดหมู่</th>
-                <th width="10%">การกระทำ</th>
+                <th width="20%">การกระทำ</th>
             </tr>
             </thead>
             <tbody>
@@ -120,6 +120,9 @@ include ("header.php");
                     <td>".$list."</td>
                     <td>".$data[$i]['name_category']."</td>
                     <td>
+                        <div class='edit_col' data-id='".$data[$i]['id_category']."'>
+                            <a><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>แก้ไข</a>
+                        </div>  
                         <div class='delete_col' data-id='".$data[$i]['id_category']."'>
                             <a onclick='deleteCat(".$data[$i]['id_category'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>
                         </div>

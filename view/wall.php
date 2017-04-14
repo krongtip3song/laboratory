@@ -22,12 +22,13 @@ include ("header.php");
 <script>
     $(document).ready( function () {
         $('#table_id').dataTable();
-        function deleteWall(id) {
-            if( confirm("Do you want to delete ?") ){
-                window.location = "../model/manageWall.php?id="+id;
-            }
-        }
     });
+    function deleteWall(id) {
+        if( confirm("Do you want to delete ?") ){
+            window.location = "../model/manageWall.php?id="+id;
+        }
+    }
+
     $( function() {
         var availableTags = [
             <?php

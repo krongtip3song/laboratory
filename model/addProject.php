@@ -14,9 +14,7 @@ $member = $_POST["member"];
 $position = $_POST["position"];
 $percent = $_POST["percent"];
 if(isset($title) && $title!=""){
-    $cat = $_POST["category"];
-    if($cat =="PAPER"){$category = "1";}
-    else{$category = "2";}
+    $category = $_POST["category"];
     $date_occ = date("Y-m-d H:i:s",strtotime($_POST["date_occ"]));
     $sql = "INSERT INTO project (title,description,date_Occurred,id_category)VALUES('$title','$html','$date_occ','$category')";
     $res = $conn->exec($sql);
@@ -30,7 +28,7 @@ if(isset($title) && $title!=""){
     $id_pro = $id_pro[0]["id_project"];
     for($i=0;$i<count($member);$i++){
         console.log($id_pro."-".$member[$i]["value"]."-".$position[$i]."-".$percent[$i]);
-         addMemberToProject($conn,$id_pro,$member[$i]["value"],$position[$i],$percent[$i]);
+        addMemberToProject($conn,$id_pro,$member[$i]["value"],$position[$i],$percent[$i]);
     }
 
 }

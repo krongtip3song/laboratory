@@ -122,7 +122,7 @@ $i=0;
             <div class="form-group">
                 <div class="control-label col-md-2 col-sm-2 col-xs-12">วันที่สร้าง</div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="datetime-local" style="float: left" name="date" id="date"  />
+                    <input type="date" style="float: left" name="date" id="date"  />
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                 </div>
@@ -133,8 +133,14 @@ $i=0;
             <div class="form-group">
                 <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
-                    <input type="radio" style="float: left" name="category"  value="PAPER"/> <span class="ch"> PAPER</span><br>
-                    <input type="radio" style="float: left" name="category"   value="COM"/><span class="ch"> แข่งขัน</span>
+                    <select id="category" name="category">
+                        <?php
+                            $cat = getCategory();
+                            for($i=0;$i<count($cat);$i++){
+                                echo "<option value='".$cat[$i]["id_category"]."'>".$cat[$i]["name_category"]."</option>";
+                            }
+                        ?>
+                    </select>
                 </div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                 </div>
@@ -258,7 +264,7 @@ $i=0;
         }
         var title = $('#title').val();
         var date_occ = $('#date').val();
-        var cat = $('input[name="category"]:checked').val();
+        var cat = $('#category').val();    //'input[name="category"]:checked'
         var html = $('#myEditor').froalaEditor('html.get', true );
 
         var d = {html: html,
@@ -270,9 +276,15 @@ $i=0;
                 percent : percent,
         };
 
-        $.post("../model/addProject.php",d, function(data, status){
-            alert("Data: " + data + "\nStatus: " + status);
+        $.ajax({
+            type: 'POST',
+            url: "../model/addProject.php",
+            data: d,
+            async:false
         });
+       // $.post("../model/addProject.php",d, function(data, status){
+
+       // });
     })
          $(".addMem").click(function () {
              i++;
@@ -350,9 +362,6 @@ $i=0;
     });
         $(document).on("click", ".main_pic", function () {
             var a = $(this).parent().parent().find("input[type=file]").val();
-           alert("asdsad");
-           console.log(a);
-           alert(a);
         });
 </script>
 

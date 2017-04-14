@@ -27,8 +27,6 @@ if(isset($title) && $title!=""){
     $id_pro = getIDProject($title,$category);
     $id_pro = $id_pro[0]["id_project"];
     for($i=0;$i<count($member);$i++){
-        console.log($id_pro."-".$member[$i]["value"]."-".$position[$i]."-".$percent[$i]);
         addMemberToProject($conn,$id_pro,$member[$i]["value"],$position[$i],$percent[$i]);
     }
-
 }

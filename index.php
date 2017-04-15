@@ -93,7 +93,7 @@
             height: 250px;
         }
         .banner{
-            background: #065784;
+            background: #119c0a;
             position: absolute;
             z-index: 100;
             padding-right: 15px;
@@ -117,6 +117,7 @@
             z-index: 10;
             box-shadow: -5px -5px #c2c2c2;
             border: 1px solid #dbdbdb;
+            border-bottom: 2px solid #119c0a;
         }
         .date{
             padding: 0 15px;

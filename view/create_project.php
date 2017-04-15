@@ -23,6 +23,7 @@ $i=0;
     var i_main_pic = 0;
     var user;
     var member = [];
+    var num = 1;
 </script>
 
 
@@ -132,7 +133,7 @@ $i=0;
         <div class="row">
             <div class="form-group">
                 <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
+                <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: left">
                     <select id="category" name="category">
                         <?php
                             $cat = getCategory();
@@ -156,23 +157,23 @@ $i=0;
             <div class="form-group">
                 <label class="control-label col-md-2 col-sm-2 col-xs-12">ผู้มีส่วนเกี่ยวข้อง</label>
                 <div class="col-md-2 col-sm-2 col-xs-12">
+                    <label id="text_select2" name="text_select2" style="display: none;color: red">กรุณาเลือก</label>
                     <script>
                         document.write("<input type='text' class='tags' id='"+i+"'>")
                     </script>
                 </div>
                 <label class="control-label col-md-1 col-sm-1 col-xs-12">ตำแหน่ง</label>
-                <div class="col-md-3 col-sm-3 col-xs-12">
+                <div class="col-md-2 col-sm-2 col-xs-12">
                     <script>
                         document.write("<input type='text' id='pos"+i+"'>")
                     </script>
                 </div>
-                <label class="control-label col-md-2 col-sm-2 col-xs-12">เปอร์เซ็นการมีส่วนร่วม</label>
+                <label class="control-label col-md-1 col-sm-1 col-xs-12">เปอร์เซ็นการมีส่วนร่วม</label>
                 <div class="col-md-2 col-sm-2 col-xs-12">
                     <script>
                         document.write("<input type='text' id='per"+i+"'>")
                     </script>
                 </div>
-
             </div>
         </div>
         </div>
@@ -250,12 +251,40 @@ $i=0;
 <script>
     var percent = [];
     var position = [];
+    var check_title;
     $(function() {
         $('#myEditor').froalaEditor()
     });
 
 
+
+    $('#title').change(function () {
+            var title = $('#title').val();
+            $.ajax({
+                url: "../model/findProject.php" ,
+                type: "POST",
+                data: {title:title}
+            })
+                .success(function(result) {
+                    if(result == "true"){
+                        $('#title').css("border","1px solid green");
+                        check_title = true;
+                    }
+                    else{
+                        $('#title').css("border","1px solid red");
+                        check_title = false;
+                    }
+                });
+        });
     $('#submit').click (function () {
+        if(!check_title){
+            alert("title ซ้ำ");
+            return false;
+        }
+        if(member == ""){
+            alert("กรุณาเลือกผู้มีส่วนร่วมอย่างน้อยหนึ่งคน");
+            return false;
+        }
         for(j=0;j<=i;j++){
             var pos = "#pos"+j;
             var per = "#per"+j;
@@ -266,7 +295,6 @@ $i=0;
         var date_occ = $('#date').val();
         var cat = $('#category').val();    //'input[name="category"]:checked'
         var html = $('#myEditor').froalaEditor('html.get', true );
-
         var d = {html: html,
                 title : title,
                 category : cat,
@@ -285,8 +313,9 @@ $i=0;
        // $.post("../model/addProject.php",d, function(data, status){
 
        // });
-    })
+    });
          $(".addMem").click(function () {
+             num++;
              i++;
              /*var b =   for($i=0;$i<count($user);$i++) {echo "<option value=".$user[$i][id_member].'>'.$user[$i][name]."</option>";} ?>*/
              var a = " <div class='row'> <div class='form-group'> <label class='control-label col-md-2 col-sm-2 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
@@ -294,15 +323,15 @@ $i=0;
              a = a +"<input class='tags' id='";
              a = a + i;
              a = a+"'>";
-             a = a+"</select> </div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-3 col-sm-3 col-xs-12'>";
+             a = a+"</select> </div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
              a = a+"<input id='pos";
              a = a + i;
              a = a + "'>";
-             a = a+"</div><label class='control-label col-md-2 col-sm-2 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
+             a = a+"</div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
              a = a+"<input id='per";
              a = a + i;
              a = a+"'>"
-             a = a+"</div> </div> </div> <br/>";
+             a = a+"</div> <div class='delete_col' class='col-md-2 col-sm-2 col-xs-12'> <label class='delete'  style='color: red'><i class='fa fa-trash-o' aria-hidden='true'></i> ลบ</label> </div></div> </div>";
              $("#mem").append(a);
              $(document).ready(function() {
                  var availableTags = [
@@ -332,19 +361,39 @@ $i=0;
                          return false;
                      },
                      select: function( event, ui ) {
+                         num--;
+                         if(num==0){
+                             document.getElementById("text_select2").style.display="none";
+                         }
+                         $(this).css("border","1px solid #ccc");
                          var terms = split( this.value );
                          // remove the current input
                          terms.pop();
                          // add the selected item
                          terms.push( ui.item.label );
-
+                         console.log("55");
                          // add array by bird
                          member[$(this).attr("id")]= ui.item;
                          // add placeholder to get the comma-and-space at the end
                          // terms.push( "" );
                          this.value = terms.join( ", " );
                          return false;
+                     },
+                     change: function (event, ui) {
+                         if(ui.item==null){
+                            $(this).css("border","1px solid red");
+                             document.getElementById("text_select2").style.display="inline";
+                         }
+                         return false;
                      }
+                 });
+                 $('.delete').click(function () {
+                     var id = $(this).data('id');
+                     var div = $(this).parent().parent().parent();
+                     var d = {id_file: id,
+                     };
+                     div.remove();
+
                  });
              } );
     });

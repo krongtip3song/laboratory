@@ -142,15 +142,6 @@ include ("header.php");
                     <br/>
                     <div class="row">
                         <div class="form-group">
-                            <label class="control-label col-md-3 col-sm-3 col-xs-12">คำบรรยาย</label>
-                            <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" name="des_pro" id="des_pro"/>
-                            </div>
-                        </div>
-                    </div>
-                    <br/>
-                    <div class="row">
-                        <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">รูปภาพ</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
                                 <input type="file" name="img"/>

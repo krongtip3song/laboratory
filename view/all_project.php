@@ -17,6 +17,11 @@ include ("header.php");
     $(document).ready( function () {
         $('#table_id').dataTable();
     });
+    function deleteProject(id) {
+        if( confirm("Do you want to delete ?") ){
+            window.location = "../model/deleteProject.php?idpro="+id;
+        }
+    }
 </script>
 <style>
     .page-head{
@@ -66,7 +71,7 @@ include ("header.php");
                     if($type_user == "ADMIN" || $type_user == "TEACHER"){
                             echo "
                                 <div class='edit_col' data-id=''>
-                                    <a href=''><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>   
+                                    <a href='../controller/edit_project.php?id=".$data[$i]['id_project']."'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i>แก้ไข</a>   
                                 </div>";
                         if($type_user == "ADMIN"){
                             echo "<div class='delete_col'>

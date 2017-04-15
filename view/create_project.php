@@ -224,7 +224,7 @@ $i=0;
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">โปรแกรม</label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="file" name="proUpload[]" id="proUpload[]"/>
+                        <input type="file" name="proUpload[]" id="proUpload[]" class="proUpload"/>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-12"></div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
@@ -397,14 +397,23 @@ $i=0;
         $(".addPic").click(function () { i_main_pic++;
         var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='radio' name='main_pic' class='main_pic' value='"+i_main_pic+"'/> รูปหลัก </div></div> </div>";
         $("#pic").append(a);
+
     });
         $(".addPap").click(function () {
         var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
         $("#pap").append(a);
     });
         $(".addPro").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]' class='proUpload'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
         $("#pro").append(a);
+        $('.proUpload').bind('change', function() {
+            var fileSize = this.files[0].size;
+            if(fileSize > 8388608){
+                alert("ไฟล์มีขนาดใหญ่เกินไป");
+                $(this).val("");
+                return false;
+            }
+        });
     });
         $(document).on("click", ".main_pic", function () {
             var a = $(this).parent().parent().find("input[type=file]").val();
@@ -428,6 +437,14 @@ $i=0;
 </script>
 <script>
     $(document).ready(function() {
+        $('.proUpload').bind('change', function() {
+            var fileSize = this.files[0].size;
+            if(fileSize > 8388608){
+                alert("ไฟล์มีขนาดใหญ่เกินไป");
+                $(this).val("");
+                return false;
+            }
+        });
         var availableTags = [
             <?php
             for($i=0;$i<count($user);$i++){

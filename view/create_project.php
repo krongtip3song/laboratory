@@ -47,9 +47,6 @@ $i=0;
     <link rel="stylesheet" href="<?php echo "$path"; ?>/css/plugins/quick_insert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
     <style>
-        body {
-            text-align: center;
-        }
 
         div#myEditor {
             width: 100%;
@@ -177,7 +174,7 @@ $i=0;
             </div>
         </div>
         </div>
-        <a class="addMem">add more</a>
+        <a class="addMem">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pic">
@@ -201,7 +198,7 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPic">add more</a>
+        <a class="addPic">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pap">
@@ -219,7 +216,7 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPap">add more</a>
+        <a class="addPap">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pro">
@@ -237,10 +234,10 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPro">add more</a>
+        <a class="addPro">เพิ่มเติม</a>
         <br/>
         <br/>
-        <input type="submit"  name="submit" id="submit" value="submit"/>
+        <input type="submit"  name="submit" id="submit" value="ยืนยัน"/>
 
 
 

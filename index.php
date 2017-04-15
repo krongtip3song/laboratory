@@ -201,7 +201,7 @@
         <div class="container">
             <div class="header-bar">
                 <a href="index.php" class="branding">
-                    <img src="images/logo.png" alt="" class="logo">
+                    <img src="images/chip_sm.png" alt="" class="logo">
                     <div class="logo-type">
                         <h1 class="site-title">Technology Laboratory</h1>
                         <small class="site-description">Tagline goes here</small>

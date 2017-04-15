@@ -165,6 +165,10 @@ include ("header.php");
         background-color: #4e6eaf;
         color: white;
     }
+    .detail_sub{
+        display: block;
+        padding: 20px 20px 20px 20px;
+    }
 </style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')" >
     <div class="container">
@@ -174,7 +178,10 @@ include ("header.php");
 
     <div style="margin: 5% 10% 5% 10%;;width: 80%;">
         <div class="sub-subject" style="border:1px solid black;">
-            <p  class="detail"><?=$data[0]["description"]?></p>
+            <div class="detail_sub">
+                <p  class="detail"><?=$data[0]["description"]?></p>
+            </div>
+
         </div>
         <br/>
         <br/>
@@ -183,7 +190,7 @@ include ("header.php");
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12" >
                 <label>รูปภาพ</label>
-                <div class="row" style="border: 1.5px solid #d9d9d9">
+                <div class="row" style="border: 1.5px solid #d9d9d9;">
                     <?php
                     for($i=0;$i<count($file);$i++){
                     if($file[$i]['type'] == "pic") {
@@ -240,7 +247,8 @@ include ("header.php");
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <table>
+                <label>สมาชิก</label>
+                <table border="1">
                     <tr>
                         <th>ลำดับ</th>
                         <th>ชื่อ-สกุล</th>
@@ -250,7 +258,7 @@ include ("header.php");
                     <?php
                     for($mp=0;$mp<count($mem_project);$mp++){
                         $c_mp = $mp+1;
-                        echo "<tr>
+                        echo "<tr class=\"table-tr\">
                         <td>".$c_mp."</td>
                         <td>".$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']."</td>
                         <td>".$mem_project[$mp]['type_user']."</td>
@@ -295,7 +303,7 @@ include ("header.php");
         $i2 = $i+1;
         ?><center>
         <div class="column">
-            <img class="demo" src="<?=$file[$i]['path']?>" onclick="currentSlide(<?=$i2?>)" alt="Nature">
+            <img class="demo" src="<?=$file[$i]['path']?>" onclick="currentSlide(<?=$i2?>)" alt="<?=$file[$i]['name']?>">
         </div></center>
             <?php
         }

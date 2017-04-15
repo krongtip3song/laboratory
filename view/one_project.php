@@ -22,9 +22,12 @@ include ("header.php");
 </div>
 
     <div style="margin: 5% 10% 5% 10%;;width: 80%;">
-        <?php
-        echo $data[0]["description"];
-        ?>
+        <div style="text-overflow: ellipsis">
+            <?php
+            echo $data[0]["description"];
+            ?>
+        </div>
+
         <div>
             <label>Download</label>
             <table border="1" width="50%">

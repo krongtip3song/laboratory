@@ -16,7 +16,7 @@ include ("header.php");
     $(document).ready( function () {
         $('#table_id').dataTable();
         var check;
-        $('#cat').change(function () {
+        $('#cat').keyup(function () {
             var cat = $('#cat').val();
             $.ajax({
                 url: "../model/findCategory.php" ,
@@ -36,16 +36,17 @@ include ("header.php");
         });
         $('#add').click(function () {
             var insert_cat = $('#cat').val();
-            if(!check){
+
+            if (insert_cat == "") {
+                $('#cat').css("border", "1px solid red");
+                return false;
+            }
+            if (!check) {
                 alert("ชื่อซ้ำ");
                 return false;
             }
-            if(insert_cat == ""){
-                $('#cat').css("border","1px solid red");
-                return false;
-            }
         });
-        $('.edit_col').click(function () {
+        $(document).on("click", ".edit_col", function () {
             $('#add').val("แก้ไข");
             $('#add').attr("name","edit");
             $('#add').attr("id","edit");

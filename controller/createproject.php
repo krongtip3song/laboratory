@@ -13,6 +13,7 @@
         $person = $_SESSION["user"];
         $type_user = $person->getType();
         if($type_user == "ADMIN" || $type_user == "TEACHER"){
+
             include ("../view/create_project.php");
             exit();
         }

@@ -191,7 +191,7 @@
         }
         function getLastProject(){
             global $conn;
-            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Occurred DESC LIMIT 8";
+            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Published DESC LIMIT 8";
             $res = $conn->query($sql);
             $resultArray = array();
             while($obResult = $res->fetch(PDO::FETCH_ASSOC))

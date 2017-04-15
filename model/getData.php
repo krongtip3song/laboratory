@@ -254,5 +254,41 @@ function getMemberProject($id){
     }
     return $resultArray;
 }
+function getMainPicProject($id){
+    global $conn;
+    $sql = "SELECT * FROM wall_index WHERE id_project='$id' ORDER BY id_wall DESC LIMIT 1";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    if($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_wall"=>$obResult['id_wall'],
+            "id_project"=>$obResult['id_project'],
+            "path_wall"=>$obResult['path_wall'],
+            "status"=>$obResult['status']);
+        array_push($resultArray,$arrCol);
+        return $resultArray[0]['path_wall'];
+    }
+    return null;
+}
+function getSearch($word){
+    global $conn;
+    $sql = "SELECT * FROM project INNER JOIN category ON project.id_category=category.id_category WHERE title LIKE '%".$word."%' or description LIKE '%".$word."%'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "name_category"=>$obResult['name_category']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 
 ?>

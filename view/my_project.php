@@ -17,6 +17,11 @@ include ("header.php");
         $(document).ready( function () {
             $('#table_id').dataTable();
         });
+        function deleteProject(id) {
+            if( confirm("Do you want to delete ?") ){
+                window.location = "../model/deleteProject.php?idpro="+id;
+            }
+        }
     </script>
     <style>
         .page-head{

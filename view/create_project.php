@@ -408,7 +408,7 @@ $i=0;
         $("#pro").append(a);
         $('.proUpload').bind('change', function() {
             var fileSize = this.files[0].size;
-            if(fileSize > 8388608){
+            if(fileSize > 2097152){
                 alert("ไฟล์มีขนาดใหญ่เกินไป");
                 $(this).val("");
                 return false;
@@ -439,7 +439,7 @@ $i=0;
     $(document).ready(function() {
         $('.proUpload').bind('change', function() {
             var fileSize = this.files[0].size;
-            if(fileSize > 8388608){
+            if(fileSize > 2097152){
                 alert("ไฟล์มีขนาดใหญ่เกินไป");
                 $(this).val("");
                 return false;

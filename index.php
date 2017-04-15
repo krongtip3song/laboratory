@@ -92,6 +92,48 @@
             width: 300px;
             height: 250px;
         }
+        .banner{
+            background: #065784;
+            position: absolute;
+            z-index: 100;
+            padding-right: 15px;
+            width: 100%;
+            color: white;
+            line-height: 18px;
+            font-weight: normal;
+            font-size: 0.9em;
+            text-align: right;
+            text-transform: uppercase;
+            height: 18px;
+        }
+        .name_pro{
+            margin-top: 30px;
+            padding: 0 15px;
+            overflow: hidden;
+            color: black;
+            font-size: 1em;
+        }
+        .post{
+            z-index: 10;
+            box-shadow: -5px -5px #c2c2c2;
+            border: 1px solid #dbdbdb;
+        }
+        .date{
+            padding: 0 15px;
+            overflow: hidden;
+            color: #999999;
+        }
+        .btn-more{
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #4798ff;
+            color: white;
+            border-radius: 2px;
+        }
+        .btn-more:hover{
+            color: white;
+            background-color: #4489ec;
+        }
     </style>
     <?php
 
@@ -148,7 +190,7 @@
         }
         function getLastProject(){
             global $conn;
-            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Occurred DESC LIMIT 6";
+            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Occurred DESC LIMIT 8";
             $res = $conn->query($sql);
             $resultArray = array();
             while($obResult = $res->fetch(PDO::FETCH_ASSOC))
@@ -328,30 +370,40 @@
 
         <div class="fullwidth-block" data-bg-color="#edf2f4">
             <div class="container">
-                <h2 class="section-title">Latest Project</h2>
+                <div style="width:100%;display:inline-block;">
+                    <h2 style="float: left" class="section-title">Latest Project</h2>
+                    <a href="controller/allproject.php" style="float: right" class="btn-more">เพิ่มเติม</a>
+                </div>
                 <?php
                 for($l_pro = 0;$l_pro<count($last_pro);$l_pro++) {
-                    if($l_pro%3==0){
+                    if($l_pro%4==0){
                         echo "<div class=\"row\">";
                     }
                     ?>
-                        <div class="col-md-4">
-                            <div class="post">
-                                <?php
-                                $img = getMainPicProject($last_pro[$l_pro]['id_project']);
-                                if($img == null){
-                                    $img = "images/mainpic.jpg";
-                                }
-                                ?>
-                                <figure class="featured-image"><img src="<?=$img?>" alt="" width="100px"></figure>
-                                <h2 class="entry-title"><a href="controller/project.php?id=<?=$last_pro[$l_pro]['id_project']?>"><?=$last_pro[$l_pro]['title']?></a></h2>
-                                <small class="date"><?=$last_pro[$l_pro]['date_Occurred']?></small>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium...</p>
-                            </div>
+                        <div class="col-md-3">
+                            <a href="controller/project.php?id=<?=$last_pro[$l_pro]['id_project']?>">
+                                <div class="post" style="background-color: white">
+                                    <?php
+                                    $img = getMainPicProject($last_pro[$l_pro]['id_project']);
+                                    if($img == null){
+                                        $img = "images/mainpic.jpg";
+                                    }
+                                    ?>
+                                    <div><img src="<?=$img?>" alt="" width="100%" height="200px"></div>
+                                    <div class="banner"><?=$last_pro[$l_pro]['name_category']?></div>
+                                    <div class="name_pro">
+                                        <h2 class="entry-title"><?=$last_pro[$l_pro]['title']?></h2>
+                                    </div>
+                                    <div>
+                                        <small class="date"><?=date("d F Y",strtotime($last_pro[$l_pro]['date_Occurred']))?></small>
+                                    </div>
+
+
+                                </div>
+                            </a>
                         </div>
                     <?php
-                    if($l_pro%3==2){
+                    if($l_pro%4==3){
                         echo "</div>";
                     }
                 }

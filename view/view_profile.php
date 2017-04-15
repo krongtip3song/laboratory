@@ -24,13 +24,24 @@ include ("header.php");
         padding-top: 6px;
         text-align: right;
     }
-    td{
-        padding-right: 10px;
-        padding-left: 10px;
-        padding-top: 10px;
-    }
+
     a{
         cursor: pointer;
+    }
+    table {
+        border-color: inherit;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+    .table-tr:hover {background-color: #f5f5f5}
+    th {
+        background-color: #4e6eaf;
+        color: white;
     }
 </style>
 <script>
@@ -126,7 +137,7 @@ include ("header.php");
                 </tr>
                 <?php
                     for ($i=0;$i<count($myProject);$i++){
-                        echo "<tr>
+                        echo "<tr class=\"table-tr\">
                                 <td>".$myProject[$i]['title']."</td>
                                 <td>".$myProject[$i]['position']."</td>
                                 </tr>";

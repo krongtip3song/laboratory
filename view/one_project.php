@@ -167,17 +167,17 @@ include ("header.php");
     }
     .detail_sub{
         display: block;
-        padding: 20px 20px 20px 20px;
+        padding: 30px 30px 30px 30px;
     }
 </style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')" >
     <div class="container">
-        <h4 class="page-title"><?=$data[0]["title"]?></h4>
+        <h1 class="page-title"><?=$data[0]["title"]?></h1>
     </div>
 </div>
 
     <div style="margin: 5% 10% 5% 10%;;width: 80%;">
-        <div class="sub-subject" style="border:1px solid black;">
+        <div class="sub-subject" style="border:1px solid #b2b2b2;">
             <div class="detail_sub">
                 <p  class="detail"><?=$data[0]["description"]?></p>
             </div>
@@ -189,7 +189,7 @@ include ("header.php");
         <br/>
         <div class="row">
             <div class="col-md-6 col-sm-6 col-xs-12" >
-                <label>รูปภาพ</label>
+                <label><i class="fa fa-picture-o" aria-hidden="true"></i> รูปภาพ</label>
                 <div class="row" style="border: 1.5px solid #d9d9d9;">
                     <?php
                     for($i=0;$i<count($file);$i++){
@@ -206,11 +206,11 @@ include ("header.php");
                 </div>
                 <br/>
                 <div class="row">
-                    <label>เอกสาร</label>
+                    <label><i class="fa fa-file-o" aria-hidden="true"></i> เอกสาร</label>
                     <table border="1" >
                         <tr>
-                            <th>ชื่อไฟล์</th>
-                            <th>ดาวน์โหลด</th>
+                            <th width="70%">ชื่อไฟล์</th>
+                            <th width="30%">ดาวน์โหลด</th>
                         </tr>
                         <?php
                         for($i=0;$i<count($file);$i++){
@@ -227,11 +227,11 @@ include ("header.php");
                 </div>
                 <br/>
                 <div class="row">
-                    <label>โปรแกรม</label>
+                    <label><i class="fa fa-desktop" aria-hidden="true"></i> โปรแกรม</label>
                     <table border="1" >
                         <tr>
-                            <th>ชื่อไฟล์</th>
-                            <th>ดาวน์โหลด</th>
+                            <th width="70%">ชื่อไฟล์</th>
+                            <th width="30%">ดาวน์โหลด</th>
                         </tr>
                         <?php
                         for($i=0;$i<count($file);$i++){
@@ -247,7 +247,7 @@ include ("header.php");
                 </div>
             </div>
             <div class="col-md-6 col-sm-6 col-xs-12">
-                <label>สมาชิก</label>
+                <label><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</label>
                 <table border="1">
                     <tr>
                         <th>ลำดับ</th>

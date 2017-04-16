@@ -273,7 +273,7 @@ function getMainPicProject($id){
 }
 function getSearch($word){
     global $conn;
-    $sql = "SELECT * FROM project INNER JOIN category ON project.id_category=category.id_category WHERE title LIKE '%".$word."%' or description LIKE '%".$word."%'";
+    $sql = "SELECT * FROM project INNER JOIN category ON project.id_category=category.id_category WHERE UPPER(title) LIKE UPPER('%".$word."%') or UPPER(description) LIKE UPPER('%".$word."%') or LOWER(title) LIKE LOWER('%".$word."%') or LOWER(description) LIKE LOWER('%".$word."%')";
     $res = $conn->query($sql);
     $resultArray = array();
     while($obResult = $res->fetch(PDO::FETCH_ASSOC))

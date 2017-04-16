@@ -121,6 +121,18 @@ include ("header.php");
     h2,small{
         text-align: left;
     }
+    .post:after {
+        margin-top: 0;
+    }
+    .post:hover{
+        filter: brightness(0.95);
+    }
+    .entry-title{
+        display: block;
+        height: auto;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
 </style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')">
     <div class="container">
@@ -165,8 +177,26 @@ include ("header.php");
                                 <div>
                                     <small class="date"><?=date("d F Y",strtotime($data[$l_pro]['date_Occurred']))?></small>
                                 </div>
-
-
+                                <?php
+                                if($type_user == "ADMIN" || $type_user == "TEACHER") {
+                                ?>
+                                <div style="display: inline-block;width: 100%">
+                                    <div style="text-align: left;padding-left: 15px;float: left">
+                                        <a href="../controller/edit_project.php?id=<?=$data[$l_pro]['id_project']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
+                                    </div>
+                                    <?php
+                                    if($type_user == "ADMIN"){
+                                    ?>
+                                    <div style="padding-right: 15px;float: right">
+                                        <a onclick='deleteProject(<?=$data[$l_pro]['id_project']?>)' style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</a>
+                                    </div>
+                                    <?php
+                                    }
+                                    ?>
+                                </div>
+                                <?php
+                                }
+                                ?>
                             </div>
                         </a>
                     </div>

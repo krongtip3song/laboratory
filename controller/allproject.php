@@ -21,7 +21,20 @@ else{
     $person = null;
     $type_user = null;
 }
-$data = getAllProjects();
+if(isset($_GET['search'])){
+    $word = $_GET['search'];
+    $data = getSearch($word);
+}
+else{
+    if(isset($_GET['cat'])){
+        $scat = $_GET['cat'];
+        $data = getProjectByCat($scat);
+    }
+    else{
+        $data = getAllProjects();
+    }
+}
+$cat = getCountCat();
 include ("../view/all_project.php");
 exit();
 

@@ -290,5 +290,37 @@ function getSearch($word){
     }
     return $resultArray;
 }
-
+function getCountCat(){
+    global $conn;
+    $sql = "SELECT category.name_category,COUNT(category.name_category) FROM project INNER JOIN category ON project.id_category=category.id_category GROUP BY category.name_category";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("name_category"=>$obResult['name_category'],
+            "count"=>$obResult['COUNT(category.name_category)']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
+function getProjectByCat($cat){
+    global $conn;
+    $sql = "SELECT * FROM project INNER JOIN category ON project.id_category=category.id_category WHERE name_category='$cat'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "name_category"=>$obResult['name_category']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 ?>

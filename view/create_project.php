@@ -118,7 +118,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">วันที่สร้าง</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>วันที่สร้าง</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="date" style="float: left" name="date" id="date"  />
                 </div>
@@ -129,7 +129,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>หมวดหมู่</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: left">
                     <select id="category" name="category">
                         <?php

@@ -42,7 +42,7 @@ include ("header.php");
         height: 250px;
     }
     .banner{
-        background: #119c0a;
+        background: seagreen;
         position: absolute;
         z-index: 100;
         padding-right: 15px;
@@ -66,7 +66,7 @@ include ("header.php");
         z-index: 10;
         box-shadow: -5px -5px #c2c2c2;
         border: 1px solid #dbdbdb;
-        border-bottom: 2px solid #119c0a;
+        border-bottom: 2px solid mediumseagreen;
     }
     .date{
         padding: 0 15px;
@@ -166,7 +166,7 @@ include ("header.php");
                                 <?php
                                 $img = getMainPicProject($data[$l_pro]['id_project']);
                                 if($img == null){
-                                    $img = "images/mainpic.jpg";
+                                    $img = "images/ON40SA0.jpg";
                                 }
                                 ?>
                                 <div><img src="../<?=$img?>" alt="" width="100%" height="180px"></div>

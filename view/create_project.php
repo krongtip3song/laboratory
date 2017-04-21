@@ -47,9 +47,6 @@ $i=0;
     <link rel="stylesheet" href="<?php echo "$path"; ?>/css/plugins/quick_insert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
     <style>
-        body {
-            text-align: center;
-        }
 
         div#myEditor {
             width: 100%;
@@ -121,7 +118,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">วันที่สร้าง</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>วันที่สร้าง</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="date" style="float: left" name="date" id="date"  />
                 </div>
@@ -132,7 +129,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>หมวดหมู่</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: left">
                     <select id="category" name="category">
                         <?php
@@ -177,7 +174,7 @@ $i=0;
             </div>
         </div>
         </div>
-        <a class="addMem">add more</a>
+        <a class="addMem">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pic">
@@ -201,7 +198,7 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPic">add more</a>
+        <a class="addPic">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pap">
@@ -219,7 +216,7 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPap">add more</a>
+        <a class="addPap">เพิ่มเติม</a>
         <br/>
         <br/>
         <div id="pro">
@@ -227,7 +224,7 @@ $i=0;
                 <div class="form-group">
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">โปรแกรม</label>
                     <div class="col-md-2 col-sm-2 col-xs-12">
-                        <input type="file" name="proUpload[]" id="proUpload[]"/>
+                        <input type="file" name="proUpload[]" id="proUpload[]" class="proUpload"/>
                     </div>
                     <div class="col-md-2 col-sm-2 col-xs-12"></div>
                     <label class="control-label col-md-2 col-sm-2 col-xs-12">ชื่อ</label>
@@ -237,10 +234,10 @@ $i=0;
                 </div>
             </div>
         </div>
-        <a class="addPro">add more</a>
+        <a class="addPro">เพิ่มเติม</a>
         <br/>
         <br/>
-        <input type="submit"  name="submit" id="submit" value="submit"/>
+        <input type="submit"  name="submit" id="submit" value="ยืนยัน"/>
 
 
 
@@ -405,14 +402,23 @@ $i=0;
         $(".addPic").click(function () { i_main_pic++;
         var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='picUpload[]' id='picUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPic[]' id='textPic[]'/> </div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='radio' name='main_pic' class='main_pic' value='"+i_main_pic+"'/> รูปหลัก </div></div> </div>";
         $("#pic").append(a);
+
     });
         $(".addPap").click(function () {
         var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='papUpload[]' id='papUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPap[]' id='textPap[]'/> </div> </div> </div>";
         $("#pap").append(a);
     });
         $(".addPro").click(function () {
-        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
+        var a = " <div class='row'> <div class='form-group'> <div class='control-label col-md-2 col-sm-2 col-xs-12'></div> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='file' name='proUpload[]' id='proUpload[]' class='proUpload'> </div> <div class='col-md-2 col-sm-2 col-xs-12'></div><label class='control-label col-md-2 col-sm-2 col-xs-12'>ชื่อ</label> <div class='col-md-2 col-sm-2 col-xs-12'> <input type='text' name='textPro[]' id='textPro[]'/> </div> </div> </div>";
         $("#pro").append(a);
+        $('.proUpload').bind('change', function() {
+            var fileSize = this.files[0].size;
+            if(fileSize > 2097152){
+                alert("ไฟล์มีขนาดใหญ่เกินไป");
+                $(this).val("");
+                return false;
+            }
+        });
     });
         $(document).on("click", ".main_pic", function () {
             var a = $(this).parent().parent().find("input[type=file]").val();
@@ -436,6 +442,14 @@ $i=0;
 </script>
 <script>
     $(document).ready(function() {
+        $('.proUpload').bind('change', function() {
+            var fileSize = this.files[0].size;
+            if(fileSize > 2097152){
+                alert("ไฟล์มีขนาดใหญ่เกินไป");
+                $(this).val("");
+                return false;
+            }
+        });
         var availableTags = [
             <?php
             for($i=0;$i<count($user);$i++){

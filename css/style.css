@@ -246,9 +246,9 @@ form input, form textarea, form select {
   padding: 10px;
   border-radius: 5px; }
 form select {
-  -webkit-appearance: none;
+  -webkit-appearance: normal;
   -moz-appearance: none;
-  appearance: none; }
+  appearance: normal; }
 form textarea {
   resize: vertical; }
 form input[type="submit"], form button, form input[type="reset"] {

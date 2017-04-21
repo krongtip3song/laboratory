@@ -92,6 +92,49 @@
             width: 300px;
             height: 250px;
         }
+        .banner{
+            background: seagreen;
+            position: absolute;
+            z-index: 100;
+            padding-right: 15px;
+            width: 100%;
+            color: white;
+            line-height: 18px;
+            font-weight: normal;
+            font-size: 0.9em;
+            text-align: right;
+            text-transform: uppercase;
+            height: 18px;
+        }
+        .name_pro{
+            margin-top: 30px;
+            padding: 0 15px;
+            overflow: hidden;
+            color: black;
+            font-size: 1em;
+        }
+        .post{
+            z-index: 10;
+            box-shadow: -5px -5px #c2c2c2;
+            border: 1px solid #dbdbdb;
+            border-bottom: 2px solid mediumseagreen;
+        }
+        .date{
+            padding: 0 15px;
+            overflow: hidden;
+            color: #999999;
+        }
+        .btn-more{
+            padding: 10px 20px;
+            text-align: center;
+            background-color: #4798ff;
+            color: white;
+            border-radius: 2px;
+        }
+        .btn-more:hover{
+            color: white;
+            background-color: #4489ec;
+        }
     </style>
     <?php
 
@@ -148,7 +191,7 @@
         }
         function getLastProject(){
             global $conn;
-            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Occurred DESC LIMIT 6";
+            $sql = "SELECT * FROM project INNER JOIN category ON project.id_category = category.id_category ORDER BY date_Published DESC LIMIT 8";
             $res = $conn->query($sql);
             $resultArray = array();
             while($obResult = $res->fetch(PDO::FETCH_ASSOC))
@@ -201,7 +244,7 @@
         <div class="container">
             <div class="header-bar">
                 <a href="index.php" class="branding">
-                    <img src="images/logo.png" alt="" class="logo">
+                    <img src="images/chip_sm.png" alt="" class="logo">
                     <div class="logo-type">
                         <h1 class="site-title">Technology Laboratory</h1>
                         <small class="site-description">Tagline goes here</small>
@@ -328,30 +371,40 @@
 
         <div class="fullwidth-block" data-bg-color="#edf2f4">
             <div class="container">
-                <h2 class="section-title">Latest Project</h2>
+                <div style="width:100%;display:inline-block;">
+                    <h2 style="float: left" class="section-title">Latest Project</h2>
+                    <a href="controller/allproject.php" style="float: right" class="btn-more">เพิ่มเติม</a>
+                </div>
                 <?php
                 for($l_pro = 0;$l_pro<count($last_pro);$l_pro++) {
-                    if($l_pro%3==0){
+                    if($l_pro%4==0){
                         echo "<div class=\"row\">";
                     }
                     ?>
-                        <div class="col-md-4">
-                            <div class="post">
-                                <?php
-                                $img = getMainPicProject($last_pro[$l_pro]['id_project']);
-                                if($img == null){
-                                    $img = "images/mainpic.jpg";
-                                }
-                                ?>
-                                <figure class="featured-image"><img src="<?=$img?>" alt="" width="100px"></figure>
-                                <h2 class="entry-title"><a href="controller/project.php?id=<?=$last_pro[$l_pro]['id_project']?>"><?=$last_pro[$l_pro]['title']?></a></h2>
-                                <small class="date"><?=$last_pro[$l_pro]['date_Occurred']?></small>
-                                <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                                    laudantium...</p>
-                            </div>
+                        <div class="col-md-3">
+                            <a href="controller/project.php?id=<?=$last_pro[$l_pro]['id_project']?>">
+                                <div class="post" style="background-color: white">
+                                    <?php
+                                    $img = getMainPicProject($last_pro[$l_pro]['id_project']);
+                                    if($img == null){
+                                        $img = "images/ON40SA0.jpg";
+                                    }
+                                    ?>
+                                    <div><img src="<?=$img?>" alt="" width="100%" height="200px"></div>
+                                    <div class="banner"><?=$last_pro[$l_pro]['name_category']?></div>
+                                    <div class="name_pro">
+                                        <h2 class="entry-title"><?=$last_pro[$l_pro]['title']?></h2>
+                                    </div>
+                                    <div>
+                                        <small class="date"><?=date("d F Y",strtotime($last_pro[$l_pro]['date_Occurred']))?></small>
+                                    </div>
+
+
+                                </div>
+                            </a>
                         </div>
                     <?php
-                    if($l_pro%3==2){
+                    if($l_pro%4==3){
                         echo "</div>";
                     }
                 }
@@ -393,21 +446,28 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Sign In</h4>
             </div>
-            <div class="modal-body" align="center">
+            <div class="modal-body" align="center" style="margin: 0px 20px 0px 20px">
                 <form action="controller/home.php" method="post">
-                    <input type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                        <input class="form-control" type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+                    </div>
                     <br/>
                     <br/>
-                    <input type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input class="form-control" type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                    </div>
                     <br/>
                     <br/>
-                    <input type="submit" name="login" id="login" value="Login"/>
+                    <input type="submit" name="login" id="login" value="Login" style="width: 100%"/>
                 </form>
             </div>
             <div class="modal-footer">

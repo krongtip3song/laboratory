@@ -55,21 +55,28 @@
 
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px">
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Sign In</h4>
             </div>
-            <div class="modal-body" align="center">
-                <form action="../controller/home.php" method="post">
-                    <input type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+            <div class="modal-body" align="center" style="margin: 0px 20px 0px 20px">
+                <form action="controller/home.php" method="post">
+                    <br/>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                        <input class="form-control" type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+                    </div>
                     <br/>
                     <br/>
-                    <input type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                        <input class="form-control" type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                    </div>
                     <br/>
                     <br/>
-                    <input type="submit" name="login" id="login" value="Login"/>
+                    <input type="submit" name="login" id="login" value="Login" style="width: 100%"/>
                 </form>
             </div>
             <div class="modal-footer">

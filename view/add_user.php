@@ -32,10 +32,7 @@
             });
         });
         $('#submit').click(function () {
-           if(!check_user){
-               alert("username ซ้ำ");
-               return false;
-           }
+
            var user = $('#username').val();
            var pass = $('#password').val();
            var name = $('#name').val();
@@ -46,6 +43,10 @@
            if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == "" || type == undefined){
                alert("กรอกข้อมูลให้ครบ");
                return false;
+           }
+           if(!check_user){
+                alert("username ซ้ำ");
+                return false;
            }
         });
         $('#cancel').click(function () {

@@ -9,17 +9,16 @@
 include ("../config.inc.php");
 
 
-if(isset($_GET['id'])){
-    $id = $_GET['id'];
+if(isset($_POST['id'])){
+    $id = $_POST['id'];
     $sql = "DELETE FROM wall_index WHERE id_wall = '$id'";
     $res = $conn->exec($sql);
     if($res){
-        echo "<script>alert('SUCCESS')</script>";
+        echo true;
     }
     else{
-        echo "<script>alert('FAIL')</script>";
+        echo false;
     }
-    echo "<script>window.location = '../controller/managehome.php';</script>";
 }
 if(isset($_GET['idwall']) && isset($_GET['update'])){
     $id = $_GET['idwall'];

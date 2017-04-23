@@ -445,15 +445,16 @@
     </footer>
 </div>
 
-<<<<<<< Updated upstream
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" style="width: 400px">
-=======
+    </div>
+</div>
 <!-- Modal Login-->
 <div class="modal fade" id="myModal-login" role="dialog">
     <div class="modal-dialog">
->>>>>>> Stashed changes
+
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -492,7 +493,7 @@
                 <h4 class="modal-title">Register</h4>
             </div>
             <div class="modal-body" align="center">
-                <form id ="register" method="post" name="register" action="model/register.php">
+                <form id ="register" method="post" name="register" enctype="multipart/form-data" action="model/register.php">
                     <table>
                         <tr>
                             <td><label for="username" style="color: darkviolet">Username</label></td>
@@ -521,14 +522,62 @@
                         <tr>
                             <td><label for="picture" style="color: orange">Picture</label></td>
                             <script>
+                                var a;
                                 function showpic(pic) {
-                                    document.register.picture.src=pic.value;
+                                        check_pic();
+                                        if(a != 1) {
+                                            if (pic.files && pic.files[0]) {
+                                                var readpic = new FileReader();
+                                                readpic.onload = function (e) {
+                                                    $('#picture')
+                                                        .attr('src', e.target.result)
+                                                        .width(150)
+                                                        .height(200);
+                                                };
+                                                readpic.readAsDataURL(pic.files[0]);
+                                                $("#pic_chk").css("display", "none");
+                                                $("#picture").css("display", "inline");
+                                            }
+                                        }
+                                }
+
+                                function check_pic() {
+                                    var type_file = document.getElementById('pic').value;
+                                    var length_file = document.getElementById('pic').value.length;
+                                    /*if(length_file == 0){
+                                        alert('กรุณาเลือกรูปด้วยจ้า');
+                                        document.getElementById('pic_id').innerHTML="";
+                                        $("#picture").css("display","none");
+                                        return false;*/
+                                    if(length_file != 0) {
+                                        if (type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "jpg" &&
+                                            type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "gif" &&
+                                            type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "PNG") {
+                                            alert('เลือกเฉพาะไฟล์นามสกุล jpg / gif / png เท่านั้นจ้า');
+                                            $("#pic").val("");
+                                            $("#pic").click();
+                                            document.getElementById('pic_id').innerHTML = "";
+                                            $("#picture").css("display", "none");
+                                            a = 1;
+                                            return a;
+                                        } else {
+                                            a = 2;
+                                            return a;
+                                        }
+                                    }
                                 }
                             </script>
-                            <td><input type="file" style="border: 0" onchange="showpic(this)"/></td>
-                            <td><img id="picture" name="picture"/></td>
+                            <span id="pic_id"></span>
+                            <td><input type="file" id="pic" name="pic" style="border: 0" onchange="showpic(this)"/></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="text-align: left"><label id="pic_chk" style="display: none; color: red;">ได้โปรดเลือกรูปด้วยเถอะนะขอรับ</label><br/></td>
                         </tr>
                     </table>
+                    <br/>
+                    <img id="picture" class="btn" name="picture" src="#" alt="your picture" style="display: none"/>
                     <br/>
                     <input type="submit" class="btn btn-success" name="regis" id="regis" value="ยืนยัน"/>
                 </form>
@@ -571,8 +620,8 @@
             var surname = $("#surname").val();
             var tel = $("#tel").val();
             var email = $("#email").val();
-            var type = $("input[name=img]:checked").val();
-            if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == "" || type == undefined){
+            var type = document.register.pic.value;
+            if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == "" || type == ""){
                 alert("กรุณากรอกข้อมูลให้ครบ");
                 if (user == "") {
                     $("#username").css("border", "1px solid red");
@@ -598,7 +647,7 @@
                 else {
                     $("#surname").css("border", "1px solid #ccc");
                 }
-                if (tel == "" || tel.length < 9) {
+                if (tel == "") {
                     $("#tel").css("border", "1px solid red");
                 }
                 else {
@@ -610,7 +659,7 @@
                 else {
                     $("#email").css("border", "1px solid #ccc");
                 }
-                if (type == undefined) {
+                if (type == "") {
                     $("#pic_chk").css("display","inline");
                 }
                 else {

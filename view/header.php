@@ -216,4 +216,66 @@
         </div>
     </header>
 
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog" style="width: 400px">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sign In</h4>
+                </div>
+                <div class="modal-body" align="center" style="margin: 0px 20px 0px 20px">
+                    <form action="../controller/home.php" method="post">
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-user fa-fw"></i></span>
+                            <input class="form-control" type="text" id="user" name="user" placeholder="ชื่อผู้ใช้"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <div class="input-group">
+                            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+                            <input class="form-control" type="password" id="pass" name="pass" placeholder="รหัสผ่าน"/>
+                        </div>
+                        <br/>
+                        <br/>
+                        <input type="submit" name="login" id="login" value="Login" style="width: 100%"/>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="../js/jquery-1.11.1.min.js"></script>
+    <script src="../js/plugins.js"></script>
+    <script src="../js/app.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#login").click(function () {
+                var user = $("#user").val();
+                var pass = $("#pass").val();
+                if(user == "" || pass == ""){
+                    if(user == ""){
+                        $("#user").css("border","1px solid red");
+                    }
+                    else{
+                        $("#user").css("border","1px solid #ccc");
+                    }
+                    if(pass == ""){
+                        $("#pass").css("border","1px solid red");
+                    }
+                    else{
+                        $("#pass").css("border","1px solid #ccc");
+                    }
+                    return false;
+                }
+            });
+            $("#user").keydown(function (e) {
+                console.log(e['key'].charCodeAt(0));
+            });
+        });
+    </script>
 

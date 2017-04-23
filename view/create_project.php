@@ -95,7 +95,7 @@ $i=0;
 
 <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 
-<link rel="stylesheet" href="/resources/demos/style.css">
+
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
@@ -118,7 +118,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">วันที่สร้าง</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>วันที่สร้าง</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="date" style="float: left" name="date" id="date"  />
                 </div>
@@ -129,7 +129,7 @@ $i=0;
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">หมวดหมู่</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>หมวดหมู่</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12" style="text-align: left">
                     <select id="category" name="category">
                         <?php
@@ -305,10 +305,12 @@ $i=0;
             type: 'POST',
             url: "../model/addProject.php",
             data: d,
+            success: function (data) {
+               alert(data)
+            },
             async:false
         });
        // $.post("../model/addProject.php",d, function(data, status){
-
        // });
     });
          $(".addMem").click(function () {
@@ -327,8 +329,10 @@ $i=0;
              a = a+"</div><label class='control-label col-md-1 col-sm-1 col-xs-12'></label> <div class='col-md-2 col-sm-2 col-xs-12'>";
              a = a+"<input id='per";
              a = a + i;
-             a = a+"'>"
-             a = a+"</div> <div class='delete_col' class='col-md-2 col-sm-2 col-xs-12'> <label class='delete'  style='color: red'><i class='fa fa-trash-o' aria-hidden='true'></i> ลบ</label> </div></div> </div>";
+             a = a+"'>";
+             a = a+"</div> <div class='delete_col' class='col-md-2 col-sm-2 col-xs-12' data-id='";
+             a = a + i;
+             a = a+"'> <label class='delete'  style='color: red'><i class='fa fa-trash-o' aria-hidden='true'></i> ลบ</label> </div></div> </div>";
              $("#mem").append(a);
              $(document).ready(function() {
                  var availableTags = [
@@ -385,7 +389,8 @@ $i=0;
                      }
                  });
                  $('.delete').click(function () {
-                     var id = $(this).data('id');
+                     var id = $(this).parent().data('id');
+                     delete member[id];
                      var div = $(this).parent().parent().parent();
                      var d = {id_file: id,
                      };

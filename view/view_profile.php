@@ -8,6 +8,7 @@
 ?>
 <?php
 include ("header.php");
+include ("../config.inc.php");
 ?>
 <link rel="stylesheet" type="text/css" href="../css/modal_byWit.css">
 <style>
@@ -72,7 +73,14 @@ include ("header.php");
         <div class="row">
             <div class="col-lg-3">
                 <p class="text-center">
-                    <span class="glyphicon glyphicon-user" style="font-size: 150px;"></span>
+                    <?php
+                        $sql = "SELECT * FROM img2 WHERE id_mem='$id'";
+                        $res = $conn->query($sql);
+                        if($obj = $res->fetch(PDO::FETCH_ASSOC)){
+                            $path_pic = $obj['path_img'];
+                        }
+                    ?>
+                    <img src="<?=$path_pic?>" width="250px" height="200px"/>
                 </p>
             </div>
             <div class="col-lg-9">

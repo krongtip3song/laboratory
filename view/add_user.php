@@ -122,7 +122,7 @@
         <br/>
         <div class="row">
             <div class="form-group">
-                <div class="control-label col-md-2 col-sm-2 col-xs-12">ชนิดผู้ใช้</div>
+                <div class="control-label col-md-2 col-sm-2 col-xs-12"><strong>ชนิดผู้ใช้</strong></div>
                 <div class="col-md-4 col-sm-4 col-xs-12">
                     <input type="radio" style="float: left" name="type" value="STUDENT"/> <span class="ch"> STUDENT</span><br>
                     <input type="radio" style="float: left" name="type" value="TEACHER"/> <span class="ch"> TEACHER</span><br>
@@ -137,10 +137,10 @@
             <div class="form-group">
                 <div class="col-md-3 col-sm-3 col-xs-12"></div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="submit" class="form-control" name="cancel" id="cancel" value="cancel"/>
+                    <input type="submit" class="form-control" name="cancel" id="cancel" value="ยกเลิก"/>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="submit" class="form-control" name="submit" id="submit" value="submit"/>
+                    <input type="submit" class="form-control" name="submit" id="submit" value="ยืนยัน"/>
                 </div>
                 <div class="col-md-3 col-sm-3 col-xs-12"></div>
             </div>

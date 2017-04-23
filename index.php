@@ -93,7 +93,7 @@
             height: 250px;
         }
         .banner{
-            background: #119c0a;
+            background: seagreen;
             position: absolute;
             z-index: 100;
             padding-right: 15px;
@@ -117,7 +117,7 @@
             z-index: 10;
             box-shadow: -5px -5px #c2c2c2;
             border: 1px solid #dbdbdb;
-            border-bottom: 2px solid #119c0a;
+            border-bottom: 2px solid mediumseagreen;
         }
         .date{
             padding: 0 15px;
@@ -388,7 +388,7 @@
                                     <?php
                                     $img = getMainPicProject($last_pro[$l_pro]['id_project']);
                                     if($img == null){
-                                        $img = "images/mainpic.jpg";
+                                        $img = "images/ON40SA0.jpg";
                                     }
                                     ?>
                                     <div><img src="<?=$img?>" alt="" width="100%" height="200px"></div>

@@ -60,7 +60,22 @@ alert("sdasd");
     } );
     function deleteUser(id) {
         if( confirm("Do you want to delete ?") ){
-            window.location = "../model/deleteUser.php?iduser="+id;
+            //window.location = "../model/deleteUser.php?iduser="+id;
+            $.ajax({
+                url: "../model/deleteUser.php" ,
+                type: "POST",
+                data: {iduser:id},
+                dataType: "json"
+            })
+                .success(function(result) {
+                    if(result){
+                        alert("SUCCESS");
+                        location.reload();
+                    }
+                    else {
+                        alert("FAIL");
+                    }
+                });
         }
     }
 </script>

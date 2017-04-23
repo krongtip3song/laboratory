@@ -159,6 +159,11 @@ include ("header.php");
     <div class="row">
         <div style="margin: 20px 20px 20px 20px;">
             <div class="row" id="div_search" style="border-bottom: 1px solid black;width: 80%">
+                <?php
+                    if(isset($data)){
+                        echo "พบข้อมูล ".count($data)." ข้อมูล";
+                    }
+                ?>
                 <form action="../controller/allproject.php" method="get">
                     <div class="input-group" style="">
                         <input type="text" class="form-control" placeholder="Search ..." name="search" id="search">
@@ -170,7 +175,9 @@ include ("header.php");
             </div>
             <section style="float: left;width: 60%;margin-left: 8%;padding: 30px 20px 30px 20px;">
                 <?php
-
+                if(count($data) == 0){
+                    echo "<h1>ไม่พบข้อมูล</h1>";
+                }
                 for($l_pro = 0;$l_pro<count($data);$l_pro++) {
                     if($l_pro%3==0){
                         echo "<div class=\"row\">";

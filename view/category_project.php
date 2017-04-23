@@ -126,6 +126,7 @@ include ("header.php");
             $('#add').show();
             $('#cancel').attr("type","hidden");
             $('#edit').attr("type","hidden");
+            $('#cat').css("border", "1px solid #ccc");
         });
     });
     function deleteCat(id) {
@@ -170,14 +171,16 @@ include ("header.php");
         <div>
             <!--<form action="../model/manageCat.php" method="post" >-->
                 <label>ชื่อหมวดหมู่</label>
-                <input type="text" name="cat" id="cat"/>
+                <input type="text" class="form-control" name="cat" id="cat"/>
                 <input type="hidden" name="idcat" id="idcat"/>
-                <input type="submit" name="add" value="เพิ่ม" id="add"/>
-                <input type="hidden" name="edit" value="แก้ไข" id="edit"/>
-                <input type="hidden" name="cancel" value="ยกเลิก" id="cancel"/>
+                <br/>
+                <input type="submit" name="add" class="btn btn-success" value="เพิ่ม" id="add"/>
+                <input type="hidden" name="edit"  class="btn btn-info" value="แก้ไข" id="edit"/>
+                <input type="hidden" name="cancel"  class="btn btn-warning" value="ยกเลิก" id="cancel"/>
             <!--</form>-->
 
         </div>
+        <br/>
         <table class="display" id="table_id">
             <thead>
             <tr>

@@ -159,11 +159,6 @@ include ("header.php");
     <div class="row">
         <div style="margin: 20px 20px 20px 20px;">
             <div class="row" id="div_search" style="border-bottom: 1px solid black;width: 80%">
-                <?php
-                    if(isset($data)){
-                        echo "พบข้อมูล ".count($data)." ข้อมูล";
-                    }
-                ?>
                 <form action="../controller/allproject.php" method="get">
                     <div class="input-group" style="">
                         <input type="text" class="form-control" placeholder="Search ..." name="search" id="search">

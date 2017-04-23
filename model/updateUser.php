@@ -18,7 +18,7 @@
         $tel = $_POST['tel'];
         $email = $_POST['email'];
         $type = $_POST['type'];
-        $sql = "UPDATE member SET username='$username',password='$pass',name='$name',surname='$surname',tel='$tel',email='$email',type_user = '$type' WHERE id_member='$idmem'";
+        $sql = "UPDATE member SET password='$pass',name='$name',surname='$surname',tel='$tel',email='$email',type_user = '$type' WHERE id_member='$idmem'";
         $result = $conn->exec($sql);
         if ($result) {
             echo "<script>alert('SUCCESS')</script>";

@@ -11,11 +11,12 @@
 include ("header.php");
 
 ?>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(document).ready( function () {
-        $('#table_id').dataTable();
+        //$('#table_id').dataTable();
         $(".libtn").click(function () {
             var cat = $(this).data("value");
             window.location = "../controller/allproject.php?cat="+cat;
@@ -23,7 +24,22 @@ include ("header.php");
     });
     function deleteProject(id) {
         if( confirm("Do you want to delete ?") ){
-            window.location = "../model/deleteProject.php?idpro="+id;
+            //window.location = "../model/deleteProject.php?idpro="+id;
+            $.ajax({
+                url: "../model/deleteProject.php" ,
+                type: "POST",
+                data: {idpro:id},
+                dataType: "json"
+            })
+            .success(function(result) {
+                if(result){
+                    alert("SUCCESS");
+                    location.reload();
+                }
+                else {
+                    alert("FAIL");
+                }
+            });
         }
     }
 </script>

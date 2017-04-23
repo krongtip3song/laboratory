@@ -34,6 +34,24 @@ include ("header.php");
                     }
                 });
         });
+        $('#cat').change(function () {
+            var cat = $('#cat').val();
+            $.ajax({
+                url: "../model/findCategory.php" ,
+                type: "POST",
+                data: {cat:cat}
+            })
+                .success(function(result) {
+                    if(result == "true"){
+                        $('#cat').css("border","1px solid green");
+                        check = true;
+                    }
+                    else{
+                        $('#cat').css("border","1px solid red");
+                        check = false;
+                    }
+                });
+        });
         $('#add').click(function () {
             var insert_cat = $('#cat').val();
 

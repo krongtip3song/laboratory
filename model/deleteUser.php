@@ -6,14 +6,13 @@
  * Time: 1:31
  */
 include ("../config.inc.php");
-$iduser = $_GET['iduser'];
+$iduser = $_POST['iduser'];
 $sql = "DELETE FROM member WHERE id_member='$iduser'";
 $res = $conn->exec($sql);
 if($res){
-    echo "<script>alert('SUCCESS')</script>";
+    echo true;
 }
 else{
-    echo "<script>alert('FAIL')</script>";
+    echo false;
 }
-echo "<script>window.location = '../controller/datauser.php';</script>";
 ?>

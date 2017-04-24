@@ -40,7 +40,7 @@ alert("sdasd");
             }
             $('#idmem').val(user_select['id_member']);
             $('#username').val(user_select['username']);
-            $('#pass').val(user_select['password']);
+            $('#pass1').val(user_select['password']);
             $('#name').val(user_select['name']);
             $('#surname').val(user_select['surname']);
             $('#tel').val(user_select['tel']);
@@ -60,11 +60,23 @@ alert("sdasd");
     } );
     function deleteUser(id) {
         if( confirm("Do you want to delete ?") ){
-            window.location = "../model/deleteUser.php?iduser="+id;
+            //window.location = "../model/deleteUser.php?iduser="+id;
+            $.ajax({
+                url: "../model/deleteUser.php" ,
+                type: "POST",
+                data: {iduser:id},
+                dataType: "json"
+            })
+                .success(function(result) {
+                    if(result){
+                        alert("SUCCESS");
+                        location.reload();
+                    }
+                    else {
+                        alert("FAIL");
+                    }
+                });
         }
-    }
-    function editUser(id) {
-        window.location = "../controller/edituser.php?iduser="+id;
     }
 </script>
 <style>
@@ -152,7 +164,7 @@ alert("sdasd");
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">ชื่อผู้ใช้</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" name="username" id="username"/>
+                                <input type="text" class="form-control" name="username" id="username" readonly/>
                             </div>
                         </div>
                     </div>
@@ -161,7 +173,7 @@ alert("sdasd");
                         <div class="form-group">
                             <label class="control-label col-md-3 col-sm-3 col-xs-12">รหัสผ่าน</label>
                             <div class="col-md-6 col-sm-6 col-xs-12">
-                                <input type="text" class="form-control" name="pass" id="pass"/>
+                                <input type="text" class="form-control" name="pass" id="pass1"/>
                             </div>
                         </div>
                     </div>

@@ -42,7 +42,7 @@ include ("header.php");
     }
 
     /* The Modal (background) */
-    .modal {
+    .modal_pic {
         display: none;
         position: fixed;
         z-index: 10;
@@ -273,7 +273,7 @@ include ("header.php");
     </div>
 
 
-<div id="myModal" class="modal">
+<div id="myModal" class="modal_pic">
     <span class="close cursor" onclick="closeModal()">&times;</span>
     <div class="modal-content">
         <?php

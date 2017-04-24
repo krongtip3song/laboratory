@@ -53,7 +53,7 @@
 </footer>
 
 
-<!-- Modal -->
+<!-- Modal
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" style="width: 400px">
         <div class="modal-content">
@@ -84,4 +84,4 @@
             </div>
         </div>
     </div>
-</div>
+</div>-->

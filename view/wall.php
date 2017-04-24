@@ -25,7 +25,22 @@ include ("header.php");
     });
     function deleteWall(id) {
         if( confirm("Do you want to delete ?") ){
-            window.location = "../model/manageWall.php?id="+id;
+            //window.location = "../model/manageWall.php?id="+id;
+            $.ajax({
+                url: "../model/manageWall.php" ,
+                type: "POST",
+                data: {id:id},
+                dataType: "json"
+            })
+            .success(function(result) {
+                if(result){
+                    alert("SUCCESS");
+                    location.reload();
+                }
+                else {
+                    alert("FAIL");
+                }
+            });
         }
     }
 

@@ -11,11 +11,12 @@
 include ("header.php");
 
 ?>
-<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+<!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 <script>
     $(document).ready( function () {
-        $('#table_id').dataTable();
+        //$('#table_id').dataTable();
         $(".libtn").click(function () {
             var cat = $(this).data("value");
             window.location = "../controller/allproject.php?cat="+cat;
@@ -23,7 +24,22 @@ include ("header.php");
     });
     function deleteProject(id) {
         if( confirm("Do you want to delete ?") ){
-            window.location = "../model/deleteProject.php?idpro="+id;
+            //window.location = "../model/deleteProject.php?idpro="+id;
+            $.ajax({
+                url: "../model/deleteProject.php" ,
+                type: "POST",
+                data: {idpro:id},
+                dataType: "json"
+            })
+            .success(function(result) {
+                if(result){
+                    alert("SUCCESS");
+                    location.reload();
+                }
+                else {
+                    alert("FAIL");
+                }
+            });
         }
     }
 </script>
@@ -154,7 +170,9 @@ include ("header.php");
             </div>
             <section style="float: left;width: 60%;margin-left: 8%;padding: 30px 20px 30px 20px;">
                 <?php
-
+                if(count($data) == 0){
+                    echo "<h1>ไม่พบข้อมูล</h1>";
+                }
                 for($l_pro = 0;$l_pro<count($data);$l_pro++) {
                     if($l_pro%3==0){
                         echo "<div class=\"row\">";

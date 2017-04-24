@@ -31,9 +31,6 @@
     <script src="../js/ie-support/respond.js"></script>
     <![endif]-->
 
-    <script src="../js/jquery-1.11.1.min.js"></script>
-    <script src="../js/plugins.js"></script>
-    <script src="../js/app.js"></script>
 
     <style>
         .site-header,.header-bar,.site-footer{
@@ -216,7 +213,7 @@
         </div>
     </header>
 
-    <!-- Modal -->
+    <!-- Modal-->
     <div class="modal fade" id="myModal" role="dialog">
         <div class="modal-dialog" style="width: 400px">
             <div class="modal-content">

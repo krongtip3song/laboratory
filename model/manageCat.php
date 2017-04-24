@@ -15,39 +15,33 @@
         $sql = "INSERT INTO category (name_category)VALUES('$cat')";
         $res = $conn->exec($sql);
         if($res){
-            echo "<script>alert('SUCCESS')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo true;
         }
         else{
-            echo "<script>alert('FAIL')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo false;
         }
     }
     if(isset($_POST['edit'])){
         $cat = $_POST['cat'];
-        $idcat = $_POST['idcat'];
+        $idcat = $_POST['idcat1'];
         $sql = "UPDATE category SET name_category = '$cat' WHERE id_category = '$idcat'";
         $res = $conn->exec($sql);
         if($res){
-            echo "<script>alert('SUCCESS')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo true;
         }
         else{
-            echo "<script>alert('FAIL')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo false;
         }
     }
-    if(isset($_GET['idcat'])){
-        $cat = $_GET['idcat'];
+    if(isset($_POST['idcat'])){
+        $cat = $_POST['idcat'];
         $sql = "DELETE FROM category WHERE id_category='$cat'";
         $res = $conn->exec($sql);
         if($res){
-            echo "<script>alert('SUCCESS')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo true;
         }
         else{
-            echo "<script>alert('FAIL')</script>";
-            echo "<script>window.location = '../controller/category.php';</script>";
+            echo false;
         }
     }
 ?>

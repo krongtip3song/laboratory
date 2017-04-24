@@ -6,7 +6,7 @@
  * Time: 15:11
  */
 include ("../config.inc.php");
-$id = $_GET['idpro'];
+$id = $_POST['idpro'];
 $sql = "DELETE FROM project WHERE id_project='$id'";
 $res = $conn->exec($sql);
 if($res){
@@ -22,20 +22,20 @@ if($res){
                 $sql5 = "DELETE FROM wall_index WHERE id_project='$id'";
                 $res5 = $conn->exec($sql5);
                 if($res5) {
-                    echo "<script>alert('SUCCESS')</script>";
+                    echo true;
                 }
             }
             else{
-                echo "<script>alert('SUCCESS')</script>";
+                echo true;
             }
         }
         else{
-            echo "<script>alert('SUCCESS')</script>";
+            echo true;
         }
     }
 }
 else{
-    echo "<script>alert('FAIL')</script>";
+    echo false;
 }
-echo "<script>window.location = '../controller/allproject.php';</script>";
+
 ?>

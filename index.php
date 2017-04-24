@@ -334,7 +334,8 @@
                                 <li class="home menu-item current-menu-item"><a href="index.php"><img src="images/home-icon.png" alt="Home"></a></li>
                                 <li class="menu-item"><a href="controller/allproject.php">โครงงานทั้งหมด</a></li>
                                 <li class="menu-item"><a href="view/about.php">เกี่ยวกับ</a></li>
-                                <li class="menu-item"><a data-target="#myModal" data-toggle="modal" style="cursor: pointer">เข้าสู่ระบบ</a></li>
+                                <li class="menu-item"><a data-target="#myModal-register" data-toggle="modal" style="cursor: pointer">สมัครสมาชิก</a></li>
+                                <li class="menu-item"><a data-target="#myModal-login" data-toggle="modal" style="cursor: pointer">เข้าสู่ระบบ</a></li>
                         <?php
                             }
                         ?>
@@ -444,9 +445,16 @@
     </footer>
 </div>
 
+
 <!-- Modal -->
 <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog" style="width: 400px">
+    </div>
+</div>
+<!-- Modal Login-->
+<div class="modal fade" id="myModal-login" role="dialog">
+    <div class="modal-dialog">
+
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
@@ -468,6 +476,110 @@
                     <br/>
                     <br/>
                     <input type="submit" name="login" id="login" value="Login" style="width: 100%"/>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal Register-->
+<div class="modal fade" id="myModal-register" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Register</h4>
+            </div>
+            <div class="modal-body" align="center">
+                <form id ="register" method="post" name="register" enctype="multipart/form-data" action="model/register.php">
+                    <table>
+                        <tr>
+                            <td><label for="username" style="color: darkviolet">Username</label></td>
+                            <td><input type="text" class="form-control" name="username" id="username" maxlength="20"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="password" style="color: navy">Password</label></td>
+                            <td><input type="text" class="form-control" name="password" id="password" maxlength="20"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="name" style="color: deepskyblue">Name</label></td>
+                            <td><input type="text" class="form-control" name="name" id="name" maxlength="20"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="surname" style="color: greenyellow">Surname</label></td>
+                            <td><input type="text" class="form-control" name="surname" id="surname" maxlength="20"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="tel" style="color: yellow">Tel. No.</label></td>
+                            <td><input type="text" class="form-control" name="tel" id="tel" minlength="9" maxlength="10"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="email" style="color: orange">E-mail</label></td>
+                            <td><input type="text" class="form-control" name="email" id="email" maxlength="50"/><br/></td>
+                        </tr>
+                        <tr>
+                            <td><label for="picture" style="color: orange">Picture</label></td>
+                            <script>
+                                var a;
+                                function showpic(pic) {
+                                        check_pic();
+                                        if(a != 1) {
+                                            if (pic.files && pic.files[0]) {
+                                                var readpic = new FileReader();
+                                                readpic.onload = function (e) {
+                                                    $('#picture')
+                                                        .attr('src', e.target.result)
+                                                        .width(150)
+                                                        .height(200);
+                                                };
+                                                readpic.readAsDataURL(pic.files[0]);
+                                                $("#pic_chk").css("display", "none");
+                                                $("#picture").css("display", "inline");
+                                            }
+                                        }
+                                }
+
+                                function check_pic() {
+                                    var type_file = document.getElementById('pic').value;
+                                    var length_file = document.getElementById('pic').value.length;
+                                    /*if(length_file == 0){
+                                        alert('กรุณาเลือกรูปด้วยจ้า');
+                                        document.getElementById('pic_id').innerHTML="";
+                                        $("#picture").css("display","none");
+                                        return false;*/
+                                    if(length_file != 0) {
+                                        if (type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "jpg" &&
+                                            type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "gif" &&
+                                            type_file.substring(type_file.lastIndexOf('.') + 1, length_file) != "PNG") {
+                                            alert('เลือกเฉพาะไฟล์นามสกุล jpg / gif / png เท่านั้นจ้า');
+                                            $("#pic").val("");
+                                            $("#pic").click();
+                                            document.getElementById('pic_id').innerHTML = "";
+                                            $("#picture").css("display", "none");
+                                            a = 1;
+                                            return a;
+                                        } else {
+                                            a = 2;
+                                            return a;
+                                        }
+                                    }
+                                }
+                            </script>
+                            <span id="pic_id"></span>
+                            <td><input type="file" id="pic" name="pic" style="border: 0" onchange="showpic(this)"/></td>
+
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td style="text-align: left"><label id="pic_chk" style="display: none; color: red;">ได้โปรดเลือกรูปด้วยเถอะนะขอรับ</label><br/></td>
+                        </tr>
+                    </table>
+                    <br/>
+                    <img id="picture" class="btn" name="picture" src="#" alt="your picture" style="display: none"/>
+                    <br/>
+                    <input type="submit" class="btn btn-success" name="regis" id="regis" value="ยืนยัน"/>
                 </form>
             </div>
             <div class="modal-footer">
@@ -501,13 +613,138 @@
                 return false;
             }
         });
-        $("#user").keydown(function (e) {
-            console.log(e['key'].charCodeAt(0));
+        $("#regis").click(function () {
+            var user = $("#username").val();
+            var pass = $("#password").val();
+            var name = $("#name").val();
+            var surname = $("#surname").val();
+            var tel = $("#tel").val();
+            var email = $("#email").val();
+            var type = document.register.pic.value;
+            if(user == "" || pass == "" || name == "" || surname == "" || tel == "" || email == "" || type == ""){
+                alert("กรุณากรอกข้อมูลให้ครบ");
+                if (user == "") {
+                    $("#username").css("border", "1px solid red");
+                }
+                else {
+                    $("#username").css("border", "1px solid #ccc");
+                }
+                if (pass == "") {
+                    $("#password").css("border", "1px solid red");
+                }
+                else {
+                    $("#password").css("border", "1px solid #ccc");
+                }
+                if (name == "") {
+                    $("#name").css("border", "1px solid red");
+                }
+                else {
+                    $("#name").css("border", "1px solid #ccc");
+                }
+                if (surname == "") {
+                    $("#surname").css("border", "1px solid red");
+                }
+                else {
+                    $("#surname").css("border", "1px solid #ccc");
+                }
+                if (tel == "") {
+                    $("#tel").css("border", "1px solid red");
+                }
+                else {
+                    $("#tel").css("border", "1px solid #ccc");
+                }
+                if (email == "") {
+                    $("#email").css("border", "1px solid red");
+                }
+                else {
+                    $("#email").css("border", "1px solid #ccc");
+                }
+                if (type == "") {
+                    $("#pic_chk").css("display","inline");
+                }
+                else {
+                    $("#pic_chk").css("display","none");
+                }
+                return false;
+            }
+        });
+        $("#tel").keydown(function (e) {
+            var tel_chk = e['key'].charCodeAt(0);
+            console.log(tel_chk);
+            if(tel_chk != 66){
+                if(tel_chk < 48 || tel_chk > 57){
+                    if(tel_chk < 84 || tel_chk > 84) {
+                        alert("กรอกเฉพาะตัวเลขนะจ๊");
+                        return false;
+                    }
+                }
+            }
+        });
+        $("#name").keydown(function (e) {
+            var name_chk = e['key'].charCodeAt(0);
+            console.log(name_chk);
+            if(name_chk != 66) {
+                if (name_chk < 65 || name_chk > 90) {
+                    if(name_chk < 97 || name_chk > 122) {
+                        if(name_chk < 161 || name_chk > 206) {
+                            if(name_chk < 3585 || name_chk > 3630) {
+                                if(name_chk < 3632 || name_chk > 3641) {
+                                    if(name_chk < 3648 || name_chk > 3661) {
+                                        alert("ห้าม!!กรอกตัวอักษรพิเศษหรือตัวเลขสิ");
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        $("#surname").keydown(function (e) {
+            var sname_chk = e['key'].charCodeAt(0);
+            console.log(sname_chk);
+            if(sname_chk != 66) {
+                if (sname_chk < 65 || sname_chk > 90) {
+                    if(sname_chk < 97 || sname_chk > 122) {
+                        if(sname_chk < 161 || sname_chk > 206) {
+                            if(sname_chk < 3585 || sname_chk > 3630) {
+                                if(sname_chk < 3632 || sname_chk > 3641) {
+                                    if(sname_chk < 3648 || sname_chk > 3661) {
+                                        alert("ห้าม!!กรอกตัวอักษรพิเศษหรือตัวเลขสิ");
+                                        return false;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        });
+        $("#username").keydown(function (e) {
+            var id_chk = e['key'].charCodeAt(0);
+            console.log(id_chk);
+            if(id_chk < 48 || id_chk > 57){
+                if(id_chk < 65 || id_chk > 90){
+                    if(id_chk < 97 || id_chk > 122){
+                        alert("กรอกได้เฉพาะตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้นครับ");
+                        return false;
+                    }
+                }
+            }
+        });
+        $("#password").keydown(function (e) {
+            var pass_chk = e['key'].charCodeAt(0);
+            console.log(pass_chk);
+            if(pass_chk < 48 || pass_chk > 57){
+                if(pass_chk < 65 || pass_chk > 90){
+                    if(pass_chk < 97 || pass_chk > 122){
+                        alert("กรอกได้เฉพาะตัวอักษรภาษาอังกฤษและตัวเลขเท่านั้นครับ");
+                        return false;
+                    }
+                }
+            }
         });
     });
 </script>
-
-
 </body>
-
 </html>

@@ -290,6 +290,68 @@ function getSearch($word){
     }
     return $resultArray;
 }
+function getSearchInMyProject($word,$id){
+    global $conn;
+    $sql = "SELECT * FROM member_project INNER JOIN (project INNER JOIN category ON project.id_category=category.id_category) ON project.id_project=member_project.id_project
+            WHERE (UPPER(title) LIKE UPPER('%".$word."%') 
+            or UPPER(description) LIKE UPPER('%".$word."%') 
+            or LOWER(title) LIKE LOWER('%".$word."%') 
+            or LOWER(description) LIKE LOWER('%".$word."%')) 
+            and id_member = '$id'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "name_category"=>$obResult['name_category']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
+function getProjectByCatInMyProject($cat,$id){
+    global $conn;
+    $sql = "SELECT * 
+            FROM member_project INNER JOIN (project INNER JOIN category ON project.id_category=category.id_category ) ON project.id_project=member_project.id_project
+            WHERE name_category='$cat' and id_member = '$id'";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("id_project"=>$obResult['id_project'],
+            "title"=>$obResult['title'],
+            "description"=>$obResult['description'],
+            "date_Published"=>$obResult['date_Published'],
+            "date_Occurred"=>$obResult['date_Occurred'],
+            "id_category"=>$obResult['id_category'],
+            "name_category"=>$obResult['name_category']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
+function getCountCatInMyProject($id){
+    global $conn;
+    $sql = "SELECT category.name_category,COUNT(category.name_category) 
+            FROM member_project INNER JOIN (project INNER JOIN category ON project.id_category=category.id_category)ON project.id_project=member_project.id_project
+            WHERE id_member = '$id'
+            GROUP BY category.name_category";
+    $res = $conn->query($sql);
+    $resultArray = array();
+    while($obResult = $res->fetch(PDO::FETCH_ASSOC))
+    {
+        $arrCol = array();
+        $arrCol = array("name_category"=>$obResult['name_category'],
+            "count"=>$obResult['COUNT(category.name_category)']);
+        array_push($resultArray,$arrCol);
+    }
+    return $resultArray;
+}
 function getCountCat(){
     global $conn;
     $sql = "SELECT category.name_category,COUNT(category.name_category) FROM project INNER JOIN category ON project.id_category=category.id_category GROUP BY category.name_category";

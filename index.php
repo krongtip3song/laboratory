@@ -453,7 +453,7 @@
 </div>
 <!-- Modal Login-->
 <div class="modal fade" id="myModal-login" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" style="width: 400px">
 
         <div class="modal-content">
             <div class="modal-header">
@@ -486,7 +486,7 @@
 </div>
 <!-- Modal Register-->
 <div class="modal fade" id="myModal-register" role="dialog">
-    <div class="modal-dialog">
+    <div class="modal-dialog" >
         <div class="modal-content">
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>

@@ -17,7 +17,21 @@ if(isset($_SESSION['user'])){
     $person = $_SESSION["user"];
     $type_user = $person->getType();
     $id_user = $person->getId();
-    $data = getMyProject($id_user);
+
+    if(isset($_GET['search'])){
+        $word = $_GET['search'];
+        $data = getSearchInMyProject($word,$id_user);
+    }
+    else{
+        if(isset($_GET['cat'])){
+            $scat = $_GET['cat'];
+            $data = getProjectByCatInMyProject($scat,$id_user);
+        }
+        else{
+            $data = getMyProject($id_user);
+        }
+    }
+    $cat = getCountCatInMyProject($id_user);
     include ("../view/my_project.php");
     exit();
 }

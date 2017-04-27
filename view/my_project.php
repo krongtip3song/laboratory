@@ -15,7 +15,6 @@ include ("header.php");
     <script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
     <script>
         $(document).ready( function () {
-            $('#table_id').dataTable();
             $(".libtn").click(function () {
                 var cat = $(this).data("value");
                 window.location = "../controller/myproject.php?cat="+cat;
@@ -203,7 +202,7 @@ include ("header.php");
                                                 <a href="../controller/edit_project.php?id=<?=$data[$l_pro]['id_project']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
                                             </div>
                                             <?php
-                                            if($type_user == "ADMIN"){
+                                            if($type_user != "STUDENT"){
                                                 ?>
                                                 <div style="padding-right: 15px;float: right">
                                                     <a onclick='deleteProject(<?=$data[$l_pro]['id_project']?>)' style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</a>
@@ -230,8 +229,13 @@ include ("header.php");
                     <section style="border-top: 1px solid black">
                         <ul id="ulcat">
                             <?php
-                            for($i_cat=0;$i_cat<count($cat);$i_cat++){
-                                echo "<li class='licat'><button class='libtn' style='height: 100%' data-value='".$cat[$i_cat]['name_category']."'>".$cat[$i_cat]['name_category']."<span style='width:50px;float:right;text-align: right;opacity: 1;'>".$cat[$i_cat]['count']."</span></button></li>";
+                            if(count($cat) == 0){
+                                echo "<li class='licat'><span style='text-align: center;opacity: 1;'>ไม่พบข้อมูล</span></li>";
+                            }
+                            else{
+                                for($i_cat=0;$i_cat<count($cat);$i_cat++){
+                                    echo "<li class='licat'><button class='libtn' style='height: 100%' data-value='".$cat[$i_cat]['name_category']."'>".$cat[$i_cat]['name_category']."<span style='width:50px;float:right;text-align: right;opacity: 1;'>".$cat[$i_cat]['count']."</span></button></li>";
+                                }
                             }
                             ?>
                         </ul>
@@ -241,71 +245,6 @@ include ("header.php");
         </div>
     </center>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    <center>
-        <div style="margin: 20px 20px 20px 20px;width: 80%;">
-            <table class="display" id="table_id">
-                <thead>
-                <tr>
-                    <th width="5%">ลำดับ</th>
-                    <th width="20%">ชื่อ</th>
-                    <th width="20%">หมวดหมู่</th>
-                    <th width="10%">วัน</th>
-                    <th width="10%">การกระทำ</th>
-                    <th width="10%">more</th>
-                </tr>
-                </thead>
-                <tbody>
-                <?php
-                for ($i=0;$i<count($data);$i++){
-                    $list = $i +1;
-                    echo "<tr>
-                    <td>".$list."</td>
-                    <td>".$data[$i]['title']."</td>
-                    <td>".$data[$i]['name_category']."</td>
-                    <td>".date("d-m-Y",strtotime($data[$i]['date_Published']))."</td>
-                    <td>
-                        <div class='edit_col' data-id=''>
-                            <a href=''><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>แก้ไข</a>   
-                        </div>
-                    ";
-                    ?>
-                    <?php
-                    if($type_user == "TEACHER"){
-                        echo "<div class='delete_col'>
-                            <a onclick='deleteProject(".$data[$i]['id_project'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>   
-                            </div>";
-                    }
-                    echo "</td><td><a href='../controller/project.php?id=".$data[$i]['id_project']."'>more</a></td>
-                </tr>";
-                }
-                ?>
-                </tbody>
-            </table>
-        </div>
-    </center>
 <?php
 include ("footer.php");
 ?>

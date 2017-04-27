@@ -169,6 +169,32 @@ include ("header.php");
         display: block;
         padding: 30px 30px 30px 30px;
     }
+    .li-p{
+        float: left;
+        display: block;
+        width: 20%;
+        height: 300px;
+        padding: 20px 20px 20px 20px;
+    }
+    .li-p:hover{
+        background-color: #f0cdf1;
+    }
+    .img-person{
+        border-radius: 100%;
+        border: 4px solid #e6e6e6;
+    }
+    .a_person{
+        height: 70%;
+        width: 100%;
+        display: inline-block;
+        cursor: pointer;
+    }
+    .a_person:hover{
+        color: #4e6eaf;
+    }
+    .a_person>.img-person:hover{
+        border: 4px solid #4e6eaf;
+    }
 </style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')" >
     <div class="container">
@@ -188,7 +214,7 @@ include ("header.php");
 
         <br/>
         <div class="row">
-            <div class="col-md-6 col-sm-6 col-xs-12" >
+
                 <label><i class="fa fa-picture-o" aria-hidden="true"></i> รูปภาพ</label>
                 <div class="row" style="border: 1.5px solid #d9d9d9;">
                     <?php
@@ -205,68 +231,97 @@ include ("header.php");
                     ?>
                 </div>
                 <br/>
-                <div class="row">
-                    <label><i class="fa fa-file-o" aria-hidden="true"></i> เอกสาร</label>
-                    <table border="1" >
-                        <tr>
-                            <th width="70%">ชื่อไฟล์</th>
-                            <th width="30%">ดาวน์โหลด</th>
-                        </tr>
-                        <?php
-                        for($i=0;$i<count($file);$i++){
-                            if($file[$i]['type'] == "paper"){
-                                echo "<tr class=\"table-tr\">
-                                <td>".$file[$i]['name']."</td>
-                                <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
-                            </tr>";
-                            }
+            <div class="row">
+                <div class="col-md-6 col-sm-6 col-xs-12" >
+                        <label><i class="fa fa-file-o" aria-hidden="true"></i> เอกสาร</label>
+                        <table border="1" >
+                            <tr>
+                                <th width="70%">ชื่อไฟล์</th>
+                                <th width="30%">ดาวน์โหลด</th>
+                            </tr>
+                            <?php
+                            for($i=0;$i<count($file);$i++){
+                                if($file[$i]['type'] == "paper"){
+                                    echo "<tr class=\"table-tr\">
+                                    <td>".$file[$i]['name']."</td>
+                                    <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
+                                </tr>";
+                                }
 
-                        }
-                        ?>
-                    </table>
-                </div>
-                <br/>
-                <div class="row">
-                    <label><i class="fa fa-desktop" aria-hidden="true"></i> โปรแกรม</label>
-                    <table border="1" >
-                        <tr>
-                            <th width="70%">ชื่อไฟล์</th>
-                            <th width="30%">ดาวน์โหลด</th>
-                        </tr>
-                        <?php
-                        for($i=0;$i<count($file);$i++){
-                            if($file[$i]['type'] == "program"){
-                                echo "<tr class=\"table-tr\">
-                                <td>".$file[$i]['name']."</td>
-                                <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
-                            </tr>";
                             }
-                        }
-                        ?>
-                    </table>
+                            ?>
+                        </table>
+                </div>
+                <div class="col-md-6 col-sm-6 col-xs-12" >
+                        <label><i class="fa fa-desktop" aria-hidden="true"></i> โปรแกรม</label>
+                        <table border="1" >
+                            <tr>
+                                <th width="70%">ชื่อไฟล์</th>
+                                <th width="30%">ดาวน์โหลด</th>
+                            </tr>
+                            <?php
+                            for($i=0;$i<count($file);$i++){
+                                if($file[$i]['type'] == "program"){
+                                    echo "<tr class=\"table-tr\">
+                                    <td>".$file[$i]['name']."</td>
+                                    <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
+                                </tr>";
+                                }
+                            }
+                            ?>
+                        </table>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-6 col-xs-12">
-                <label><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</label>
-                <table border="1">
-                    <tr>
-                        <th>ลำดับ</th>
-                        <th>ชื่อ-สกุล</th>
-                        <th>ประเภท</th>
-                        <th>ตำแหน่ง</th>
-                    </tr>
+            <br/>
+            <hr>
+            <br/>
+            <!--<div class="row">
+                    <label><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</label>
+                    <table border="1">
+                        <tr>
+                            <th>ลำดับ</th>
+                            <th>ชื่อ-สกุล</th>
+                            <th>ประเภท</th>
+                            <th>ตำแหน่ง</th>
+                        </tr>
+                        <?php
+                        /*for($mp=0;$mp<count($mem_project);$mp++){
+                            $c_mp = $mp+1;
+                            echo "<tr class=\"table-tr\">
+                            <td>".$c_mp."</td>
+                            <td>".$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']."</td>
+                            <td>".$mem_project[$mp]['type_user']."</td>
+                            <td>".$mem_project[$mp]['position']."</td>
+                            </tr>";
+                        }*/
+                        ?>
+                    </table>
+            </div>-->
+            <h1 style="margin-bottom: 20px">สมาชิก</h1>
+            <div class="row">
+                <center>
+                <ul>
                     <?php
                     for($mp=0;$mp<count($mem_project);$mp++){
-                        $c_mp = $mp+1;
-                        echo "<tr class=\"table-tr\">
-                        <td>".$c_mp."</td>
-                        <td>".$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']."</td>
-                        <td>".$mem_project[$mp]['type_user']."</td>
-                        <td>".$mem_project[$mp]['position']."</td>
-                        </tr>";
+                    $c_mp = $mp+1;
+                    ?>
+                    <li class="li-p">
+                        <a class="a_person" align="center" href="../controller/profile.php?id=<?=$mem_project[$mp]['id_member']?>">
+                            <img src="../images/band_eng.jpg" class="img-person" width="80%" height="80%">
+                            <p style="font-weight: bold;font-size: 1.3em"><?=$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']?></p>
+                        </a>
+                        <p>
+                            <?=$mem_project[$mp]['type_user']?>
+                        </p>
+                        <p>
+                            <?=$mem_project[$mp]['position']?>
+                        </p>
+                    </li>
+                    <?php
                     }
                     ?>
-                </table>
+                </ul>
+                </center>
             </div>
         </div>
         <br/>

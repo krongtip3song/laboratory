@@ -16,6 +16,8 @@ session_start();
 if(isset($_SESSION['user'])){
     $person = $_SESSION['user'];
     $type_user = $person->getType();
+    $id_user = $person->getId();
+    $myproject = getMyProject($id_user);
 }
 else{
     $person = null;

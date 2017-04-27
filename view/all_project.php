@@ -195,26 +195,61 @@ include ("header.php");
                                 <div>
                                     <small class="date"><?=date("d F Y",strtotime($data[$l_pro]['date_Occurred']))?></small>
                                 </div>
-                                <?php
-                                if($type_user == "ADMIN" || $type_user == "TEACHER") {
-                                ?>
                                 <div style="display: inline-block;width: 100%">
-                                    <div style="text-align: left;padding-left: 15px;float: left">
-                                        <a href="../controller/edit_project.php?id=<?=$data[$l_pro]['id_project']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
-                                    </div>
                                     <?php
                                     if($type_user == "ADMIN"){
                                     ?>
+                                    <div style="text-align: left;padding-left: 15px;float: left">
+                                        <a href="../controller/edit_project.php?id=<?=$data[$l_pro]['id_project']?>"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
+                                    </div>
                                     <div style="padding-right: 15px;float: right">
                                         <a onclick='deleteProject(<?=$data[$l_pro]['id_project']?>)' style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</a>
                                     </div>
                                     <?php
                                     }
+                                    else {
+                                        if($type_user == "TEACHER"){
+                                            $ch = false;
+                                            for ($i_my=0;$i_my<count($myproject);$i_my++){
+                                                if($data[$l_pro]['id_project'] == $myproject[$i_my]['id_project']){
+                                                    $ch = true;
+                                                    break;
+                                                }
+                                            }
+                                            if($ch){
+                                                echo "<div style=\"text-align: left;padding-left: 15px;float: left\">
+                                        <a href='../controller/edit_project.php?id=".$data[$l_pro]['id_project']."'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> แก้ไข</a>
+                                    </div>
+                                    <div style=\"padding-right: 15px;float: right\">
+                                        <a onclick='deleteProject(".$data[$l_pro]['id_project']."' style=\"cursor: pointer\"><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i> ลบ</a>
+                                    </div>";
+                                            }
+                                        }
+                                        else{
+                                            if($type_user == "STUDENT"){
+                                                $ch = false;
+                                                for ($i_my=0;$i_my<count($myproject);$i_my++){
+                                                    if($data[$l_pro]['id_project'] == $myproject[$i_my]['id_project']){
+                                                        $ch = true;
+                                                        break;
+                                                    }
+                                                }
+                                                if($ch){
+                                                    echo "<div style=\"text-align: left;padding-left: 15px;float: left\">
+                                        <a href='../controller/edit_project.php?id=".$data[$l_pro]['id_project']."'><i class=\"fa fa-pencil-square-o\" aria-hidden=\"true\"></i> แก้ไข</a>
+                                    </div>";
+                                                }
+                                            }
+                                            else{
+                                                echo "<br/>";
+                                            }
+                                        }
+                                    ?>
+
+                                    <?php
+                                    }
                                     ?>
                                 </div>
-                                <?php
-                                }
-                                ?>
                             </div>
                         </a>
                     </div>

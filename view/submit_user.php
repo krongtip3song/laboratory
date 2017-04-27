@@ -26,6 +26,26 @@ include ("header.php");
             }
         });
     });
+    function deleteUser(id) {
+        if( confirm("Do you want to delete ?") ){
+            //window.location = "../model/deleteUser.php?iduser="+id;
+            $.ajax({
+                url: "../model/deleteUser.php" ,
+                type: "POST",
+                data: {iduser:id},
+                dataType: "json"
+            })
+                .success(function(result) {
+                    if(result){
+                        alert("SUCCESS");
+                        location.reload();
+                    }
+                    else {
+                        alert("FAIL");
+                    }
+                });
+        }
+    }
 </script>
 <style>
     .page-head{
@@ -81,11 +101,12 @@ include ("header.php");
                     <td>".$data[$i]['email']."</td>
                     <td>".$data[$i]['type_user']."</td>
                     <td>
-                        
-                            <div class='edit_col' data-id='".$data[$i]['id_member']."'>
-                                <input type=\"checkbox\" class='sub' name=\"person[]\" value='".$data[$i]['id_member']."'> submit<br>
-                            </div>
-                        
+                    <div class='edit_col' data-id='".$data[$i]['id_member']."'>
+                        <input type=\"checkbox\" class='sub' name=\"person[]\" value='".$data[$i]['id_member']."'> submit
+                    </div>
+                    <div class='delete_col' data-id='".$data[$i]['id_member']."'>
+                         <a onclick='deleteUser(".$data[$i]['id_member'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>
+                    </div>    
                     </td>
                 </tr>";
             }

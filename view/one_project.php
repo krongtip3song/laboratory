@@ -11,6 +11,7 @@ include ("header.php");
 
 ?>
 
+
 <style>
     .page-head{
         padding: 30px 0 ;
@@ -37,7 +38,7 @@ include ("header.php");
 
     .column {
         float: left;
-        width: 25%;
+        width: 12.5%;
         cursor: pointer;
     }
 
@@ -196,6 +197,7 @@ include ("header.php");
         border: 4px solid #4e6eaf;
     }
 </style>
+<link rel="stylesheet" href="../css/css_in_project.css">
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')" >
     <div class="container">
         <h1 class="page-title"><?=$data[0]["title"]?></h1>
@@ -218,16 +220,18 @@ include ("header.php");
                 <label><i class="fa fa-picture-o" aria-hidden="true"></i> รูปภาพ</label>
                 <div class="row" style="border: 1.5px solid #d9d9d9;">
                     <?php
+                    $iPic=1;
                     for($i=0;$i<count($file);$i++){
                     if($file[$i]['type'] == "pic") {
                         ?>
                         <div class="column">
                             <img src="<?=$file[$i]['path']?>" width="100px" height="100px"
-                                 onclick="openModal();currentSlide(<?=$i+1?>)" class="hover-shadow">
+                                 onclick="openModal();currentSlide(<?=$iPic?>)" class="hover-shadow">
                             <a href='../model/dwload.php?idfile=<?=$file[$i]['path']?>'>Download</a>
                         </div>
                         <?php
-                    }}
+                        $iPic++;}
+                    }
                     ?>
                 </div>
                 <br/>
@@ -328,13 +332,14 @@ include ("header.php");
     </div>
 
 
-<div id="myModal" class="modal_pic">
+<div id="myModal_pic" class="modal_pic">
     <span class="close cursor" onclick="closeModal()">&times;</span>
     <div class="modal-content">
         <?php
+        $i2=0;
         for($i=0;$i<count($file);$i++){
             if($file[$i]['type'] == "pic") {
-                $i2 = $i+1;
+                $i2 = $i2+1;
             ?>
             <div class="mySlides">
                 <div class="numbertext"><?=$i2?> / <?=count($file)?></div>
@@ -353,9 +358,10 @@ include ("header.php");
             <p id="caption"></p>
         </div>
         <?php
+        $i2=0;
         for($i=0;$i<count($file);$i++){
         if($file[$i]['type'] == "pic") {
-        $i2 = $i+1;
+        $i2 = $i2+1;
         ?><center>
         <div class="column">
             <img class="demo" src="<?=$file[$i]['path']?>" onclick="currentSlide(<?=$i2?>)" alt="<?=$file[$i]['name']?>">
@@ -371,11 +377,11 @@ include ("footer.php");
 ?>
 <script>
     function openModal() {
-        document.getElementById('myModal').style.display = "block";
+        document.getElementById('myModal_pic').style.display = "block";
     }
 
     function closeModal() {
-        document.getElementById('myModal').style.display = "none";
+        document.getElementById('myModal_pic').style.display = "none";
     }
 
     var slideIndex = 1;

@@ -58,7 +58,6 @@
         }
         .dropdownWit {
             position: relative;
-            display: inline-block;
         }
         .dropdown-contentWit {
             display: none;
@@ -259,7 +258,10 @@
                                 if($type_user == "ADMIN"){
                                     ?>
                                     <li class="menu-item">
-                                        <a class="new-a" href="controller/home.php">หน้าหลัก</a>
+                                        <a class="new-a" href="index.php">หน้าหลักผู้ใช้ทั่วไป</a>
+                                    </li>
+                                    <li class="menu-item">
+                                        <a class="new-a" href="controller/home.php">หน้าหลักผู้ดูแลระบบ</a>
                                     </li>
 
                                     <li class="menu-item dropdownWit">
@@ -307,12 +309,11 @@
                                             <li class="menu-item">
                                                 <a class="new-a" href="index.php">หน้าหลัก</a>
                                             </li>
-                                            <li class="menu-item dropdownWit">
-                                                <a class="dropbtnWit">จัดการโครงงาน <span class="glyphicon glyphicon-chevron-down"></span></a>
-                                                <div class="dropdown-contentWit">
-                                                    <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
-                                                    <a class="new-a" href="controller/myproject.php">โครงงานของตนเอง</a>
-                                                </div>
+                                            <li class="menu-item">
+                                                <a class="new-a" href="controller/allproject.php">โครงงานทั้งหมด</a>
+                                            </li>
+                                            <li class="menu-item">
+                                                <a class="new-a" href="controller/myproject.php">โครงงานของตนเอง</a>
                                             </li>
                                             <?php
                                         }

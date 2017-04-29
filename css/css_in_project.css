@@ -1,0 +1,32 @@
+@media screen and (max-width: 359px) {
+    .column {
+        width: 100%;
+    }
+    .li-p{
+        width: 100%;
+    }
+}
+@media screen and (min-width: 360px) {
+    .column {
+        width: 50%;
+    }
+    .li-p{
+        width: 50%;
+    }
+}
+@media screen and (min-width: 480px) {
+    .column {
+        width: 33.33%;
+    }
+    .li-p{
+        width: 33.33%;
+    }
+}
+@media screen and (min-width: 800px) {
+    .column {
+        width: 25%;
+    }
+    .li-p{
+        width: 20%;
+    }
+}

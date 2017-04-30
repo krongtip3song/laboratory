@@ -47,9 +47,6 @@ $i=0;
     <link rel="stylesheet" href="<?php echo "$path"; ?>/css/plugins/quick_insert.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.3.0/codemirror.min.css">
     <style>
-        body {
-            text-align: center;
-        }
 
         div#myEditor {
             width: 100%;
@@ -101,7 +98,23 @@ $i=0;
 <link rel="stylesheet" href="/resources/demos/style.css">
 
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<style>
+    table {
+        border-color: inherit;
+        border-collapse: collapse;
+        width: 100%;
+    }
 
+    th, td {
+        text-align: left;
+        padding: 10px;
+    }
+    .table-tr:hover {background-color: #f5f5f5}
+    th {
+        background-color: #4e6eaf;
+        color: white;
+    }
+</style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')">
     <div class="container">
         <h4 class="page-title">เพิ่มโครงงาน</h4>
@@ -250,57 +263,85 @@ $i=0;
                 </div>
             </div>
             <a class="addPro">add more</a>
-            <div>
-                <label>Download</label>
-                <table border="1" width="50%">
-                    <tr>
-                        <td colspan="2">รูปภาพ</td>
-                    </tr>
-                    <?php
-                    for($i=0;$i<count($file);$i++){
-                        if($file[$i]['type'] == "pic"){
-                            echo "<tr>
-                                <td><img src='".$file[$i]['path']."' width='80px' height='50px'>"."</td>
-                                <td>".$file[$i]['name']."</td>
-                                <td>
-                                <div class='delete_col' data-id='".$file[$i]['id_file']."'>
-                                <button type=\"button\" class=\"delete\" >Delete</button>
-                                </div>
-                                </td>
-                            </tr>";
-                        }
-
-                    }
-                    ?>
-                    <tr>
-                        <td colspan="2">เอกสาร</td>
-                    </tr>
-                    <?php
-                    for($i=0;$i<count($file);$i++){
-                        if($file[$i]['type'] == "paper"){
-                            echo "<tr>
-                                <td>".$file[$i]['name']."</td>
-                                <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'>Download</a></td>
-                            </tr>";
-                        }
-
-                    }
-                    ?>
-                    <tr>
-                        <td colspan="2">โปรแกรม</td>
-                    </tr>
-                    <?php
-                    for($i=0;$i<count($file);$i++){
-                        if($file[$i]['type'] == "program"){
-                            echo "<tr>
-                                <td>".$file[$i]['name']."</td>
-                                <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'>Download</a></td>
-                            </tr>";
-                        }
-
-                    }
-                    ?>
-                </table>
+            <br/>
+            <br/>
+            <div style="margin-top: 20px">
+                <div class="row">
+                    <div class="col-md-4 col-sm-4 col-xs-12" >
+                        <table border="1" width="50%">
+                            <tr>
+                                <th colspan="2">รูปภาพ</th>
+                                <th>ลบ</th>
+                            </tr>
+                            <?php
+                            $ch_pic = true;
+                            for($i=0;$i<count($file);$i++){
+                                if($file[$i]['type'] == "pic"){
+                                    $ch_pic = false;
+                                    echo "<tr>
+                                        <td><img src='".$file[$i]['path']."' width='80px' height='50px'>"."</td>
+                                        <td>".$file[$i]['name']."</td>
+                                        <td>
+                                        <div class='delete_col' data-id='".$file[$i]['id_file']."'>
+                                        <input type=\"submit\" class=\"delete\" value='Delete'/>
+                                        </div>
+                                        </td>
+                                    </tr>";
+                                }
+                            }
+                            if($ch_pic){
+                                echo "<tr><td colspan='3' style='text-align: center'>ไม่พบข้อมูล</td></tr>";
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12" >
+                        <table border="1" width="50%">
+                            <tr>
+                                <th colspan="2">เอกสาร</th>
+                                <th>ลบ</th>
+                            </tr>
+                            <?php
+                            $ch_pa = true;
+                            for($i=0;$i<count($file);$i++){
+                                if($file[$i]['type'] == "paper"){
+                                    $ch_pa = false;
+                                    echo "<tr>
+                                            <td>".$file[$i]['name']."</td>
+                                            <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'>Download</a></td>
+                                        </tr>";
+                                }
+                            }
+                            if($ch_pa){
+                                echo "<tr><td colspan='3' style='text-align: center'>ไม่พบข้อมูล</td></tr>";
+                            }
+                            ?>
+                        </table>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-12" >
+                        <table border="1" width="50%">
+                            <tr>
+                                <th colspan="2">โปรแกรม</th>
+                                <th>ลบ</th>
+                            </tr>
+                            <?php
+                            $ch_pro = true;
+                            for($i=0;$i<count($file);$i++){
+                                if($file[$i]['type'] == "program"){
+                                    $ch_pro = false;
+                                    echo "<tr>
+                                    <td>".$file[$i]['name']."</td>
+                                    <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'>Download</a></td>
+                                </tr>";
+                                }
+                            }
+                            if($ch_pro){
+                                echo "<tr><td colspan='3' style='text-align: center'>ไม่พบข้อมูล</td></tr>";
+                            }
+                            ?>
+                        </table>
+                    </div>
+                </div>
             </div>
             <br/>
             <br/>
@@ -505,8 +546,7 @@ $i=0;
     $(document).on("click", ".delete_col", function () {
         var id = $(this).data('id');
         var tr = $(this).parent().parent();
-        var d = {id_file: id,
-        };
+        var d = {id_file: id,};
         $.ajax({
             type: 'POST',
             url: "../model/deleteFile.php",

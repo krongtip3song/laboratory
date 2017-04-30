@@ -97,7 +97,7 @@ include ("header.php");
             })
                 .success(function(result) {
                     if(result){
-                        alert("SUCCESS");
+                        swal("Edit success", "", "success");
                         location.reload();
                     }
                     else {
@@ -140,8 +140,7 @@ include ("header.php");
             })
             .success(function(result) {
                 if(result){
-                    alert("SUCCESS");
-                    location.reload();
+                    alert("SUCCESS");location.reload();
                 }
                 else {
                     alert("FAIL");

@@ -24,6 +24,27 @@ include ("header.php");
                 alert("โปรดเลือกผู้ใช้");
                 return false;
             }
+            else{
+                $.ajax({
+                    url: "../model/submitUser.php" ,
+                    type: "POST",
+                    data: {person:val},
+                    dataType: "json"
+                })
+                .success(function(result) {
+                    if(result){
+                        alert("Succes to submit "+ val.length + " user.");
+                        location.reload();
+                    }
+                    else {
+                        alert("FAIL");
+                    }
+                });
+            }
+            return false;
+        });
+        $('#all').click(function () {
+            $('input:checkbox').attr('checked','checked');
         });
     });
     function deleteUser(id) {
@@ -35,15 +56,15 @@ include ("header.php");
                 data: {iduser:id},
                 dataType: "json"
             })
-                .success(function(result) {
-                    if(result){
-                        alert("SUCCESS");
-                        location.reload();
-                    }
-                    else {
-                        alert("FAIL");
-                    }
-                });
+            .success(function(result) {
+                if(result){
+                    alert("SUCCESS");
+                    location.reload();
+                }
+                else {
+                    alert("FAIL");
+                }
+            });
         }
     }
 </script>
@@ -66,6 +87,12 @@ include ("header.php");
         padding-top: 6px;
         text-align: right;
     }
+    form select,form input{
+        border-radius: 0;
+        padding: 0;
+        border:1px solid #8e9ca5;
+        line-height: inherit;
+    }
 </style>
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')">
     <div class="container">
@@ -76,7 +103,8 @@ include ("header.php");
 
 
     <div style="margin: 20px 20px 20px 20px;width: 80%;">
-        <form action='../model/submitUser.php' method='post'>
+        <input type="submit" id="all"/>
+        <!--<form action='../model/submitUser.php' method='post'>-->
         <table class="display" id="table_id">
             <thead>
             <tr>
@@ -113,8 +141,8 @@ include ("header.php");
             ?>
             </tbody>
         </table>
-            <input type="submit" id="submit" value="ยืนยัน"/>
-        </form>
+            <input class="btn btn-info" type="submit" id="submit" value="ยืนยัน"/>
+        <!--</form>-->
     </div>
 </center>
     <?php

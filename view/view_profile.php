@@ -132,19 +132,21 @@ include ("../config.inc.php");
                 <input type="hidden" class="form-control" name="idmem" id="idmem" value="<?=$data[0]['id_member']?>"/>
                 <table  width="80%">
                     <?php
-                    if($id == $person->getId()) {
-                        ?>
-                        <tr>
-                            <td width="20%" style="text-align: right;">ชื่อผู้ใช้</td>
-                            <td width="50%"><input type="text" class="form-control" name="username" id="username"
-                                                   value="<?= $data[0]['username'] ?>" disabled/></td>
-                        </tr>
-                        <tr>
-                            <td style="text-align: right;">รหัสผ่าน</td>
-                            <td><input type="text" class="form-control" name="password" id="pass"
-                                       value="<?= $data[0]['password'] ?>" disabled/></td>
-                        </tr>
-                        <?php
+                    if($person != null){
+                        if($id == $person->getId()) {
+                            ?>
+                            <tr>
+                                <td width="20%" style="text-align: right;">ชื่อผู้ใช้</td>
+                                <td width="50%"><input type="text" class="form-control" name="username" id="username"
+                                                       value="<?= $data[0]['username'] ?>" disabled/></td>
+                            </tr>
+                            <tr>
+                                <td style="text-align: right;">รหัสผ่าน</td>
+                                <td><input type="text" class="form-control" name="password" id="pass"
+                                           value="<?= $data[0]['password'] ?>" disabled/></td>
+                            </tr>
+                            <?php
+                        }
                     }
                     ?>
                     <tr>
@@ -167,31 +169,34 @@ include ("../config.inc.php");
             </div>
         </div>
         <?php
+        if($person != null){
         if($id == $person->getId()) {
         ?>
-        <div class="row">
-            <div class="form-group">
-                <div class="col-md-3 col-sm-3 col-xs-12"></div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="hidden" class="form-control btn-warning" name="cancel_p" id="cancel_p" value="ยกเลิก"/>
+            <div class="row">
+                <div class="form-group">
+                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type="hidden" class="form-control btn-warning" name="cancel_p" id="cancel_p"
+                               value="ยกเลิก"/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12">
+                        <input type="hidden" class="form-control btn-info" name="save" id="save" value="บันทึก"/>
+                    </div>
+                    <div class="col-md-3 col-sm-3 col-xs-12"></div>
                 </div>
-                <div class="col-md-3 col-sm-3 col-xs-12">
-                    <input type="hidden" class="form-control btn-info" name="save" id="save" value="บันทึก"/>
-                </div>
-                <div class="col-md-3 col-sm-3 col-xs-12"></div>
             </div>
-        </div>
 
         </form>
 
         <div class="row">
-                <div class="col-md-4 col-sm-4 col-xs-12"></div>
-                <div class="col-md-4 col-sm-4 col-xs-12">
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            <div class="col-md-4 col-sm-4 col-xs-12">
                 <input type="submit" class="form-control btn-default" name="edit_pro" id="edit_pro" value="แก้ไข"/>
-                </div>
-                <div class="col-md-4 col-sm-4 col-xs-12"></div>
+            </div>
+            <div class="col-md-4 col-sm-4 col-xs-12"></div>
         </div>
         <?php
+        }
         }
         ?>
         <br/>
@@ -205,14 +210,13 @@ include ("../config.inc.php");
                         echo "<tr><td colspan='2' style='text-align: center'>ไม่พบข้อมูล</td> </tr>";
                     }
                     else {
-
                         for ($l_pro = 0; $l_pro < count($myProject); $l_pro++) {
                             if ($l_pro % 4 == 0) {
                                 echo "<div class=\"row\">";
                             }
                             ?>
                             <div class="col-md-3">
-                                <a href="../controller/project.php?id=<?= $myProject[$l_pro]['id_project'] ?>">
+                                <a href="../controller/project.php?id=<?=$myProject[$l_pro]['id_project'] ?>">
                                     <div class="post" style="background-color: white">
                                         <?php
                                         $img = getMainPicProject($myProject[$l_pro]['id_project']);
@@ -220,38 +224,55 @@ include ("../config.inc.php");
                                             $img = "images/ON40SA0.jpg";
                                         }
                                         ?>
-                                        <div><img src="../<?= $img ?>" alt="" width="100%" height="180px"></div>
-                                        <div class="banner"><?= $myProject[$l_pro]['name_category'] ?></div>
+                                        <div><img src="../<?=$img ?>" alt="" width="100%" height="180px"></div>
+                                        <div class="banner"><?=$myProject[$l_pro]['name_category'] ?></div>
                                         <div class="name_pro">
-                                            <h2 class="entry-title"><?= $myProject[$l_pro]['title'] ?></h2>
+                                            <h2 class="entry-title"><?=$myProject[$l_pro]['title'] ?></h2>
                                         </div>
                                         <div>
-                                            <small class="date"><?= date("d F Y", strtotime($myProject[$l_pro]['date_Occurred'])) ?></small>
+                                            <small class="date"><?=date("d F Y", strtotime($myProject[$l_pro]['date_Occurred'])) ?></small>
                                         </div>
                                         <?php
-                                        if ($type_user == "ADMIN" || $type_user == "TEACHER") {
-                                            if ($id == $person->getId()) {
+                                        if($person != null) {
+                                            if ($type_user == "ADMIN") {
                                                 ?>
                                                 <div style="display: inline-block;width: 100%">
                                                     <div style="text-align: left;padding-left: 15px;float: left">
-                                                        <a href="../controller/edit_project.php?id=<?= $myProject[$l_pro]['id_project'] ?>"><i
-                                                                    class="fa fa-pencil-square-o"
-                                                                    aria-hidden="true"></i>
-                                                            แก้ไข</a>
+                                                        <a href="../controller/edit_project.php?id=<?= $myProject[$l_pro]['id_project'] ?>">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
                                                     </div>
-                                                    <?php
-                                                    if ($type_user != "STUDENT") {
-                                                        ?>
-                                                        <div style="padding-right: 15px;float: right">
-                                                            <a onclick='deleteProject(<?= $myProject[$l_pro]['id_project'] ?>)'
-                                                               style="cursor: pointer"><i class="fa fa-trash-o"
-                                                                                          aria-hidden="true"></i> ลบ</a>
-                                                        </div>
-                                                        <?php
-                                                    }
-                                                    ?>
+                                                    <div style="padding-right: 15px;float: right">
+                                                        <a onclick='deleteProject(<?= $myProject[$l_pro]['id_project'] ?>)'
+                                                           style="cursor: pointer"><i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</a>
+                                                    </div>
                                                 </div>
                                                 <?php
+                                            }
+                                            elseif ($type_user == "TEACHER"){
+                                                if ($id == $person->getId()) {
+                                                    ?>
+                                                    <div style="display: inline-block;width: 100%">
+                                                        <div style="text-align: left;padding-left: 15px;float: left">
+                                                            <a href="../controller/edit_project.php?id=<?= $myProject[$l_pro]['id_project'] ?>">
+                                                                <i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
+                                                        </div>
+                                                        <div style="padding-right: 15px;float: right">
+                                                            <a onclick='deleteProject(<?= $myProject[$l_pro]['id_project'] ?>)' style="cursor: pointer">
+                                                                <i class="fa fa-trash-o" aria-hidden="true"></i> ลบ</a>
+                                                        </div>
+                                                    </div>
+                                                    <?php
+                                                }
+                                            }
+                                            elseif ($type_user == "STUDENT"){
+                                                ?>
+                                                <div style="display: inline-block;width: 100%">
+                                                    <div style="text-align: left;padding-left: 15px;float: left">
+                                                        <a href="../controller/edit_project.php?id=<?= $myProject[$l_pro]['id_project'] ?>">
+                                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> แก้ไข</a>
+                                                    </div>
+                                                </div>
+                                            <?php
                                             }
                                         }
                                         ?>

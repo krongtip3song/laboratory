@@ -18,6 +18,7 @@ include ("header.php");
 <script>
 
     $(document).ready( function () {
+        $('[data-toggle="popover"]').popover();
         $('#table_id').dataTable();
         /*
         $('#submit').click(function () {
@@ -125,7 +126,11 @@ alert("sdasd");
         <?php
             for ($i=0;$i<count($data);$i++){
                 $list = $i +1;
-                echo "<tr>
+                $alert = "";
+                if($data[$i]['verify'] == 0){
+                    $alert = "<i class=\"fa fa-exclamation-triangle\" aria-hidden=\"true\" data-toggle=\"popover\" data-trigger=\"hover\" data-content=\"ยังไม่ยืนยัน\"></i>";
+                }
+                echo "<tr style='color: #8e9ca5'>
                     <td>".$list."</td>
                     <td>".$data[$i]['name']."</td>
                     <td>".$data[$i]['surname']."</td>
@@ -139,6 +144,7 @@ alert("sdasd");
                         <div class='delete_col' data-id='".$data[$i]['id_member']."'>    
                             <a onclick='deleteUser(".$data[$i]['id_member'].")'><i class=\"fa fa-trash-o\" aria-hidden=\"true\"></i>ลบ</a>           
                         </div>
+                        $alert
                     </td>
                 </tr>";
             }

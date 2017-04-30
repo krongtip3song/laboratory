@@ -15,25 +15,22 @@
     include("../class/Authentication.class.php");
     include("../model/getData.php");
     session_start();
-    if(isset($_SESSION['user'])){
-        if(isset($_GET['id'])) {
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+        $data = getUser($id);
+        $myProject = getMyProject($id);
+        if(isset($_SESSION['user'])) {
             $person = $_SESSION["user"];
             $type_user = $person->getType();
-            $id = $_GET['id'];
-            $data = getUser($id);
-            $myProject = getMyProject($id);
-
-            include("../view/view_profile.php");
-            exit();
         }
-        else{
-            header("Location:../index.php");
-            exit();
+        else {
+            $person = null;
         }
+        include("../view/view_profile.php");
+        exit();
     }
-    else{
+    else {
         header("Location:../index.php");
         exit();
     }
-
 ?>

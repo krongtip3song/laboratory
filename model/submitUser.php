@@ -13,5 +13,5 @@
         $sql = "UPDATE member SET verify=1 WHERE id_member='$person[$i]'";
         $res = $conn->exec($sql);
     }
-    echo "<script>window.location = '../controller/submituser.php';</script>";
+    echo true;
 ?>

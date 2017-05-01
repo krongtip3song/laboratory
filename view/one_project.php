@@ -177,9 +177,6 @@ include ("header.php");
         height: 300px;
         padding: 20px 20px 20px 20px;
     }
-    .li-p:hover{
-        background-color: #f0cdf1;
-    }
     .img-person{
         border-radius: 100%;
         border: 4px solid #e6e6e6;
@@ -196,6 +193,12 @@ include ("header.php");
     .a_person>.img-person:hover{
         border: 4px solid #4e6eaf;
     }
+    body{
+        background-color: #F7F7F7;
+    }
+    label{
+        color: black;
+    }
 </style>
 <link rel="stylesheet" href="../css/css_in_project.css">
 <div class="page-head" data-bg-image="../images/page-head-3.jpg" style="background-image: url('../images/page-head-3.jpg')" >
@@ -204,25 +207,24 @@ include ("header.php");
     </div>
 </div>
 
-    <div style="margin: 5% 10% 5% 10%;;width: 80%;">
-        <div class="sub-subject" style="border:1px solid #b2b2b2;">
+    <div style="margin: 5% 10% 5% 10%;width: 80%;background-color: white;border:1px solid #b2b2b2;" class="row">
+        <div class="sub-subject">
             <div class="detail_sub">
                 <p  class="detail"><?=$data[0]["description"]?></p>
             </div>
-
         </div>
         <br/>
         <br/>
-
         <br/>
-        <div class="row">
+        <div style="margin:20px 20px 20px 20px;padding-top:20px;border-top: 1px solid #b2b2b2;">
 
-                <label><i class="fa fa-picture-o" aria-hidden="true"></i> รูปภาพ</label>
-                <div class="row" style="border: 1.5px solid #d9d9d9;">
-                    <?php
-                    $iPic=1;
-                    for($i=0;$i<count($file);$i++){
+            <label><i class="fa fa-picture-o" aria-hidden="true"></i> รูปภาพ</label>
+            <div class="row" style="border: 1.5px solid #d9d9d9;width: 100%;margin: 0 0 0 0;">
+                <?php
+                $iPic=1;$ch_pic = true;
+                for($i=0;$i<count($file);$i++){
                     if($file[$i]['type'] == "pic") {
+                        $ch_pic = false;
                         ?>
                         <div class="column">
                             <img src="<?=$file[$i]['path']?>" width="100px" height="100px"
@@ -230,12 +232,16 @@ include ("header.php");
                             <a href='../model/dwload.php?idfile=<?=$file[$i]['path']?>'>Download</a>
                         </div>
                         <?php
-                        $iPic++;}
+                        $iPic++;
                     }
-                    ?>
-                </div>
-                <br/>
-            <div class="row">
+                }
+                if($ch_pic){
+                    echo "<div class=\"column\" style='cursor: default'>ไม่มีรูปภาพ</div>";
+                }
+                ?>
+            </div>
+            <br/>
+            <div style="display: block" class="row">
                 <div class="col-md-6 col-sm-6 col-xs-12" >
                         <label><i class="fa fa-file-o" aria-hidden="true"></i> เอกสาร</label>
                         <table border="1" >
@@ -244,14 +250,18 @@ include ("header.php");
                                 <th width="30%">ดาวน์โหลด</th>
                             </tr>
                             <?php
+                            $ch_pa = true;
                             for($i=0;$i<count($file);$i++){
                                 if($file[$i]['type'] == "paper"){
+                                    $ch_pa = false;
                                     echo "<tr class=\"table-tr\">
                                     <td>".$file[$i]['name']."</td>
                                     <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
                                 </tr>";
                                 }
-
+                            }
+                            if($ch_pa){
+                                echo "<tr><td colspan='2' style='text-align: center'>ไม่พบข้อมูล</td></tr>";
                             }
                             ?>
                         </table>
@@ -264,45 +274,26 @@ include ("header.php");
                                 <th width="30%">ดาวน์โหลด</th>
                             </tr>
                             <?php
+                            $ch_pro = true;
                             for($i=0;$i<count($file);$i++){
                                 if($file[$i]['type'] == "program"){
+                                    $ch_pro = false;
                                     echo "<tr class=\"table-tr\">
                                     <td>".$file[$i]['name']."</td>
                                     <td><a href='../model/dwload.php?idfile=".$file[$i]['path']."'><i class=\"fa fa-download\" aria-hidden=\"true\"></i> Download</a></td>
                                 </tr>";
                                 }
                             }
+                            if($ch_pro){
+                                echo "<tr><td colspan='3' style='text-align: center'>ไม่พบข้อมูล</td></tr>";
+                            }
                             ?>
                         </table>
                 </div>
             </div>
             <br/>
-            <hr>
-            <br/>
-            <!--<div class="row">
-                    <label><i class="fa fa-users" aria-hidden="true"></i> สมาชิก</label>
-                    <table border="1">
-                        <tr>
-                            <th>ลำดับ</th>
-                            <th>ชื่อ-สกุล</th>
-                            <th>ประเภท</th>
-                            <th>ตำแหน่ง</th>
-                        </tr>
-                        <?php
-                        /*for($mp=0;$mp<count($mem_project);$mp++){
-                            $c_mp = $mp+1;
-                            echo "<tr class=\"table-tr\">
-                            <td>".$c_mp."</td>
-                            <td>".$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']."</td>
-                            <td>".$mem_project[$mp]['type_user']."</td>
-                            <td>".$mem_project[$mp]['position']."</td>
-                            </tr>";
-                        }*/
-                        ?>
-                    </table>
-            </div>-->
-            <h1 style="margin-bottom: 20px">สมาชิก</h1>
-            <div class="row">
+            <div style="border-top: 1px solid #b2b2b2;">
+                <h1 style="margin-top: 20px;margin-bottom:20px;color: black">สมาชิก</h1>
                 <center>
                 <ul>
                     <?php
@@ -311,7 +302,7 @@ include ("header.php");
                     ?>
                     <li class="li-p">
                         <a class="a_person" align="center" href="../controller/profile.php?id=<?=$mem_project[$mp]['id_member']?>">
-                            <img src="../images/band_eng.jpg" class="img-person" width="80%" height="80%">
+                            <img src="../images/band_eng.jpg" class="img-person" width="80%" height="70%">
                             <p style="font-weight: bold;font-size: 1.3em"><?=$mem_project[$mp]['name']." ".$mem_project[$mp]['surname']?></p>
                         </a>
                         <p>

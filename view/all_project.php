@@ -12,8 +12,8 @@ include ("header.php");
 
 ?>
 <!--<link rel="stylesheet" type="text/css" href="//cdn.datatables.net/1.10.13/css/jquery.dataTables.css">
-<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>-->
-<script src="http://code.jquery.com/jquery-latest.js"></script>
+<script type="text/javascript" charset="utf8" src="//cdn.datatables.net/1.10.13/js/jquery.dataTables.js"></script>
+<script src="http://code.jquery.com/jquery-latest.js"></script>-->
 <script>
     $(document).ready( function () {
         //$('#table_id').dataTable();

@@ -43,9 +43,6 @@ include ("header.php");
             }
             return false;
         });
-        $('#all').click(function () {
-            $('input:checkbox').attr('checked','checked');
-        });
     });
     function deleteUser(id) {
         if( confirm("Do you want to delete ?") ){
@@ -103,7 +100,6 @@ include ("header.php");
 
 
     <div style="margin: 20px 20px 20px 20px;width: 80%;">
-        <input type="submit" id="all"/>
         <!--<form action='../model/submitUser.php' method='post'>-->
         <table class="display" id="table_id">
             <thead>
